@@ -16,10 +16,12 @@
             <button class="loginBtn" type="submit" v-on:click.prevent="login()">
                 Login
             </button>
-            <button class="signinBtn" type="submit">
-                Create Account
-            </button>
+
         </form>
+
+        <button @click="emitMultipleEvents" class="signinBtn" type="submit">
+            Create Account
+        </button>
     </div>
 
 
@@ -40,6 +42,11 @@ export default {
         }
     },
     methods: {
+        emitMultipleEvents() {
+            console.log('closing');
+            this.$emit('toggle-signup');
+            this.$emit('close-login');
+        },
         login() {
             if (this.input.email !== "" && this.input.password !== "") {
                 axios.post('http://localhost:3000/api/auth/login', {

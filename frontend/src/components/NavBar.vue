@@ -9,15 +9,15 @@
                     <img class="navIcon" src="@/assets/icons/home.svg" alt="Icon description">
                     <p>Home</p>
                 </router-link>
-                <router-link to="/">
+                <router-link to="/explore">
                     <img class="navIcon" src="@/assets/icons/search.svg" alt="Icon description">
                     <p>Explore</p>
                 </router-link>
-                <router-link to="/">
+                <router-link to="/bookmarks">
                     <img class="navIcon" src="@/assets/icons/bookmarks.svg" alt="Icon description">
                     <p>Bookmarks</p>
                 </router-link>
-                <router-link to="/">
+                <router-link to="/profile">
                     <img class="navIcon" src="@/assets/icons/profile.svg" alt="Icon description">
                     <p>Profile</p>
                 </router-link>
@@ -25,7 +25,7 @@
             <div id="botNav">
                 <h3>Welcome {{ getUsername() }}</h3>
                 <button class="loginbtnNav" @click="$emit('toggle-login')">Log In</button>
-                <button class="loginbtnNav" @click="$emit('toggle-login')">sign Up</button>
+                <button class="loginbtnNav" @click="$emit('toggle-signup')">sign Up</button>
             </div>
         </nav>
 

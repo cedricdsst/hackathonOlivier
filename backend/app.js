@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const app = express();
 const topicRoutes = require('./routes/topic');
 const chatRoutes = require('./routes/chat');
+const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const path = require('path');
 
@@ -25,7 +26,8 @@ app.use((req, res, next) => {
 
 app.use('/api/topic', topicRoutes);
 app.use('/api/chat', chatRoutes);
-app.use('/api/auth', userRoutes);
+app.use('/api/user', userRoutes);
+app.use('/api/auth', authRoutes);
 app.use('/topicFiles', express.static(path.join(__dirname, 'topicFiles')));
 
 module.exports = app;

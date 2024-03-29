@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const userCtrl = require('../controllers/user');
+const userController = require('../controllers/user'); // Assurez-vous que le chemin est correct
+const auth = require('../middleware/auth');
 
-router.post('/signup', userCtrl.signup);
-router.post('/login', userCtrl.login);
+router.get('/followers', userController.getFollowers);
+router.get('/followings', userController.getFollowings);
+router.post('/follow', auth, userController.followUser);
+router.post('/unfollow', auth, userController.unfollowUser);
 
 module.exports = router;
