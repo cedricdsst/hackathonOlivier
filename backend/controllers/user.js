@@ -1,5 +1,38 @@
 const User = require('../models/User');
 
+exports.getOneUser = (req, res, next) => {
+    User.findOne({
+        username: req.params.username
+    }, 'username email followers following')
+        .then((user) => {
+            if (!user) {
+                return res.status(404).json({
+                    message: "User not found"
+                });
+            }
+
+            // Get count of followers and following
+            const followersCount = user.followers.length;
+            const followingCount = user.following.length;
+
+            // Construct response object with required fields and counts
+            const response = {
+                username: user.username,
+                email: user.email,
+                followers: followersCount,
+                following: followingCount
+            };
+
+            res.status(200).json(response);
+        })
+        .catch((error) => {
+            res.status(500).json({
+                error: error.message
+            });
+        });
+};
+
+
 exports.getFollowers = async (req, res) => {
     const username = req.query.username;
     try {
@@ -30,7 +63,7 @@ exports.getFollowings = async (req, res) => {
 // Suivre un nouvel utilisateur
 exports.followUser = async (req, res) => {
     const usernameToFollow = req.body.username;
-    const userId = req.userId;
+    const userId = req.auth.userId;
 
     try {
         const userToFollow = await User.findOne({ username: usernameToFollow });
@@ -62,7 +95,7 @@ exports.followUser = async (req, res) => {
 // Ne plus suivre un utilisateur
 exports.unfollowUser = async (req, res) => {
     const usernameToUnfollow = req.body.username;
-    const userId = req.userId;
+    const userId = req.auth.userId;
 
     try {
         const userToUnfollow = await User.findOne({ username: usernameToUnfollow });

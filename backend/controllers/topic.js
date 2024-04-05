@@ -98,3 +98,7 @@ exports.getAllTopics = (req, res, next) => {
         }
     );
 };
+
+exports.upvoteTopic = (req, res, next) => {
+
+}

@@ -7,7 +7,7 @@ const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const path = require('path');
 
-mongoose.connect('mongodb://localhost:27017/go-fullstack',
+mongoose.connect('mongodb+srv://cedricdsst:C9STiOiaJQYv8j3I@cluster0.7oiduv6.mongodb.net/chokbar?retryWrites=true&w=majority&appName=Cluster0',
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
