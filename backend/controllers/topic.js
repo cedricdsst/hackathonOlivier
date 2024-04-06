@@ -21,25 +21,37 @@ exports.createTopic = (req, res, next) => {
         }
     }
 
+
     if (req.file) {
         const topic = new Topic({
             ...topicObject,
-            userId: "req.auth.userId",
+            userId: req.auth.userId,
             fileUrl: `${req.protocol}://${req.get('host')}/topicFiles/${req.file.filename}`,
             fileType: fileType
         });
         topic.save()
-            .then(() => { res.status(201).json({ message: 'Objet enregistré !' }) })
+            .then(() => {
+                res.status(201).json({ message: 'Objet enregistré !' });
+                const io = req.app.get('io');
+                io.emit('topicCreated');
+
+            })
             .catch(error => { res.status(400).json({ error }) });
+
     }
     else {
         const topic = new Topic({
             ...topicObject,
-            userId: "req.auth.userId"
+            userId: req.auth.userId
+
 
         });
         topic.save()
-            .then(() => { res.status(201).json({ message: 'Objet enregistré !' }) })
+            .then(() => {
+                res.status(201).json({ message: 'Objet enregistré !' });
+                const io = req.app.get('io');
+                io.emit('topicCreated');
+            })
             .catch(error => { res.status(400).json({ error }) });
     }
 
@@ -86,7 +98,7 @@ exports.deleteTopic = (req, res, next) => {
 };
 
 exports.getAllTopics = (req, res, next) => {
-    Topic.find({}, 'title _id fileUrl fileType').then(
+    Topic.find({}, 'title _id fileUrl fileType').sort({ 'creationDate': -1 }).then(
         (topics) => {
             res.status(200).json(topics);
         }
