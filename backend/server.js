@@ -47,6 +47,29 @@ const io = new Server(server, {
         credentials: true
     }
 });
+
+io.on('connection', (socket) => {
+    console.log('Un utilisateur s\'est connecté');
+
+    // Rejoindre une room spécifique
+    socket.on('joinChatRoom', (topicId) => {
+        console.log(`Rejoindre la room: ${topicId}`);
+        socket.join(topicId);
+    });
+
+    // Quand un utilisateur envoie un message dans le chat
+    socket.on('chatMessage', (data) => {
+        // 'data' doit contenir 'topicId' et le 'message'
+        console.log(`Message reçu dans la room ${data.topicId}: ${data.message}`);
+        // Envoyer le message à tous dans cette room
+        io.to(data.topicId).emit('newChatMessage', data.message);
+    });
+
+    // Optionnellement, gérer le départ de la room si nécessaire
+    socket.on('leaveChatRoom', (topicId) => {
+        socket.leave(topicId);
+    });
+});
 app.set('io', io);
 
 

@@ -1,45 +1,49 @@
 <template>
   <div class="homeContainer">
   <div class="create-topic-container">
-    <h2>Créer un nouveau topic</h2>
+    
     <form @submit.prevent="submitTopic">
       <div class="form-group">
-        <label for="title">Titre :</label>
-        <input id="title" v-model="title" type="text" required placeholder="Titre du topic">
+        <input id="title" v-model="title" type="text" required placeholder="Titre">
       </div>
 
       <div class="form-group">
-        <label for="description">Description :</label>
-        <textarea id="description" v-model="description" required placeholder="Description du topic"></textarea>
+        <input id="description" v-model="description" type="text"  required placeholder="Description"></input>
       </div>
 
+
+      <div style="display:flex;">
       <div class="form-group">
-        <label for="file">Fichier (optionnel) :</label>
         <input id="file" ref="fileInput" type="file" @change="handleFileUpload" name="image">
       </div>
 
       <button type="submit">Soumettre</button>
+    </div>
     </form>
   </div>
 
   <div id="listTopics">
-    <ul>
-      <li v-for="topic in topics" :key="topic._id">
+  <transition-group :name="enableAnimation ? 'topic' : ''"  tag="div">
+    <div v-for="topic in topics" :key="topic._id" class="topic">
+      <router-link :to="`/topic/${topic._id}`">
         <h3>{{ topic.title }}</h3>
         <img class="topicImg" v-if="topic.fileUrl" :src="topic.fileUrl" alt="Image du topic">
-      </li>
-    </ul>
-  </div>
+      </router-link>
+    </div>
+  </transition-group>
+</div>
 </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed} from 'vue';
-import { useTopicStore } from '../stores/topicStore';
-import { useWebSocket } from '../services/websocketService';
-// Correctement extrait de useWebSocket
-const { startListening, stopListening } = useWebSocket();
+import { useRouter } from 'vue-router';
 
+import { ref, onMounted, onUnmounted, computed, watch} from 'vue';
+import { useTopicStore } from '../stores/topicStore';
+import { useTopicWebSocket } from '../services/topicWebsocketService';
+// Correctement extrait de useWebSocket
+const { startListening, stopListening } = useTopicWebSocket();
+const router = useRouter();
 const title = ref('');
 const description = ref('');
 const file = ref(null);
@@ -64,8 +68,7 @@ async function submitTopic() {
 
   try {
     await store.createTopic(formData);
-    alert("Topic créé avec succès !");
-    
+        
   topics.value = store.topics;
     title.value = '';
     description.value = '';
@@ -78,11 +81,15 @@ async function submitTopic() {
   }
 }
 
+const enableAnimation = ref(false)
+
 const topics = computed(() => store.topics);
+// Observez les changements dans `chats` et réagissez aux nouveaux messages
 
 onMounted(async () => {
   await store.fetchAllTopics();
   startListening();
+  enableAnimation.value = true;
 });
 
 onUnmounted(() => {
@@ -99,9 +106,9 @@ onUnmounted(() => {
 
 }
 .create-topic-container {
-  max-width: 500px;
+  max-width: 5000px;
   margin: auto;
-  padding: 20px;
+  
 }
 
 .form-group {
@@ -118,18 +125,6 @@ input[type="text"], input[type="file"] {
   margin-top: 5px;
 }
 
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
 
 .login-container {
   max-width: 400px;
@@ -151,16 +146,22 @@ input[type="email"], input[type="password"] {
   margin-top: 5px;
 }
 
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
+
+
+
+/* État initial de l'élément entrant */
+.topic-enter-from, .topic-leave-to {
+  background-color: rgba(172, 172, 172, 0.644);
 }
 
-button:hover {
-  background-color: #0056b3;
+/* État final de l'élément entrant et état initial de l'élément sortant */
+.topic-enter-to, .topic-leave-from {
+  background-color: rgba(172, 172, 172, 0);
 }
+
+/* Définition de la durée de la transition pour les éléments entrants et sortants */
+.topic-enter-active, .topic-leave-active {
+  transition: all 1s ease-in-out;
+}
+
 </style>

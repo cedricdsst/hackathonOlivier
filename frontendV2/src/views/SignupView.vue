@@ -72,17 +72,6 @@ const router = useRouter();
     margin-top: 5px;
   }
   
-  button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
   
-  button:hover {
-    background-color: #0056b3;
-  }
   </style>
   

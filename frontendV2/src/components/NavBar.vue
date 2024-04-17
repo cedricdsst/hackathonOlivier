@@ -84,7 +84,7 @@ nav {
     /* Align items to the start of the flex direction */
     text-align: left;
     /* Align text to the left */
-    background-color: #15202B;
+
     /* Just an example, adjust the color as needed */
     border-right: solid 0.5px grey;
 
@@ -108,7 +108,7 @@ nav a {
     align-items: center;
     margin: 10px 10px 5px 10px;
     text-decoration: none;
-    color: white;
+    
 }
 
 nav a p {
@@ -120,10 +120,21 @@ nav a p {
     height: 42px;
     width: 190px;
     background-color: #3b984a00;
-    color: white;
+    color: rgb(0, 0, 0);
 
     font-size: 13px;
-    border: solid 2px white;
+    border: solid 2px rgb(0, 0, 0);
+    border-radius: 5px;
+}
+
+.loginbtnNav:hover {
+    height: 42px;
+    width: 190px;
+    background-color: #00000000;
+    color: rgb(255, 255, 255);
+
+    font-size: 13px;
+    border: solid 2px rgb(0, 0, 0);
     border-radius: 5px;
 }
 

@@ -3,7 +3,7 @@ import { useTopicStore } from '../stores/topicStore';
 
 const socket = io('http://localhost:3000');
 
-export const useWebSocket = () => {
+export const useTopicWebSocket = () => {
     const topicStore = useTopicStore();
 
     const startListening = () => {
