@@ -1,5 +1,6 @@
 // VinController.js
 const Vin = require('../models/Vin');
+const Atelier = require('../models/Atelier');
 const fs = require('fs');
 
 // Create a new Vin
@@ -7,7 +8,7 @@ exports.createVin = (req, res, next) => {
     const vinObject = JSON.parse(req.body.vin);
     delete vinObject._id;
 
-    const fileUrl = req.file ? `${req.protocol}://${req.get('host')}/vinFiles/${req.file.filename}` : null;
+    const fileUrl = req.file ? `${req.protocol}://${req.get('host')}/topicFiles/${req.file.filename}` : null;
 
     const vin = new Vin({
         ...vinObject,
@@ -18,6 +19,43 @@ exports.createVin = (req, res, next) => {
         .then(() => res.status(201).json({ message: 'Vin enregistré !' }))
         .catch(error => res.status(400).json({ error }));
 };
+
+// Get all Vins
+exports.getAllVins = (req, res, next) => {
+    Vin.find()
+        .then(vins => {
+            const promises = vins.map(vin => {
+                return Atelier.find({ "vins.id": vin._id })
+                    .then(ateliers => {
+                        const totalUsedQuantity = ateliers.reduce((acc, atelier) => {
+                            if (atelier.vins && atelier.vins.length > 0) {
+                                const vinEntry = atelier.vins.find(v => v.id && v.id.equals(vin._id));
+                                return acc + (vinEntry && vinEntry.quantity ? vinEntry.quantity : 0);
+                            }
+                            return acc;
+                        }, 0);
+                        const quantiteDispo = vin.quantite - totalUsedQuantity;
+                        return {
+                            ...vin._doc,
+                            ateliers: ateliers.map(atelier => {
+                                const vinEntry = atelier.vins.find(v => v.id && v.id.equals(vin._id));
+                                return vinEntry ? {
+                                    id: atelier._id,
+                                    title: atelier.title,
+                                    quantity: vinEntry.quantity
+                                } : null;
+                            }).filter(v => v),
+                            quantiteDispo
+                        };
+                    });
+            });
+            return Promise.all(promises);
+        })
+        .then(results => res.status(200).json(results))
+        .catch(error => res.status(400).json({ error }));
+};
+
+
 
 
 // Get a single Vin by its ID
@@ -79,9 +117,4 @@ exports.deleteVin = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));
 };
 
-// Get all Vins
-exports.getAllVins = (req, res, next) => {
-    Vin.find()
-        .then(vins => res.status(200).json(vins))
-        .catch(error => res.status(400).json({ error }));
-};
+

@@ -34,12 +34,14 @@ const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const vinRoutes = require('./routes/vin');
 const ecoleRoutes = require('./routes/ecole');
+const atelierRoutes = require('./routes/atelier');
 
 app.use('/api/topic', topicRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/vin', vinRoutes);
-app.use('/api/vin', ecoleRoutes);
+app.use('/api/ecole', ecoleRoutes);
+app.use('/api/atelier', atelierRoutes);
 
 module.exports = app;
