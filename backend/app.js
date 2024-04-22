@@ -32,10 +32,14 @@ const topicRoutes = require('./routes/topic');
 const chatRoutes = require('./routes/chat');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
+const vinRoutes = require('./routes/vin');
+const ecoleRoutes = require('./routes/ecole');
 
 app.use('/api/topic', topicRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/vin', vinRoutes);
+app.use('/api/vin', ecoleRoutes);
 
 module.exports = app;
