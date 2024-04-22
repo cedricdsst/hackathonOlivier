@@ -1,6 +1,21 @@
 <template>
-   <div v-if="isUserLoggedIn" id="botNavDis">
-        <nav>
+
+<nav class="py-4">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <img src="@/assets/logo.svg" alt="Logo" class="h-8 mr-2">
+            </div>
+            <!-- Liens -->
+            <div class="flex items-center space-x-4">
+                <a href="#" class="text-white hover:text-gray-300">Accueil</a>
+                <a href="#" class="text-white hover:text-gray-300">À propos</a>
+                <a href="#" class="text-white hover:text-gray-300">Évènements</a>
+                <a href="#" class="text-white hover:text-gray-300">Me contacter</a>
+            </div>
+        </div>
+    </nav>
+        <!-- <nav>
             <div id="topNav">
                 <img class="navLogo" src="@/assets/logo.svg" alt="">
             </div>
@@ -33,10 +48,8 @@
                 <button class="loginbtnNav" @click="logout" >logout</button>
             </div>
         </nav>
-    </div>
-    <div v-else>Navbar site...</div>
 
-    
+     -->
 </template>
 
 <script setup lang="ts">
@@ -72,85 +85,13 @@ const redirectTo = (route: string) => {
 </script>
 
 <style>
-/* Style for NavBar component */
-nav {
-    flex: 0 0 250px;
-    /* Adjust as necessary, sets the base width of the navbar */
-    height: 100%;
-    /* Full height of its parent */
-   
-    display: flex;
-    flex-direction: column;
-    /* Align items vertically */
-    justify-content: space-between;
-    /* Align items to the start of the flex direction */
-    text-align: left;
-    /* Align text to the left */
-
-    /* Just an example, adjust the color as needed */
-    border-right: solid 0.5px grey;
-
-    margin-top:0 !important; 
-
+nav 
+{
+  background-color: var(--default-black);
 }
 
-.navIcon {
-    width: 25px;
-    height: auto;
-}
-
-.navLogo {
-    width: 40px;
-    height: auto;
-    margin: 10px;
-}
-
-nav a {
-    display: flex;
-    align-items: center;
-    margin: 10px 10px 5px 10px;
-    text-decoration: none;
-    
-}
-
-nav a p {
-    margin: 0px 5px;
-    font-size: 14px;
-}
-
-.loginbtnNav {
-    height: 42px;
-    width: 190px;
-    background-color: #3b984a00;
-    color: rgb(0, 0, 0);
-
-    font-size: 13px;
-    border: solid 2px rgb(0, 0, 0);
-    border-radius: 5px;
-}
-
-.loginbtnNav:hover {
-    height: 42px;
-    width: 190px;
-    background-color: #00000000;
-    color: rgb(255, 255, 255);
-
-    font-size: 13px;
-    border: solid 2px rgb(0, 0, 0);
-    border-radius: 5px;
-}
-
-#botNavDis {
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    margin: 15px;
-}
-
-#botNavDis button {
-
-    margin: auto;
-    margin: 10px;
+nav a, nav button
+{
+    font-size: 16px;
 }
 </style>
