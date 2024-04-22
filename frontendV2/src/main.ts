@@ -7,19 +7,14 @@ import { useAuthStore } from './stores/authStore'
 import App from './App.vue'
 import router from './router'
 
-
-
-
-
 // Fonction immédiatement invoquée pour appeler verifyToken
-(async () => {
-    const app = createApp(App)
+;(async () => {
+  const app = createApp(App)
 
+  app.use(createPinia())
+  app.use(router)
 
-    app.use(createPinia())
-    app.use(router)
-
-    const authStore = useAuthStore();
-    await authStore.verifyToken();
-    app.mount('#app');
-})();
+  const authStore = useAuthStore()
+  await authStore.verifyToken()
+  app.mount('#app')
+})()

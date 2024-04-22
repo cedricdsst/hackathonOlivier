@@ -1,5 +1,5 @@
 <template>
-   
+   <div v-if="isUserLoggedIn" id="botNavDis">
         <nav>
             <div id="topNav">
                 <img class="navLogo" src="@/assets/logo.svg" alt="">
@@ -33,6 +33,8 @@
                 <button class="loginbtnNav" @click="logout" >logout</button>
             </div>
         </nav>
+    </div>
+    <div v-else>Navbar site...</div>
 
     
 </template>
