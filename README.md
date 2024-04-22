@@ -1,5 +1,5 @@
 cd backend/
-npm install nodemon
+npm install -g nodemon
 nodemon
 cd ../frontendV2
 npm install
