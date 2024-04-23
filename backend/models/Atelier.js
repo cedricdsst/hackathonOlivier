@@ -15,6 +15,7 @@ const AtelierSchema = mongoose.Schema({
     duration: { type: Number, required: false },
     password: { type: String, required: true },
     finished: { type: Boolean, default: false },
+    price: { type: Number, required: true },
 
     files: [{
         fileUrl: { type: String, required: true },

@@ -171,46 +171,55 @@ exports.removeParticipantFromAtelier = (req, res) => {
 exports.confirmPaymentForParticipant = (req, res) => {
     const { idAtelier, participantId } = req.params;
 
-    // Find the atelier and the participant within it
-    Atelier.findOne({ "_id": idAtelier, "participants._id": participantId })
+    // Find the atelier and update the payed status for the specified participant
+    Atelier.findOneAndUpdate(
+        { "_id": idAtelier, "participants._id": participantId },
+        { $set: { "participants.$.payed": true } },
+        { new: true } // Returns the updated document
+    )
         .then(atelier => {
             if (!atelier) {
                 return res.status(404).json({ message: 'Atelier not found or participant not found.' });
             }
-
-            // Update the payed status for the participant
+            // Participant is successfully updated, proceed to send confirmation email
             const participant = atelier.participants.id(participantId);
-            participant.payed = true;
+            if (!participant) {
+                return res.status(404).json({ message: 'Participant not found.' });
+            }
 
-            return atelier.save(); // Save the atelier with the updated participant
-        })
-        .then(atelier => {
-            const participant = atelier.participants.id(participantId);
+            // Prepare the email content
+            const emailContent = `Dear ${participant.email},\n\n` +
+                `Your payment for the atelier "${atelier.title}" has been confirmed.\n\n` +
+                `Best regards,\nYour Atelier Team`;
 
-            // Prepare the email content including the Atelier's password
-            const emailContent = `Votre paiement pour l'atelier "${atelier.title}" a été confirmé.`;
-
-            // Send a confirmation email to the participant including the password
+            // Send a confirmation email to the participant
             sendEmail(
                 participant.email,
-                'Confirmation de paiement',
+                'Confirmation of Payment',
                 emailContent
             )
                 .then(() => {
-                    res.status(200).json({ message: 'Payment confirmed and participant notified.', atelier });
+                    res.status(200).json({
+                        message: 'Payment confirmed and participant notified via email.',
+                        atelier: atelier
+                    });
                 })
                 .catch(emailError => {
                     // Handle the case where payment is confirmed but email sending fails
                     console.error('Failed to send confirmation email', emailError);
-                    res.status(200).json({
+                    res.status(500).json({
                         message: 'Payment confirmed, but failed to send confirmation email.',
                         emailError: emailError.message,
                         atelier
                     });
                 });
         })
-        .catch(error => res.status(400).json({ error }));
+        .catch(error => {
+            console.error('Error updating payment status:', error);
+            res.status(400).json({ error: error.message });
+        });
 };
+
 
 
 exports.addFileToAtelier = (req, res) => {

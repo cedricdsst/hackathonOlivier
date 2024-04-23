@@ -26,6 +26,6 @@ router.delete('/:idAtelier/vins/:vinId', atelierCtrl.removeVinFromAtelier); // S
 router.post('/:idAtelier/participants', atelierCtrl.addParticipantToAtelier); // Ajouter un participant à un atelier
 router.delete('/:idAtelier/participants/:participantId', atelierCtrl.removeParticipantFromAtelier); // Supprimer un participant d'un atelier
 
-router.put('/:idAtelier/participants/:participantId/confirm-payment', atelierCtrl.confirmPaymentForParticipant)
+router.patch('/:idAtelier/participants/:participantId/confirm-payment', atelierCtrl.confirmPaymentForParticipant)
 
 module.exports = router;
