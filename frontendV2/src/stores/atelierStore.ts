@@ -38,6 +38,18 @@ export const useAtelierStore = defineStore('atelier', {
             }
         },
 
+        // In atelierStore.js
+        async updateAtelier(id, atelierData) {
+            try {
+                const updatedAtelier = await atelierService.updateAtelier(id, atelierData);
+                // Optionally update local state if needed
+            } catch (error) {
+                console.error('Failed to update Atelier:', error);
+                throw error;
+            }
+        },
+
+
         async deleteAtelier(id: string) {
             try {
                 await atelierService.deleteAtelier(id);

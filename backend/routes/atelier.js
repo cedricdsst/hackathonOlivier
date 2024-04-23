@@ -11,6 +11,7 @@ router.post('/', atelierCtrl.createAtelier); // Créer un atelier
 router.get('/:idAtelier', atelierCtrl.getOneAtelier); // Obtenir un atelier spécifique avec détails complets
 router.get('/', atelierCtrl.getAllAteliers); // Obtenir tous les ateliers avec détails complets
 router.delete('/:idAtelier', atelierCtrl.deleteAtelier); // Supprimer un atelier spécifique
+router.patch('/:idAtelier', atelierCtrl.updateAtelier);
 
 router.post('/:idAtelier/finish', atelierCtrl.finishAtelier);
 

@@ -32,6 +32,22 @@ export const atelierService = {
         }
     },
 
+    // In atelierService.js or similar file
+    async updateAtelier(id, atelierData) {
+        const response = await fetch(`${API_URL}/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(atelierData),
+            credentials: 'include',
+        });
+        if (!response.ok) {
+            throw new Error('Failed to update Atelier');
+        }
+        return await response.json();
+    },
+
 
 
     async getAllAteliers() {

@@ -35,9 +35,7 @@ export const vinService = {
 
     async updateVin(id, vinData, file) {
         const formData = new FormData();
-        for (const key in vinData) {
-            formData.append(key, vinData[key]);
-        }
+        formData.append('vin', JSON.stringify(vinData));  // Stringify and send as 'vin'
         if (file) {
             formData.append('file', file);
         }

@@ -26,15 +26,73 @@ exports.createAtelier = (req, res) => {
         .catch(error => res.status(400).json({ error }));
 };
 
+// Update an existing Atelier
+exports.updateAtelier = (req, res) => {
+    const { idAtelier } = req.params;
+    Atelier.findOneAndUpdate(
+        { _id: idAtelier },
+        { $set: req.body },
+        { new: true, runValidators: true } // Return the modified document, and run validators defined in the schema
+    )
+        .then(atelier => {
+            if (!atelier) {
+                return res.status(404).json({ message: 'Atelier not found' });
+            }
+            res.status(200).json(atelier);
+        })
+        .catch(error => {
+            console.error('Error updating Atelier:', error);
+            res.status(400).json({ error });
+        });
+};
+
+
 
 exports.deleteAtelier = (req, res) => {
-    Atelier.findByIdAndRemove(req.params.id)
+    const { idAtelier } = req.params;
+
+    Atelier.findById(idAtelier)
         .then(atelier => {
-            if (!atelier) return res.status(404).json({ message: 'Atelier not found.' });
-            res.status(200).json({ message: 'Atelier deleted successfully!' });
+            if (!atelier) {
+                res.status(404).json({ message: 'Atelier not found.' });
+                return Promise.reject(new Error('Abort chain')); // Abort further execution in the chain
+            }
+
+            const filenames = atelier.files.map(file => file.fileUrl.split('/topicFiles/')[1]);
+
+            const deleteFile = (filename) => {
+                return new Promise((resolve, reject) => {
+                    fs.unlink(`./topicFiles/${filename}`, err => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve();
+                        }
+                    });
+                });
+            };
+
+            return Promise.all(filenames.map(deleteFile)).then(() => atelier);
         })
-        .catch(error => res.status(500).json({ error }));
+        .then(atelier => {
+            return Atelier.findOneAndDelete({ _id: idAtelier });
+        })
+        .then(() => {
+            res.status(200).json({ message: 'Atelier and all associated files deleted successfully!' });
+        })
+        .catch(error => {
+            if (error.message !== 'Abort chain') {
+                console.error('Error:', error);
+                // Make sure to not send another response if one has already been sent
+                if (!res.headersSent) {
+                    res.status(400).json({ error: error.message });
+                }
+            }
+        });
 };
+
+
+
 
 
 // Get one Atelier with detailed information
@@ -75,7 +133,7 @@ exports.removeVinFromAtelier = (req, res) => {
 
     Atelier.findByIdAndUpdate(
         idAtelier,
-        { $pull: { vins: { id: vinId } } }, // Utiliser $pull pour retirer le vin spécifié
+        { $pull: { vins: { _id: vinId } } }, // Utiliser $pull pour retirer le vin spécifié
         { new: true, safe: true } // Options pour retourner le document modifié et assurer la sécurité de l'opération
     )
         .then(atelier => {
@@ -145,7 +203,7 @@ exports.addParticipantToAtelier = (req, res) => {
     )
         .then(atelier => {
             res.status(200).json({ message: 'Participant added to Atelier.', atelier });
-            sendEmail(email, 'Confirmation de participation', `Vous êtes inscrit à l'atelier ${atelier.name} avec l'école ${school}.`).catch(console.error);
+            sendEmail(email, 'Confirmation de participation', `Vous êtes inscrit à l'atelier ${atelier.title} avec l'école ${school}.`).catch(console.error);
         })
         .catch(error => res.status(400).json({ error }));
 };

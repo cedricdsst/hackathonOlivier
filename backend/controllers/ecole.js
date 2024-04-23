@@ -44,7 +44,7 @@ exports.updateEcole = (req, res, next) => {
 
 // Delete an Ecole
 exports.deleteEcole = (req, res, next) => {
-    Ecole.findByIdAndRemove(req.params.id)
+    Ecole.findByIdAndDelete(req.params.id)  // Updated to use findByIdAndDelete
         .then(ecole => {
             if (!ecole) {
                 return res.status(404).json({ message: 'Ecole not found.' });
@@ -53,7 +53,6 @@ exports.deleteEcole = (req, res, next) => {
         })
         .catch(error => res.status(500).json({ error }));
 };
-
 
 
 
