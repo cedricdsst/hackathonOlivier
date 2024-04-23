@@ -24,7 +24,7 @@
                 <a href="#" class="network-link">
                     <img src="@/assets/icons/linkedin_icon.svg" alt="linkedin-icon" class="network-icon">
                 </a>
-                <a class="network-link">
+                <a href="#"class="network-link">
                     <img src="@/assets/icons/facebook_icon.svg" alt="facebook-icon" class="network-icon">
                 </a>
             </div>
