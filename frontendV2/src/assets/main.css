@@ -3,6 +3,11 @@
 @tailwind components;
 @tailwind utilities;
 
+#mainContent
+{
+  margin: 0 170px;
+}
+
 h1 {
   font-family: 'Futura Std Medium';
 }
@@ -16,4 +21,24 @@ p,
 a,
 span {
   font-family: 'Futura Std Book';
+}
+
+p,
+span {
+  font-size: 16px;
+}
+
+.red-btn {
+  font-size: 12px;
+  background-color: var(--default-red);
+  color: var(--vt-c-white);
+  padding: 7px 20px;
+  border: solid 2px var(--default-red);
+  transition: all 0.3s;
+}
+
+.red-btn:hover {
+  background-color: var(--vt-c-white);
+  color: var(--default-red);
+  border: solid 2px var(--default-red);
 }

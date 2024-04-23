@@ -1,17 +1,18 @@
 <template>
 
-<nav class="py-4">
-        <div class="container mx-auto flex justify-between items-center px-4">
+<nav>
+        <div class="container mx-auto flex justify-between items-center">
             <!-- Logo -->
             <div class="flex items-center">
-                <img src="@/assets/logo.svg" alt="Logo" class="h-8 mr-2">
+                <a href="#">
+                    <img src="@/assets/Logo_Hackaton_M1-ESGI_blanc.png" alt="Logo" class="h-8 mr-2 logo">
+                </a>
             </div>
             <!-- Liens -->
-            <div class="flex items-center space-x-4">
+            <div class="nav-links items-center">
                 <a href="#" class="text-white hover:text-gray-300">Accueil</a>
                 <a href="#" class="text-white hover:text-gray-300">À propos</a>
-                <a href="#" class="text-white hover:text-gray-300">Évènements</a>
-                <a href="#" class="text-white hover:text-gray-300">Me contacter</a>
+                <a href="#" class="red-btn">Participer à un évènement</a>
             </div>
         </div>
     </nav>
@@ -53,45 +54,61 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import { useAuthStore } from '../stores/authStore';
-import { useRouter } from 'vue-router';
-const router = useRouter();
-const authStore = useAuthStore();
+    import { ref, computed } from 'vue';
+    import { useAuthStore } from '../stores/authStore';
+    import { useRouter } from 'vue-router';
+    const router = useRouter();
+    const authStore = useAuthStore();
 
-// Propriété calculée pour déterminer si l'utilisateur est connecté
-const isUserLoggedIn = computed(() => {
-  return authStore.userId !== null; // Vérifiez en fonction de votre logique d'authentification
-});
+    // Propriété calculée pour déterminer si l'utilisateur est connecté
+    const isUserLoggedIn = computed(() => {
+    return authStore.userId !== null; // Vérifiez en fonction de votre logique d'authentification
+    });
 
-const username = computed(() => authStore.username);
-const email = computed(() => authStore.email);
+    const username = computed(() => authStore.username);
+    const email = computed(() => authStore.email);
 
-const logout = async () => {
-  try {
-    await authStore.logout();
-    router.push('/');
-    // Par exemple : router.push({ name: 'home' });
-  } catch (error: any) {
-    alert("Erreur de connexion : " + error.message);
-  }
-};
+    const logout = async () => {
+    try {
+        await authStore.logout();
+        router.push('/');
+        // Par exemple : router.push({ name: 'home' });
+    } catch (error: any) {
+        alert("Erreur de connexion : " + error.message);
+    }
+    };
 
 
 
-const redirectTo = (route: string) => {
-  router.push(route);
-};
+    const redirectTo = (route: string) => {
+    router.push(route);
+    };
 </script>
 
 <style>
-nav 
-{
-  background-color: var(--default-black);
-}
+    nav 
+    {
+        background-color: var(--default-black);
+        height: 112px;
+        display: flex;
+        vertical-align: middle;
+        padding: 0 85px;
+    }
 
-nav a, nav button
-{
-    font-size: 16px;
-}
+    nav a, nav button
+    {
+        font-size: 15px;
+    }
+
+    nav img.logo
+    {
+        width: 180px;
+        height: 54px;
+    }
+
+    .nav-links
+    {
+        display: flex;
+        gap: 60px;
+    }
 </style>
