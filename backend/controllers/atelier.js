@@ -188,7 +188,7 @@ exports.confirmPaymentForParticipant = (req, res) => {
             const participant = atelier.participants.id(participantId);
 
             // Prepare the email content including the Atelier's password
-            const emailContent = `Votre paiement pour l'atelier "${atelier.title}" a été confirmé. Voici votre mot de passe pour accéder à l'atelier: ${atelier.password}`;
+            const emailContent = `Votre paiement pour l'atelier "${atelier.title}" a été confirmé.`;
 
             // Send a confirmation email to the participant including the password
             sendEmail(
@@ -292,6 +292,48 @@ exports.removeFileFromAtelier = (req, res) => {
 };
 
 
+exports.finishAtelier = (req, res) => {
+    const { idAtelier } = req.params;
+
+    Atelier.findById(idAtelier)
+        .then(atelier => {
+            if (!atelier) {
+                return res.status(404).json({ message: 'Atelier not found.' });
+            }
+
+            // Check if Atelier is already marked as finished
+            if (atelier.finished) {
+                return res.status(400).json({ message: 'Atelier is already marked as finished.' });
+            }
+
+            // Update the Atelier to be finished
+            atelier.finished = true;
+
+            // Save the updated Atelier
+            return atelier.save();
+        })
+        .then(atelier => {
+            // Send a thank-you email to all participants
+            const participantEmails = atelier.participants.map(participant => participant.email);
+            const emailPromises = participantEmails.map(email => {
+                return sendEmail(
+                    email,
+                    'Thank You for Participating',
+                    `Thank you for participating in our atelier "${atelier.title}". Here is your password for the records: ${atelier.password}`
+                );
+            });
+
+            // Wait for all emails to be sent
+            return Promise.all(emailPromises).then(() => atelier);
+        })
+        .then(atelier => {
+            res.status(200).json({ message: 'Atelier marked as finished and all participants have been notified.', atelier });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            res.status(400).json({ error: error.message });
+        });
+};
 
 
 

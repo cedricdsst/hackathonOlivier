@@ -12,6 +12,8 @@ router.get('/:idAtelier', atelierCtrl.getOneAtelier); // Obtenir un atelier spé
 router.get('/', atelierCtrl.getAllAteliers); // Obtenir tous les ateliers avec détails complets
 router.delete('/:idAtelier', atelierCtrl.deleteAtelier); // Supprimer un atelier spécifique
 
+router.post('/:idAtelier/finish', atelierCtrl.finishAtelier);
+
 router.post('/:idAtelier/files', multer, atelierCtrl.addFileToAtelier);
 router.delete('/:idAtelier/files/:fileId', atelierCtrl.removeFileFromAtelier);
 
