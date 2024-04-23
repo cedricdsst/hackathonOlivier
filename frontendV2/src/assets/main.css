@@ -43,3 +43,18 @@ span {
   color: var(--default-red);
   border: solid 2px var(--default-red);
 }
+
+@media (max-width:768px)
+{
+  #mainContent
+  {
+    margin: 0 30px;
+  }
+}
+
+.header-gradiant
+{
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5));
+}
