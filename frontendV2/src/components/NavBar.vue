@@ -5,7 +5,7 @@
             <!-- Logo -->
             <div class="flex items-center">
                 <a href="#">
-                    <img src="@/assets/Logo_Hackaton_M1-ESGI_blanc.png" alt="Logo" class="h-8 mr-2 logo">
+                    <img src="@/assets/img/Logo_Hackaton_M1-ESGI_blanc.png" alt="Logo" class="h-8 mr-2 logo">
                 </a>
             </div>
             <!-- Bouton Burger (Hamburger) -->
@@ -18,9 +18,9 @@
             </button>
             <!-- Liens -->
             <div class="nav-links items-center">
-                <a href="#" class="text-white hover:text-gray-300">Accueil</a>
-                <a href="#" class="text-white hover:text-gray-300">À propos</a>
-                <a href="#" class="red-btn">Participer à un évènement</a>
+                <a href="/" class="text-white hover:text-gray-300">Accueil</a>
+                <a href="/about" class="text-white hover:text-gray-300">À propos</a>
+                <a href="/evenement" class="red-btn">Participer à un évènement</a>
             </div>
         </div>
     </nav>
