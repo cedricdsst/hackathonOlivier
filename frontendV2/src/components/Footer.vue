@@ -9,7 +9,7 @@
             <!-- Logo -->
             <div class="flex items-center">
                 <a href="#">
-                    <img src="@/assets/Logo_Hackaton_M1-ESGI_blanc.png" alt="Logo" class="h-8 mr-2 logo">
+                    <img src="@/assets/img/Logo_Hackaton_M1-ESGI_blanc.png" alt="Logo" class="h-8 mr-2 logo">
                 </a>
             </div>
             <hr class="link-separator" />
