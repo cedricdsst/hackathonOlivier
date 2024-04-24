@@ -4,10 +4,11 @@
 @tailwind utilities;
 
 #app {
+  background-color: white;
   margin: 0 auto;
   height: 100vh;
   font-weight: normal;
-  display: flex;
+  /* display: flex; */
 }
 
 a,

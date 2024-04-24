@@ -13,8 +13,11 @@ import NavBar from '@/components/NavBar.vue'
 </template>
 
 <style scoped>
-header {
-width: 250px;
+body{
+  background-color: white;
+}
+/*header {
+ width: 250px;
 }
 
 #mainContent{
@@ -67,7 +70,7 @@ nav a:first-of-type {
     display: flex;
     place-items: flex-start;
     flex-wrap: wrap;
-  }
+  } */
 
   /* nav {
     text-align: left;
@@ -76,6 +79,6 @@ nav a:first-of-type {
 
     padding: 1rem 0;
     margin-top: 1rem;
-  } */
-}
+  } 
+}*/
 </style>
