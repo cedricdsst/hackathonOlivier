@@ -104,40 +104,54 @@ exports.updateVin = (req, res, next) => {
 
 
 // Delete a Vin
-// Delete a Vin
 exports.deleteVin = (req, res, next) => {
-    Vin.findById(req.params.id)
-        .then(vin => {
-            if (!vin) {
-                return res.status(404).json({ message: 'Vin not found' });
+    Atelier.find({ "vins.id": req.params.id })
+        .then(ateliers => {
+            // Check if any Ateliers are using this Vin
+            if (ateliers && ateliers.length > 0) {
+                return res.status(400).json({ message: 'Vin cannot be deleted because it is used in one or more Ateliers.' });
             }
-            const filename = vin.fileUrl && vin.fileUrl.split('/vinFiles/')[1];
-            if (filename) {
-                fs.unlink(`vinFiles/${filename}`, (err) => {
-                    if (err) {
-                        console.log('Error deleting file:', err);
-                        return res.status(500).json({ message: 'Failed to delete file', error: err.message });
+            // If not used, proceed to delete the Vin
+            Vin.findById(req.params.id)
+                .then(vin => {
+                    if (!vin) {
+                        return res.status(404).json({ message: 'Vin not found' });
                     }
-                    deleteVinDocument(req, res);
+                    const filename = vin.fileUrl && vin.fileUrl.split('/vinFiles/')[1];
+                    if (filename) {
+                        fs.unlink(`vinFiles/${filename}`, err => {
+                            if (err) {
+                                console.log('Error deleting file:', err);
+                                return res.status(500).json({ message: 'Failed to delete file', error: err.message });
+                            }
+                            deleteVinDocument(req, res);
+                        });
+                    } else {
+                        deleteVinDocument(req, res);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error finding vin:', error);
+                    res.status(500).json({ message: 'Error finding vin', error: error.message });
                 });
-            } else {
-                deleteVinDocument(req, res);
-            }
         })
         .catch(error => {
-            console.error('Error finding vin:', error);
-            res.status(500).json({ message: 'Error finding vin', error: error.message });
+            console.error('Error checking atelier references:', error);
+            res.status(500).json({ error });
         });
 };
 
 function deleteVinDocument(req, res) {
     Vin.deleteOne({ _id: req.params.id })
-        .then(() => res.status(200).json({ message: 'Vin supprimé !' }))
+        .then(() => res.status(200).json({ message: 'Vin deleted successfully!' }))
         .catch(error => {
             console.error('Error deleting vin:', error);
             res.status(400).json({ message: 'Error deleting vin', error: error.message });
         });
 }
+
+
+
 
 
 

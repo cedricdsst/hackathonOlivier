@@ -29,8 +29,12 @@ export const useEcoleStore = defineStore('ecole', {
         },
 
         async deleteEcole(id) {
-            await ecoleService.deleteEcole(id);
-            this.ecoles = this.ecoles.filter(e => e._id !== id);
+            try {
+                await ecoleService.deleteEcole(id);
+                this.ecoles = this.ecoles.filter(e => e._id !== id);
+            } catch (error) {
+                throw error; // Re-throw the error to be caught by the component
+            }
         },
     },
 });

@@ -47,15 +47,24 @@ onMounted(async () => {
 const addEcole = async () => {
   await ecoleStore.createEcole(newEcole.value);
   newEcole.value = { nom: '', adresse: '' };  // Reset form fields
+  await ecoleStore.fetchAllEcoles();
 };
 
 const deleteEcole = async (id) => {
-  await ecoleStore.deleteEcole(id);
+  try {
+    await ecoleStore.deleteEcole(id);
+    await ecoleStore.fetchAllEcoles();  // Refresh the list after deletion
+    alert('Ecole deleted successfully');
+  } catch (error) {
+    console.error('Failed to delete ecole:', error);
+    alert(error.message);  // Display the error message from the backend
+  }
 };
 
 const editEcole = (ecole) => {
   editableEcole.value = {...ecole};  // Clone the ecole to avoid direct mutation
   editFormVisible.value = true;
+  
 };
 
 const updateEcole = async () => {

@@ -42,6 +42,10 @@ export const ecoleService = {
             method: 'DELETE',
             credentials: 'include',
         });
-        return response.json();
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message || 'Failed to delete ecole');
+        }
+        return data;
     },
 };

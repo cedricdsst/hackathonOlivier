@@ -77,7 +77,9 @@
       await vinStore.createVin(newVin.value, file.value);
       newVin.value = { nom: '', region: '', cepage: '', annee: '', quantite: '', descrption: '' };
       file.value = null;  // Clear the file input
+     
       await vinStore.fetchAllVins();
+      
   }
   
   async function deleteVin(vinId) {

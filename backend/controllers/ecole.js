@@ -1,5 +1,6 @@
 // EcoleController.js
 const Ecole = require('../models/Ecole');
+const Atelier = require('../models/Atelier');
 
 // Create a new Ecole
 exports.createEcole = (req, res, next) => {
@@ -43,15 +44,23 @@ exports.updateEcole = (req, res, next) => {
 };
 
 // Delete an Ecole
-exports.deleteEcole = (req, res, next) => {
-    Ecole.findByIdAndDelete(req.params.id)  // Updated to use findByIdAndDelete
-        .then(ecole => {
-            if (!ecole) {
-                return res.status(404).json({ message: 'Ecole not found.' });
-            }
-            res.status(200).json({ message: 'Ecole deleted successfully!' });
-        })
-        .catch(error => res.status(500).json({ error }));
+exports.deleteEcole = async (req, res) => {
+    try {
+        // Check if any Atelier is using this Ecole
+        const atelierUsingEcole = await Atelier.findOne({ idEcole: req.params.id });
+        if (atelierUsingEcole) {
+            return res.status(400).json({ message: 'Ecole cannot be deleted because it is used in one or more Ateliers.' });
+        }
+
+        // If not used, proceed to delete the Ecole
+        const ecole = await Ecole.findByIdAndDelete(req.params.id);
+        if (!ecole) {
+            return res.status(404).json({ message: 'Ecole not found.' });
+        }
+        res.status(200).json({ message: 'Ecole deleted successfully!' });
+    } catch (error) {
+        res.status(500).json({ error });
+    }
 };
 
 
