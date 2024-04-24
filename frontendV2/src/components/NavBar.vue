@@ -110,11 +110,14 @@
 <style>
     nav 
     {
+        position: fixed;
         background-color: var(--default-black);
         height: 112px;
         display: flex;
         vertical-align: middle;
         padding: 0 85px;
+        width: 100%;
+        z-index: 10;
     }
 
     nav a, nav button

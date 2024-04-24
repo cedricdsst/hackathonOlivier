@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import SignupView from '../views/SignupView.vue'
 import TopicView from '../views/TopicView.vue'
-import TestView from '../views/TestView.vue'
+import EvenementView from '../views/EvenementView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,7 +39,12 @@ const router = createRouter({
       name: 'about',
 
       component: () => import('../views/AboutView.vue')
-    }
+    },
+    {
+      path: '/evenement/:id',
+      name: 'evenement',
+      component: EvenementView
+    },
   ]
 })
 
