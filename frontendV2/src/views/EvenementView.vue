@@ -133,6 +133,7 @@ export default defineComponent({
 
 .info-event-card
 {
+    position: relative;
     background-color: var(--default-light-grey);
     padding: 40px;
 }
@@ -236,7 +237,7 @@ export default defineComponent({
 {
     position: relative;
     max-width: 1000px;
-    margin: 100px auto;
+    margin: 50px auto;
     background-color: var(--default-light-grey);
 }
 
