@@ -2,8 +2,8 @@ const http = require('http');
 const { Server } = require("socket.io");
 const app = require('./app');
 
-// Dans server.js ou app.js
-require('./cron_tasks/topicDeleter.js');
+
+//require('./cron_tasks/topicDeleter.js');
 
 const normalizePort = val => {
     const port = parseInt(val, 10);
