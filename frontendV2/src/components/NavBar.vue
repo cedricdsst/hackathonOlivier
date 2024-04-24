@@ -1,6 +1,6 @@
 <template>
 
-<nav>
+<nav :class="{ 'hidden': $route.name === 'admin' }">
         <div class="container mx-auto flex justify-between items-center">
             <!-- Logo -->
             <div class="flex items-center">
