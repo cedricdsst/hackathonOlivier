@@ -15,16 +15,16 @@
             <hr class="link-separator" />
             <!-- Liens -->
             <div class="nav-links items-center">
-                <a href="#" class="text-white hover:text-gray-300">À propos</a>
-                <a href="#" class="text-white hover:text-gray-300">Évènements</a>
-                <a href="#" class="text-white hover:text-gray-300">Contact</a>
+                <a href="/about" class="text-white hover:text-gray-300">À propos</a>
+                <a href="/evenements" class="text-white hover:text-gray-300">Évenements</a>
+                <a href="/contact" class="text-white hover:text-gray-300">Contact</a>
             </div>
             <!-- Icones -->
             <div class="flex flex-row items-center gap-4">
                 <a href="#" class="network-link">
                     <img src="@/assets/icons/linkedin_icon.svg" alt="linkedin-icon" class="network-icon">
                 </a>
-                <a href="#"class="network-link">
+                <a href="#" class="network-link">
                     <img src="@/assets/icons/facebook_icon.svg" alt="facebook-icon" class="network-icon">
                 </a>
             </div>

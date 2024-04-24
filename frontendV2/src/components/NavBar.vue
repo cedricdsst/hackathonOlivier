@@ -20,7 +20,7 @@
             <div class="nav-links items-center">
                 <a href="/" class="text-white hover:text-gray-300">Accueil</a>
                 <a href="/about" class="text-white hover:text-gray-300">À propos</a>
-                <a href="/evenement" class="red-btn">Participer à un évènement</a>
+                <a href="/evenements" class="red-btn">Participer à un évenement</a>
             </div>
         </div>
     </nav>
