@@ -39,7 +39,7 @@
                 </div>
                 <div class="flex gap-1">
                   <img class="" src="../assets/icons/clock.svg" />
-                  <p class="text-black text-[10px]">{{ atelier.duration }}</p>
+                  <p class="text-black text-[10px]">{{ atelier.duration }} h</p>
                 </div>
                 <div class="flex gap-1">
                   <img class="" src="../assets/icons/places_restantes.svg" />
