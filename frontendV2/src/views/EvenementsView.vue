@@ -22,7 +22,7 @@
     </div> -->
 
 
-    <section v-for="article in articles" :key="article.id" class="flex flex-col items-center pt-10 pb-5 m-auto bg-white ">
+    <section v-for="atelier in ateliers" :key="atelier._id" @click="goToAtelier(atelier._id)" class="flex flex-col items-center pt-10 pb-5 m-auto bg-white ">
       <div class="max-w-md mx-auto bg-[#F2F2F2] overflow-hidden md:max-w-6xl p-2">
         <div class="md:flex">
           <div class="md:shrink-0">
@@ -30,26 +30,26 @@
           </div>
           <div class="p-5 flex flex-col justify-center">
             <article class="pb-4">
-              <h3 class="text-[#8C2C2C] font-semibold">{{ article.title }}</h3>
+              <h3 class="text-[#8C2C2C] font-semibold">{{ atelier.title }}</h3>
 
               <div class="flex gap-4">
                 <div class="flex gap-1 items-center">
                   <img class="" src="../assets/icons/calendar.svg" />
-                  <p class="text-black text-[10px]">{{ article.date }}</p>
+                  <p class="text-black text-[10px]">{{ atelier.startDate }}</p>
                 </div>
                 <div class="flex gap-1">
                   <img class="" src="../assets/icons/clock.svg" />
-                  <p class="text-black text-[10px]">{{ article.time }}</p>
+                  <p class="text-black text-[10px]">{{ atelier.duration }}</p>
                 </div>
                 <div class="flex gap-1">
                   <img class="" src="../assets/icons/places_restantes.svg" />
-                  <p class="text-black text-[10px]">{{ article.remainingPlaces }} places restantes</p>
+                  <p class="text-black text-[10px]">{{ atelier.remainingSpots }} places restantes</p>
                 </div>
               </div>
             </article>
 
             <p class="mt-2 text-black text-sm">
-              {{ article.description }} <br />
+              {{ atelier.description }} <br />
             </p>
             <p class="mt-2 text-black text-sm">
               <strong> Cet évenement est réservé au plus de 18 ans.</strong>
@@ -66,27 +66,34 @@
     
   </div>
 </template>
-<script lang="ts">
-export default {
-  data() {
-    return {
-      articles: [
-        // Vous pouvez remplir cet array avec les données de vos articles provenant de la base de données
-        {
-          id: 1,
-          title: "Découverte des vins du monde",
-          imageSrc: "../assets/img/vins.png",
-          date: "18 mai 2024",
-          time: "21h30",
-          remainingPlaces: 3,
-          description: "Je vous propose une découverte en 4 temps de différents vins du monde. Cet événement est réservé au plus de 18 ans."
-        },
-        // Ajoutez d'autres objets d'article ici si nécessaire
-      ]
-    };
-  }
-};
+
+<script setup>
+import { computed, ref, onMounted } from 'vue';
+import { useAtelierStore } from '../stores/atelierStore';
+import { useEcoleStore } from '../stores/ecoleStore';
+import { useRouter } from 'vue-router';
+
+const atelierStore = useAtelierStore();
+const ecoleStore = useEcoleStore();  // Ensure you have this store
+const router = useRouter();
+
+const ateliers = computed(() => atelierStore.ateliers);
+const ecoles = computed(() => ecoleStore.ecoles);  // Use computed for reactivity on ecoles
+
+
+onMounted(async () => {
+    await atelierStore.fetchAllAteliers();
+    await ecoleStore.fetchAllEcoles();  // Fetch Ecoles on mounted
+});
+
+function goToAtelier(id) {
+    router.push({ name: 'evenement', params: { id } });
+}
+
+
 </script>
+
+
 
 <style scoped>
 /* Assurez-vous d'ajuster les styles selon les besoins de votre design */

@@ -1,4 +1,5 @@
 <template>
+    <div v-if="currentAtelier">
     <div class="header-banner header-banner-img cust-full-width">
         <div class="header-gradiant cust-full-width"></div>
     </div>
@@ -6,18 +7,18 @@
         <div class="info-event-card">
             <div class="top-left-square bg-default-red"></div>
             <div class="bottom-right-square bg-default-black"></div>
-            <h2 class="event-title mb-3">{{ jsonData.title }}</h2>
+            <h2 class="event-title mb-3">{{ currentAtelier.title }}</h2>
             <div class="event-summary mb-3">
-                <p class="inline-flex"><img src="@/assets/icons/date-svgrepo-com.svg" class="info-icon">{{ jsonData.startDate }}</p><br />
-                <p class="inline-flex"><img src="@/assets/icons/clock-with-white-face_icon-icons.com_72804.svg" class="info-icon">{{ jsonData.duration }}h</p><br />
-                <p class="inline-flex"><img src="@/assets/icons/3289574-clan-family-group-peer-people_107094.svg" class="info-icon">{{ jsonData.participantsMax }} places restantes</p><br />
+                <p class="inline-flex"><img src="@/assets/icons/date-svgrepo-com.svg" class="info-icon">{{ currentAtelier.startDate }}</p><br />
+                <p class="inline-flex"><img src="@/assets/icons/clock-with-white-face_icon-icons.com_72804.svg" class="info-icon">{{ currentAtelier.duration }}h</p><br />
+                <p class="inline-flex"><img src="@/assets/icons/3289574-clan-family-group-peer-people_107094.svg" class="info-icon">{{ currentAtelier.remainingSpots }} places restantes</p><br />
             </div>
             <p class="mb-3">
-                {{ jsonData.description }} <br />
+                {{ currentAtelier.description }} <br />
                 <b>Cet évènement est réservé au plus de 18 ans</b>
             </p>
 
-            <div class="price mb-3">{{ jsonData.price }} € par pers.</div>
+            <div class="price mb-3">{{ currentAtelier.price }} € par pers.</div>
             <button class="red-btn" @click="openModal">Je souhaite m'inscrire</button>
         </div>
     </div>
@@ -30,7 +31,7 @@
         <button class="white-btn mt-4">Bouton optionnel</button>
     </div>
 
-    <div v-if="jsonData.finished" class="info-post-event">
+    <div v-if="currentAtelier.finished" class="info-post-event">
         <div>
             <h2 class="text-center">Liste des vins</h2>
             <hr class="divider-1 m-auto" />
@@ -80,48 +81,85 @@
         <div class="modal">
             <div class="modal-content">
                 <span @click="closeModal" class="close">&times;</span>
-                <h2>Inscription à la session "{{ jsonData.title }}"</h2>
+                <h2>Inscription à la session "{{ currentAtelier.title }}"</h2>
                 <p class="disclaimer">Attention : vous devez avoir 18 ans pour vous inscrire à cette session</p>
-                <p class="inline-flex"><img src="@/assets/icons/date-svgrepo-com.svg" class="info-icon">{{ jsonData.startDate }}</p><br />
-                <p class="inline-flex"><img src="@/assets/icons/clock-with-white-face_icon-icons.com_72804.svg" class="info-icon">{{ jsonData.duration }}h</p><br />
-                <p class="inline-flex"><img src="@/assets/icons/3289574-clan-family-group-peer-people_107094.svg" class="info-icon">{{ jsonData.participantsMax }} places restantes</p><br />
+                <p class="inline-flex"><img src="@/assets/icons/date-svgrepo-com.svg" class="info-icon">{{ currentAtelier.startDate }}</p><br />
+                <p class="inline-flex"><img src="@/assets/icons/clock-with-white-face_icon-icons.com_72804.svg" class="info-icon">{{ currentAtelier.duration }}h</p><br />
+                <p class="inline-flex"><img src="@/assets/icons/3289574-clan-family-group-peer-people_107094.svg" class="info-icon">{{ currentAtelier.remainingSpots }} places restantes</p><br />
             
-                <div>
+                <form @submit.prevent="addParticipant">
+                
                     <p>Votre email</p>
-                    <input type="email" placeholder="exemple@mail.com" />
-                </div>
-                <button @click="submitRegistration" class="red-btn">S'inscrire</button>
+                    <input type="email" v-model="participantEmail" placeholder="exemple@mail.com" />
+                
+                <button type="submit" class="red-btn">S'inscrire</button>
+                </form>
             </div>
       </div>
     </div>
+</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script setup lang="ts">
 
-export default defineComponent({
-  name: 'MyComponent',
-  data() {
-    return {
-      jsonData: {"_id":"6628d0bf4cd441503b00a05a","title":"atelier 1","description":"test","startDate":"2024-04-19T00:00:00.000Z","duration":3,"finished":false,"price":50,"participantsMax":14,"password":"752895","idEcole":{"_id":"6628ceda4cd441503b00a034","nom":"esgi","adresse":"Lyon 6","__v":0},"creationDate":"2024-04-24T09:28:31.875Z","files":[],"participants":[],"vins":[{"id":{"_id":"6628cecb4cd441503b00a02e","nom":"vin test","region":"t","cepage":"t","annee":2010,"quantite":15,"descrption":"tses","fileUrl":null,"__v":0},"quantity":1,"_id":"6628d77e4cd441503b00a077"}],"__v":0},
-      isModalVisible: ref(false)
-    };
-  },
-  methods: {
-    openModal() {
-      this.isModalVisible = true;
-    },
-    closeModal() {
-      this.isModalVisible = false;
-    },
-    submitRegistration() {
-      console.log('Inscription confirmée pour :', this.jsonData.title);
-      // ajouter ici la logique pour effectuer une action d'inscription
-      // Une fois l'inscription réussie, fermer la modale
-      this.closeModal();
+const isModalVisible = ref(false);
+
+
+import { ref, onMounted, computed, watch, reactive } from 'vue';
+import { useAtelierStore } from '../stores/atelierStore';
+import { useEcoleStore } from '../stores/ecoleStore';
+import { useRoute, useRouter } from 'vue-router';
+
+const atelierStore = useAtelierStore();
+const ecoleStore = useEcoleStore(); 
+const route = useRoute();
+const router = useRouter();  // Create a router instance
+const currentAtelier = computed(() => atelierStore.currentAtelier);
+const participantEmail = ref('');
+
+
+
+
+async function addParticipant() {
+    if (participantEmail.value) {
+        const participantData = { email: participantEmail.value };
+        await atelierStore.addParticipantToAtelier(route.params.id, participantData);
+        await atelierStore.fetchAtelier(route.params.id);  // Refresh the atelier to show the new participant
+        participantEmail.value = '';  // Reset the input after adding
+        alert('Participant added successfully');
+        closeModal();
     }
-  }
+}
+
+
+
+onMounted(async () => {
+    await Promise.all([
+        
+        atelierStore.fetchAtelier(route.params.id)
+    ]);
+   
 });
+
+
+
+const openModal = () => {
+  isModalVisible.value = true;
+};
+
+const closeModal = () => {
+  isModalVisible.value = false;
+};
+
+const submitRegistration = () => {
+  console.log('Inscription confirmée pour :', currentAtelier.title);
+  // ajouter ici la logique pour effectuer une action d'inscription
+  // Une fois l'inscription réussie, fermer la modale
+  closeModal();
+};
+
+
+
 </script>
 
 

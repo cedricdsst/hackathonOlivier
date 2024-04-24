@@ -106,13 +106,22 @@ exports.getOneAtelier = (req, res) => {
         })
         .then(atelier => {
             if (!atelier) return res.status(404).json({ message: 'Atelier not found.' });
-            res.status(200).json(atelier);
+
+            // Calculate remaining spots
+            const remainingSpots = atelier.participantsMax - atelier.participants.length;
+            const atelierWithRemainingSpots = {
+                ...atelier._doc,
+                remainingSpots: remainingSpots
+            };
+
+            res.status(200).json(atelierWithRemainingSpots);
         })
         .catch(error => {
             console.error('Error fetching Atelier:', error);
             res.status(400).json({ error: error.message });
         });
 };
+
 
 
 // Get all Ateliers with detailed information
@@ -123,7 +132,17 @@ exports.getAllAteliers = (req, res) => {
             path: 'vins.id',
             model: 'Vin'
         })
-        .then(ateliers => res.status(200).json(ateliers))
+        .then(ateliers => {
+            // Calculate remaining spots for each workshop
+            const ateliersWithRemainingSpots = ateliers.map(atelier => {
+                const remainingSpots = atelier.participantsMax - atelier.participants.length;
+                return {
+                    ...atelier._doc,
+                    remainingSpots: remainingSpots
+                };
+            });
+            res.status(200).json(ateliersWithRemainingSpots);
+        })
         .catch(error => res.status(400).json({ error }));
 };
 

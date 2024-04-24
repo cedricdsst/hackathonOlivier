@@ -46,6 +46,12 @@ const router = createRouter({
       props: true
     },
     {
+      path: '/evenement/:id',
+      name: 'evenement',
+      component: EvenementView,
+      props: true
+    },
+    {
       path: '/topic/:topicId',
       name: 'topic',
       component: TopicView,
@@ -76,12 +82,7 @@ const router = createRouter({
       path: '/evenements',
       name: 'evenements',
       component: EvenementsView
-    },
-    {
-      path: '/evenement/:id',
-      name: 'evenement',
-      component: EvenementView
-    },
+    }
   ]
 })
 
