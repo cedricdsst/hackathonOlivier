@@ -1,77 +1,99 @@
 
     <template>
-    <div id="app">
-      <!-- Section Hero avec Tailwind CSS -->
-      <section class=" hero g-cover bg-no-repeat bg-fixed text-center py-32 px-4">
+    <div id="app" class="">
+
+      <!-- Section Hero avec Tailwind CSS bg-white text-center py-20 px-4 -->
+      <section class="hero g-cover bg-no-repeat bg-fixed text-center py-32 px-4 header-gradiant
+">
         
         <div class=" header flex flex-col items-center justify-center">
           <h1 class="text-white text-5xl font-bold mb-4">Apprendre à <br> déguster autrement</h1>
-          <span class="border-2 w-full border-red-500 my-6"></span>
+          <span class="border-2 w-full border-VinColor my-6"></span>
           <p class="text-white text-xl mb-4">Initiation à l’oenologie à Lyon</p>
           <!-- Ajoutez plus de contenu ou des boutons si nécessaire -->
         </div>
       </section>
+      
       <section class="scoller relative bg-cover bg-center flex justify-center items-end">
         <div class="absolute animate-bounce">
             <a href=""><img src="../assets/img/Icone_mouse_scroll.svg" alt="" ></a>
         </div>
       </section>
-      <section class="concepte bg-white flex flex-col items-center justify-center text-center p-6">
+      
+      <section class="concepte mt-20 bg-white flex flex-col items-center justify-center text-center py-20 px-4 ">
         <h2 class="text-2xl font-bold mb-4">Le concept</h2>
-        <span class="mx-4 border-2 w-full border-red-500 my-6"></span>
+        <span class="mx-6 border-2 w-full border-VinColor my-6"></span>
         <div class="flex justify-around items-stretch w-full md:flex-row flex-col">
-            <article class="flex flex-col items-center p-4">
-            <img src="../assets/img/wine_glass_icon_156828.svg" alt="" class="mb-2">
-            <h3 class="text-xl font-semibold mb-1">Dégustation guidée</h3>
-            <p>Découvrez les subtilités des vins avec un expert</p>
+            <article class="flex mx-10 flex-col items-center p-4">
+              <img src="../assets/img/wine_glass_icon_156828.svg" alt="" class="mb-2">
+              <h3 class="text-xl font-semibold mb-1">Dégustation guidée</h3>
+              <p>Découvrez les subtilités des vins avec un expert</p>
             </article>
-            <article class="flex flex-col items-center p-4">
-            <img src="../assets/img/wine_glass_icon_156828.svg" alt="" class="mb-2">
-            <h3 class="text-xl font-semibold mb-1">Apprentissage ludique</h3>
-            <p>Apprenez à vous amuser grace à des jeux et des quizz</p>
+            <article class="flex mx-10 flex-col items-center p-4">
+              <img src="../assets/img/wine_glass_icon_156828.svg" alt="" class="mb-2">
+              <h3 class="text-xl font-semibold mb-1">Apprentissage ludique</h3>
+              <p>Apprenez à vous amuser grace à des jeux et des quizz</p>
             </article>
-            <article class="flex flex-col items-center p-4">
-            <img src="../assets/img/wine_glass_icon_156828.svg" alt="" class="mb-2">
-            <h3 class="text-xl font-semibold mb-1">Découverte des vins du monde</h3>
+              <article class="flex mx-10 flex-col items-center p-4">
+              <img src="../assets/img/wine_glass_icon_156828.svg" alt="" class="mb-2">
+              <h3 class="text-xl font-semibold mb-1">Découverte des vins du monde</h3>
             <p>Voyagez à travers les régions viticoles en une séance</p>
             </article>
         </div>
-    </section>
-    <section class="NextEvent bg-white flex flex-col items-center justify-center text-center p-6">
-        <h2 class="text-2xl font-bold mb-4">Prochain événement</h2>
-        <span class="mx-4 border-2 w-full border-red-500 my-6"></span>
-        <div class="flex flex-col md:flex-row">
-            <div class=" event flex flex-col md:flex-row items-center gap-4 w-full">
+      </section>
+      
+      <section class="NextEvent bg-white flex flex-col items-center justify-center text-center py-20 px-4">
+          <h2 class="text-2xl font-bold mb-4">Prochain événement</h2>
+          <span class="mx-4 border-2 w-full border-VinColor my-6"></span>
+          <div class="flex ">
+            <div class="event flex flex-col md:flex-row sm:flex-col items-center gap-4 w-full">
                 <img class="p-2 object-contain h-40 w-auto ml-4 sm:ml-0" src="../assets/img/thumbnail_evenement.jpg" alt="">
-                <article class="flex flex-col items-start w-auto gap-2 ">
+                <article class="flex flex-col items-start w-auto gap-2">
                     <h4 class="text-lg font-semibold mb-4">Découverte des vins du monde</h4>
-                    <p class="text-sm ">Je vous propose une découverte en 4 temps de différents vins du monde.</p>
+                    <p class="text-sm">Je vous propose une découverte en 4 temps de différents vins du monde.</p>
                     <p class="text-sm font-bold"><strong>Cet événement est réservé au plus de 18 ans.</strong></p>
                 </article>        
-                <div class="mr-2 md:mb-0 sm:mb-4 ">
-                    <button class="text-white bg-black w-10 h-10">+</button>
+                <div class="mr-2 md:mb-0 sm:mb-4">
+                    <button class="text-white bg-black w-10 h-10 hover:bg-VinColor">+</button>
                 </div>
             </div>
 
-            <div class="flex justify-center items-center mt-4 md:mt-0 ">
-                <button type="button" class="text-sm border-2 px-4 py-2 w-full hover:bg-gray-200">Voir tous les événements ></button>
+            <div class="flex justify-center items-center mt-4 sm:mt-2">
+                <button type="button" class="text-sm bg-gray-200 border-2 px-4 py-2 hover:bg-VinColor whitespace-nowrap">
+                    Voir tous les événements
+                </button>
             </div>
         </div>
-    </section>
-    <section class="NextEvent bg-white flex flex-col items-center justify-center text-center p-6">
-        <h2 class="text-2xl font-bold mb-4">A propos</h2>
-        <span class="mx-4 border-2 w-full border-red-500 my-6"></span>
-        <div class="flex flex-col md:flex-row items-center md:items-start text-center md:text-left mx-auto p-6">
-            <div class="flex-shrink-0">
-                <img src="../assets/img/Olivier_bonneton.webp" alt="Olivier Bonneton" class="object-contain h-40 w-40 md:w-48 lg:w-56 rounded-full border-4 border-red-600">
+
+      </section>
+      
+      <section class="Apropos bg-white flex flex-col items-center justify-center text-center py-20 px-4 ">
+          <h2 class="text-2xl font-bold mb-4">A propos</h2>
+          <span class="mx-4 border-2 w-full border-VinColor my-6"></span>
+          <div class="flex flex-col md:flex-row items-center md:items-start text-center md:text-left mx-auto p-6">
+              <div class="sm:w-full ">
+                  <img src="../assets/img/Olivier_bonneton.webp" alt="Olivier Bonneton" class="object-contain h-40 md:w-48 lg:w-full self-start sm:self-center">
+              </div>
+              <div class="mt-6 flex flex-col justify-center items-start md:items-center">
+                <p class="mb-6 text-left md:text-center">Découvrez mon atelier de dégustation de vin à Lyon, spécialement conçu pour les débutants passionnés et curieux. Dans une ambiance chaleureuse et conviviale, je vous invite à un voyage œnologique pour découvrir les vins du monde. Ma table d'animation est le lieu idéal pour échanger, apprendre et partager des moments uniques autour du vin. Rejoignez-nous et laissez-vous guider par nos experts pour une expérience de dégustation inoubliable.</p>
+                <button type="button" class="text-black bg-gray-200 py-2 px-4 hover:bg-VinColor transition-colors self-start md:self-center">En savoir plus</button>
             </div>
-            <div class="mt-6 md:mt-0 md:ml-6 lg:ml-10 flex flex-col justify-center">
-                <p class="mb-6">Découvrez mon atelier de dégustation de vin à Lyon, spécialement conçu pour les débutants passionnés et curieux. Dans une ambiance chaleureuse et conviviale, je vous invite à un voyage œnologique pour découvrir les vins du monde. Ma table d'animation est le lieu idéal pour échanger, apprendre et partager des moments uniques autour du vin. Rejoignez-nous et laissez-vous guider par nos experts pour une expérience de dégustation inoubliable.</p>
-                <button type="button" class="text-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">En savoir plus</button>
-            </div>
-        </div>
-    </section>
-      <!-- D'autres sections peuvent être ajoutées ici -->
+
+          </div>
+      </section>
+
+      <section class="py-20 px-4 mt-20">
+    <div class="relative w-full h-full"> <!-- Assurez-vous que le conteneur a une hauteur suffisante -->
+        <!-- Première image (gauche) -->
+        <img src="../assets/img/gallerie_plateau.jpg" alt="Plateau 1" class="absolute ml-20 top-0 left-1/4 transform -translate-x-1/2 w-1/3 z-10">
+        
+        <!-- Troisième image (droite) -->
+        <img src="../assets/img/gallerie_plateau.jpg" alt="Plateau 3" class="absolute top-0 left-3/4 transform -translate-x-1/2 w-1/3 z-30">
+        
+        <!-- Deuxième image (centre, en bas et en partie en dessous de la troisième) -->
+        <img src="../assets/img/gallerie_plateau.jpg" alt="Plateau 2" class="absolute bottom-0 left-[45%] transform -translate-x-1/2 w-1/4 z-20" style="transform: translateY(50%);">
+    </div>
+</section>
     </div>
   </template>
   <script>
@@ -102,7 +124,6 @@
   }
 
   .scoller {
-    background-color: red;
     width: 100%;
     display: flex;
     align-items: center;
@@ -130,14 +151,14 @@
 .animate-bounce {
   animation: bounce 1s infinite;
 }
-.concepte, .NextEvent{
+.concepte, .NextEvent, .Apropos {
     color: black;
-    margin-top: 80px;
+
     display: flex;
     justify-content: center;
 }
-.concepte span, .NextEvent span {
-    width: 20%;
+.concepte span, .NextEvent span, .Apropos span{
+    width: 5%;
 }
 .concepte article {
     width: 100%;
@@ -161,6 +182,9 @@
  justify-content: center;
  
 }
+/* button {
+  background-color: #8c2c2c;
+} */
 .event{
     background-color: #f1f1f1;
     margin-right: 10px;
