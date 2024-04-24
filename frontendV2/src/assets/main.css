@@ -140,6 +140,11 @@ body
   margin: 20px 0;
 }
 
+.divider-1.m-auto
+ {
+  margin: 20px auto;
+ }
+
 @media (max-width:768px)
 {
   #mainContent
