@@ -7,6 +7,7 @@ import AteliersView from '../views/AteliersView.vue'
 import AtelierView from '../views/AtelierView.vue'
 import VinsView from '../views/VinsView.vue'
 import EcolesView from '../views/EcolesView.vue'
+import CalendarView from '../views/CalendarView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,6 +16,11 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView
+    },
+    {
+      path: '/calendar',
+      name: 'calendar',
+      component: CalendarView
     },
     {
       path: '/ecoles',

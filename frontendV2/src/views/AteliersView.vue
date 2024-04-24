@@ -58,6 +58,7 @@ const newAtelier = ref({
 onMounted(async () => {
     await atelierStore.fetchAllAteliers();
     await ecoleStore.fetchAllEcoles();  // Fetch Ecoles on mounted
+    console.log(JSON.stringify(atelierStore.ateliers));
 });
 
 function goToAtelier(id) {

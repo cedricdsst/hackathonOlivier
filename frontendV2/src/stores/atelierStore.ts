@@ -6,6 +6,19 @@ export const useAtelierStore = defineStore('atelier', {
         ateliers: [],
         currentAtelier: null,
     }),
+    getters: {
+        calendarEvents: (state) => state.ateliers.map(atelier => ({
+            id: atelier._id,
+            startDate: new Date(atelier.startDate),
+            endDate: new Date(new Date(atelier.startDate).getTime() + atelier.duration * 24 * 60 * 60 * 1000),
+            title: atelier.title,
+            description: atelier.description,
+            price: atelier.price,
+            participantsMax: atelier.participantsMax,
+            finished: atelier.finished,
+            school: atelier.idEcole.nom
+        }))
+    },
     actions: {
         // In your atelierStore
         async fetchAllAteliers() {
