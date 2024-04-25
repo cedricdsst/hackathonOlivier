@@ -22,15 +22,4 @@
   </script>
 
 <style scoped>
-  /* Styles spécifiques au contenu du tableau de bord */
-  h1 {
-    font-size: 24px;
-    color: #333;
-  }
-  
-  p {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 10px;
-  }
-  </style>
+</style>
