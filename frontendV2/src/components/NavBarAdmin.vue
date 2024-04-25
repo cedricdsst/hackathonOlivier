@@ -12,7 +12,7 @@
             <router-link :to="{ name: 'admin' }"><img src="@/assets/icons/dashboard-svgrepo-com.svg" class="logo-admin" />Tableau de bord</router-link>
             <router-link :to="{ name: 'admin-pages' }"><img src="@/assets/icons/calendar-svgrepo-com.svg" class="logo-admin" />Pages</router-link>
             <router-link :to="{ name: 'admin-ateliers' }"><img src="@/assets/icons/page-svgrepo-com.svg" class="logo-admin" />Ateliers</router-link>
-            <router-link :to="{ name: 'admin-vins' }"><img src="@/assets/icons/wine_glass_icon_156828.svg" class="logo-admin" />Cave</router-link>
+            <router-link :to="{ name: 'admin-cave' }"><img src="@/assets/icons/wine_glass_icon_156828.svg" class="logo-admin" />Cave</router-link>
             <router-link :to="{ name: 'admin-ecoles' }"><img src="@/assets/icons/school-svgrepo-com.svg" class="logo-admin" />Écoles</router-link>
         </div>
 

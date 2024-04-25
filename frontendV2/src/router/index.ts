@@ -80,8 +80,8 @@ const router = createRouter({
           props: true
         },
         {
-          path: 'vins',
-          name: 'admin-vins',
+          path: 'cave',
+          name: 'admin-cave',
           component: VinsView
         },
         {
