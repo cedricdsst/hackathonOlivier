@@ -62,48 +62,33 @@
         <h2 class="text-center">Liste des vins</h2>
         <hr class="divider-1 m-auto" />
         <article class="flex flex-wrap justify-center gap-5">
-           
-              <div v-for="vin in vins" :key="vin._id" class="flex flex-col justify-center items-center">
-                <img :src="vin.fileUrl" class="w-52" />
-                <p>{{ vin.nom }}</p>
-              </div>
-              <!-- <div class="flex flex-col justify-center items-center">
-                <img src="../assets/img/chablis.webp" class="w-52"/>
-                <p> Test 4</p>
-              </div>
-              <div class="flex flex-col justify-center items-center">
-                <img src="../assets/img/vin-rouge-de-france.jpg" class="w-52" />
-                <p>Test 2</p>
-              </div>
-              <div class="flex flex-col justify-center items-center">
-                <img src="../assets/img/chablis.webp" class="w-52"/>
-                <p> Test</p>
-              </div>
-              <div class="flex flex-col justify-center items-center">
-                <img src="../assets/img/vin-rouge-de-france.jpg" class="w-52" />
-                <p>Test 2</p>
-              </div>
-              <div class="flex flex-col justify-center items-center">
-                <img src="../assets/img/chablis.webp" class="w-52"/>
-                <p> Test</p>
-              </div>
-              <div class="flex flex-col justify-center items-center">
-                <img src="../assets/img/vin-rouge-de-france.jpg" class="w-52" />
-                <p>Test 2</p>
-              </div> -->
-           
-          </article>
+          <div v-for="vin in vins" :key="vin._id" class="flex flex-col justify-center items-center">
+            <img :src="vin.fileUrl" class="w-52" />
+            <p>{{ vin.nom }}</p>
+          </div>
+        </article>
       </div>
 
       <div class="ressource-block">
         <h2 class="text-center">Ressources liées</h2>
         <hr class="divider-1 m-auto" />
-        <p class="text-center">
-          Les ressources sont protégées par mot de passe. Veuillez entrer le mot de passe pour
-          continuer :
-        </p>
-        <input class="m-auto" type="password" placeholder="Mot de passe" />
-        <button class="red-btn">Soumettre</button>
+        <div>
+          <div v-if="!isPasswordCorrect">
+            <p class="text-center">
+              Les ressources sont protégées par mot de passe. Veuillez entrer le mot de passe pour
+              continuer :
+            </p>
+            <div class="text-center">
+            <input class="m-auto" type="password" v-model="password" placeholder="Mot de passe" />
+            <button class="red-btn" @click="submitPassword">Soumettre</button>
+          </div>
+        </div>
+          <!-- Contenu à afficher si le mot de passe est correct -->
+          <div v-if="isPasswordCorrect">
+            <!-- Votre contenu protégé par mot de passe -->
+            <h2>Ressources orotefgé par mdp oeeeeeeee</h2>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -118,37 +103,11 @@
           <h2 class="text-center">Liste des vins</h2>
           <hr class="divider-1 m-auto" />
           <article v-for="vin in vins" :key="vin._id" class="flex flex-wrap justify-center gap-5">
-            
-              <div class="flex flex-col justify-center items-center">
-                <img :src="vin.fileUrl" class="w-52" />
-                <p>{{ vin.nom }}</p>
-              </div>
-              <!-- <div class="flex flex-col justify-center items-center">
-                <img src="../assets/img/chablis.webp" class="w-52"/>
-                <p> Test 4</p>
-              </div>
-              <div class="flex flex-col justify-center items-center">
-                <img src="../assets/img/vin-rouge-de-france.jpg" class="w-52" />
-                <p>Test 2</p>
-              </div>
-              <div class="flex flex-col justify-center items-center">
-                <img src="../assets/img/chablis.webp" class="w-52"/>
-                <p> Test</p>
-              </div>
-              <div class="flex flex-col justify-center items-center">
-                <img src="../assets/img/vin-rouge-de-france.jpg" class="w-52" />
-                <p>Test 2</p>
-              </div>
-              <div class="flex flex-col justify-center items-center">
-                <img src="../assets/img/chablis.webp" class="w-52"/>
-                <p> Test</p>
-              </div>
-              <div class="flex flex-col justify-center items-center">
-                <img src="../assets/img/vin-rouge-de-france.jpg" class="w-52" />
-                <p>Test 2</p>
-              </div> -->
+            <div class="flex flex-col justify-center items-center">
+              <img :src="vin.fileUrl" class="w-52" />
+              <p>{{ vin.nom }}</p>
+            </div>
           </article>
-          
         </div>
 
         <div class="ressource-block">
@@ -158,8 +117,14 @@
             Les ressources sont protégées par mot de passe. Veuillez entrer le mot de passe pour
             continuer :
           </p>
-          <input class="m-auto" type="password" placeholder="Mot de passe" />
-          <button class="red-btn">Soumettre</button>
+          <input class="m-auto" type="password" v-model="password" placeholder="Mot de passe" />
+          <button class="red-btn" @click="submitPassword">Soumettre</button>
+
+          <!-- Contenu à afficher si le mot de passe est correct -->
+          <div v-if="isPasswordCorrect">
+            <!-- Votre contenu protégé par mot de passe -->
+            <h2>Ressources orotefgé par mdp oeeeeeeee</h2>
+          </div>
         </div>
       </div>
     </div>
@@ -220,8 +185,7 @@ import { ref, onMounted, computed, watch, reactive } from 'vue'
 import { useAtelierStore } from '../stores/atelierStore'
 import { useEcoleStore } from '../stores/ecoleStore'
 import { useRoute, useRouter } from 'vue-router'
-import { useVinStore } from '@/stores/vinStore';
-
+import { useVinStore } from '@/stores/vinStore'
 
 const atelierStore = useAtelierStore()
 const ecoleStore = useEcoleStore()
@@ -229,12 +193,10 @@ const route = useRoute()
 const router = useRouter() // Create a router instance
 const currentAtelier = computed(() => atelierStore.currentAtelier)
 const participantEmail = ref('')
+const password = ref('') // Variable pour stocker le mot de passe saisi par l'utilisateur
 
-const vinStore = useVinStore();
-  const vins = computed(() => vinStore.vins);
-  
-
-  
+const vinStore = useVinStore()
+const vins = computed(() => vinStore.vins)
 
 async function addParticipant() {
   if (participantEmail.value) {
@@ -249,9 +211,7 @@ async function addParticipant() {
 
 onMounted(async () => {
   await Promise.all([atelierStore.fetchAtelier(route.params.id)])
-  await Promise.all([vinStore.fetchAllVins(route.params.id)]);
-  
-
+  await Promise.all([vinStore.fetchAllVins(route.params.id)])
 })
 
 const openModal = () => {
@@ -267,6 +227,32 @@ const submitRegistration = () => {
   // ajouter ici la logique pour effectuer une action d'inscription
   // Une fois l'inscription réussie, fermer la modale
   closeModal()
+}
+
+let correctPassword = ''
+
+// Fonction asynchrone pour charger les données de l'atelier et mettre à jour le mot de passe correct
+const loadAtelierData = async () => {
+  await atelierStore.fetchAtelier(route.params.id)
+  correctPassword = currentAtelier.value.password
+}
+
+// Appeler la fonction de chargement des données de l'atelier lors du montage du composant
+onMounted(loadAtelierData)
+
+// Utiliser watch pour détecter les changements dans currentAtelier et mettre à jour correctPassword
+watch(currentAtelier, () => {
+  correctPassword = currentAtelier.value.password
+})
+
+// Méthode pour vérifier si le mot de passe saisi est correct
+const isPasswordCorrect = ref(false)
+const submitPassword = () => {
+  if (password.value === correctPassword) {
+    isPasswordCorrect.value = true // Afficher le contenu si le mot de passe est correct
+  } else {
+    alert('Mot de passe incorrect')
+  }
 }
 </script>
 
