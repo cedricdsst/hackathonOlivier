@@ -60,11 +60,6 @@ export default defineComponent({
     margin: auto;
 }
 
-#mainContent
-{
-  padding-top: 0 !important;
-}
-
 #admin-app {
     display: flex;
     height: 100vh;
