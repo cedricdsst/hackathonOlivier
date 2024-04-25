@@ -7,14 +7,13 @@
         <div class="info-event-card">
             <div class="top-left-square bg-default-red"></div>
             <div class="bottom-right-square bg-default-black"></div>
-            <h2 class="event-title mb-3">{{ currentAtelier.title }}</h2>
+            <h2 class="event-title mb-3 futura-med">{{ currentAtelier.title }}</h2>
             <div class="event-summary mb-3">
-                <p class="inline-flex"><img src="@/assets/icons/date-svgrepo-com.svg" class="info-icon">{{ currentAtelier.startDate }}</p><br />
-                <p class="inline-flex"><img src="@/assets/icons/clock-with-white-face_icon-icons.com_72804.svg" class="info-icon">{{ currentAtelier.duration }}h</p><br />
-                <p class="inline-flex"><img src="@/assets/icons/3289574-clan-family-group-peer-people_107094.svg" class="info-icon">{{ currentAtelier.remainingSpots }} places restantes</p><br />
+                <p class="inline-flex text-[12px] font-bold"><img src="@/assets/icons/date-svgrepo-com.svg" class="info-icon">{{ currentAtelier.startDate }}</p><br />
+                <p class="inline-flex text-[12px] font-bold"><img src="@/assets/icons/clock-with-white-face_icon-icons.com_72804.svg" class="info-icon">{{ currentAtelier.duration }}h</p><br />
+                <p class="inline-flex text-[12px] font-bold"><img src="@/assets/icons/3289574-clan-family-group-peer-people_107094.svg" class="info-icon">{{ currentAtelier.remainingSpots }} places restantes</p><br />
             </div>
             <p class="mb-3">
-                {{ currentAtelier.description }} <br />
                 <b>Cet évènement est réservé au plus de 18 ans</b>
             </p>
 
@@ -23,11 +22,11 @@
         </div>
     </div>
 
-    <div class="mb-10">
-        <h2>Titre niveau 2</h2>
+    <div class="mb-[100px]">
+        <h2>Description de l'atelier</h2>
         <hr class="divider-1" />
 
-        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit morbi, vitae aenean cras feugiat massa etiam quisque mi, convallis sed nibh iaculis praesent sem lobortis. Montes phasellus non orci senectus nostra, dictumst bibendum magnis vivamus ridiculus scelerisque, risus blandit et torquent. Habitant sed ligula malesuada aptent quisque lobortis, dignissim egestas montes in nisi, lectus nibh felis rhoncus donec. Cum aliquet blandit euismod montes himenaeos, non aliquam libero etiam laoreet magna, erat platea fringilla nam. Ante magna tempor consequat ad potenti elementum pellentesque volutpat, mattis ultrices sagittis non interdum vestibulum venenatis id, eget lectus semper odio fusce nec lacus.</p>
+        <p>{{ currentAtelier.description }}</p>
         <button class="white-btn mt-4">Bouton optionnel</button>
     </div>
 
@@ -69,7 +68,7 @@
     </div>
 
 
-    <div class="img-bottom-page mb-10">
+    <div class="img-bottom-page mt-[100px] mb-10">
             <div class="top-left-square bg-default-red"></div>
             <div class="bottom-right-square bg-default-black"></div>
         <img src="@/assets/BD118-1024x684.jpg" class="image1">
@@ -81,16 +80,16 @@
         <div class="modal">
             <div class="modal-content">
                 <span @click="closeModal" class="close">&times;</span>
-                <h2>Inscription à la session "{{ currentAtelier.title }}"</h2>
+                <h2 class="futura-med">Inscription à la session "{{ currentAtelier.title }}"</h2>
                 <p class="disclaimer">Attention : vous devez avoir 18 ans pour vous inscrire à cette session</p>
-                <p class="inline-flex"><img src="@/assets/icons/date-svgrepo-com.svg" class="info-icon">{{ currentAtelier.startDate }}</p><br />
-                <p class="inline-flex"><img src="@/assets/icons/clock-with-white-face_icon-icons.com_72804.svg" class="info-icon">{{ currentAtelier.duration }}h</p><br />
-                <p class="inline-flex"><img src="@/assets/icons/3289574-clan-family-group-peer-people_107094.svg" class="info-icon">{{ currentAtelier.remainingSpots }} places restantes</p><br />
+                <p class="inline-flex text-[12px] font-bold"><img src="@/assets/icons/date-svgrepo-com.svg" class="info-icon">{{ currentAtelier.startDate }}</p><br />
+                <p class="inline-flex text-[12px] font-bold"><img src="@/assets/icons/clock-with-white-face_icon-icons.com_72804.svg" class="info-icon">{{ currentAtelier.duration }}h</p><br />
+                <p class="inline-flex text-[12px] font-bold"><img src="@/assets/icons/3289574-clan-family-group-peer-people_107094.svg" class="info-icon">{{ currentAtelier.remainingSpots }} places restantes</p><br />
             
                 <form @submit.prevent="addParticipant">
-                <div class="mb-6">
+                <div class="mb-6 mt-[15px]">
                     <p>Votre email</p>
-                    <input type="email" v-model="participantEmail" placeholder="exemple@mail.com" />
+                    <input class="text-[12px]" type="email" v-model="participantEmail" placeholder="exemple@mail.com" />
                 </div>
                 <button type="submit" class="red-btn">S'inscrire</button>
                 </form>
@@ -187,7 +186,7 @@ const submitRegistration = () => {
     max-height: 340px;
     position: relative;
     max-width : 550px;
-    top : -100px;
+    top : -200px;
     z-index: 2;
 }
 
@@ -229,7 +228,7 @@ const submitRegistration = () => {
     width: 100%;
     background-color: var(--default-light-grey);
     margin-bottom: 5rem;
-    padding: 20px;
+    padding: 50px 20px;
 }
 
 .ressource-block {
@@ -284,6 +283,12 @@ const submitRegistration = () => {
     color: var(--default-red);
 }
 
+.futura-med
+{
+    font-family: 'Futura Std Medium';
+    font-weight: bold;
+}
+
 .modal .disclaimer
 {
     font-weight: bold;
@@ -291,20 +296,21 @@ const submitRegistration = () => {
 
 
 .modal-content {
-  padding: 20px;
+  padding: 40px;
 }
 
 .modal-content > *
 {
-    margin-bottom: 1.5rem;
+    margin-bottom: 15px;
 }
 
 .close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 24px;
-  cursor: pointer;
+    color: #8B8A8A;
+    position: absolute;
+    top: 0;
+    right: 30px;
+    font-size: 40px;
+    cursor: pointer;
 }
 
 .disclaimer-btn-event
@@ -326,7 +332,7 @@ const submitRegistration = () => {
 
 .info-icon
 {
-    margin-right: 5px;
+    margin-right: 10px;
     width: 20px;
 }
 </style>

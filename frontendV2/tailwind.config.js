@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'color-wine': '#8c2c2c', // Ajouter la couleur personnalisée sous un nom descriptif
+        'VinColor': '#8c2c2c',
       },
     } // Étendre ou personnaliser le thème Tailwind CSS si nécessaire
   },

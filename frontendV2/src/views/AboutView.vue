@@ -1,8 +1,9 @@
 <template>
-    <section class="hero g-cover bg-no-repeat text-center py-32 px-4 cust-full-width">
-      <div class="header flex flex-col items-center justify-center">
+    <section class="hero mb-[100px] g-cover bg-no-repeat text-center py-32 px-4 cust-full-width">
+      <div class="header  flex flex-col items-center justify-center">
+        <small class="mb-5 text-white">Accueil > À propos</small>
         <h1 class="text-white text-5xl font-bold mb-4">À propos</h1>
-        <span class="border-2 w-full border-color-wine my-6"></span>
+        <span class="border-2 w-1/3 border-color-wine my-6"></span>
         <h2 class="text-white mb-4">Laissez vous guider par la douceur de nos saveurs</h2>
     
       </div>
@@ -89,7 +90,7 @@
 
     </template>
 
-<style>
+<style scoped>
 @media (min-width: 1024px) {
   .about {
     min-height: 100vh;
@@ -98,23 +99,27 @@
   }
 }
 .hero {
-  background-image: url('../assets/img/verre_rouge.jpg');
+  background-image: radial-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url('../assets/img/verre_rouge.jpg');
   background-size: cover;
   background-position: 0px 0px;
   text-align: left;
   width: auto;
-  height: 620px;
+  height: 50vh;
   display: flex;
 
   /* padding: 100px 0; */
 }
 
+.border-color-wine
+{
+  border-color: var(--default-red);
+}
 
 .hero div {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  margin-left: 50px;
+  margin-left: 180px;
 }
 
 .header-banner-img

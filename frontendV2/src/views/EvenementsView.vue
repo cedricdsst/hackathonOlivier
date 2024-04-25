@@ -1,17 +1,17 @@
 <template>
   <div id="app">
     <!-- Section Hero avec Tailwind CSS -->
-    <section class="hero g-cover bg-no-repeat text-center py-32 px-4 cust-full-width">
+    <section class="hero g-cover bg-no-repeat text-center py-32 px-4 cust-full-width mb-[100px]">
       <div class="header flex flex-col items-center justify-center">
-        <small class="mb-5">Accueil > Evenement</small>
-        <h1 class="text-white text-5xl font-bold mb-4">Evenement à venir</h1>
-        <span class="border-2 w-full border-red-500 my-6"></span>
+        <small class="mb-5 text-white">Accueil > Évènements</small>
+        <h1 class="text-white text-5xl font-bold mb-4">Évènements à venir</h1>
+        <span class="border-2 w-1/3 custom-border-red my-6"></span>
         <h2 class="text-white mb-4">Inscriptions réservées aux plus de 18 ans</h2>
     
       </div>
     </section>
 
-    <section v-for="atelier in ateliers" :key="atelier._id" @click="goToAtelier(atelier._id)" class="flex flex-col items-center pt-10 pb-5 m-auto bg-white ">
+    <section v-for="atelier in ateliers" :key="atelier._id" @click="goToAtelier(atelier._id)" class="flex flex-col items-center my-[30px] mx-auto bg-white ">
       <div class="w-full mx-auto bg-[#F2F2F2] overflow-hidden p-2 cursor-pointer">
         <div class="flex">
           <div class="md:shrink-0">
@@ -87,12 +87,12 @@ function goToAtelier(id) {
 <style scoped>
 /* Assurez-vous d'ajuster les styles selon les besoins de votre design */
 .hero {
-  background-image: url('../assets/img/verre_rouge.jpg');
+  background-image:radial-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url('../assets/img/verre_rouge.jpg');
   background-size: cover;
   background-position: 0px 0px;
   text-align: left;
   width: auto;
-  height: 620px;
+  height: 50vh;
   display: flex;
 
   /* padding: 100px 0; */
@@ -103,7 +103,7 @@ function goToAtelier(id) {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  margin-left: 50px;
+  margin-left: 180px;
 }
 
 .header-banner-img
@@ -117,6 +117,11 @@ function goToAtelier(id) {
   margin-left: -50vw;
   left: 50%;
   position: relative;
+}
+
+.custom-border-red
+{
+  border-color: var(--default-red);
 }
 
 .scoller {

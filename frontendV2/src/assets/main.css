@@ -11,6 +11,7 @@
 
 h1 {
   font-family: 'Futura Std Medium';
+  font-weight: bold;
   font-size: 48px;
 }
 
@@ -78,6 +79,11 @@ span {
   height: 100%;
   background-image: radial-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5));
   
+}
+
+.header h1, .header h2
+{
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.50);
 }
 
 
