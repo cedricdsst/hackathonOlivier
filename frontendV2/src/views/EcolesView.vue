@@ -29,7 +29,7 @@
   </div>
 </template>
 
-  
+
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useEcoleStore } from '../stores/ecoleStore';
@@ -75,8 +75,7 @@ const updateEcole = async () => {
 };
 </script>
 
-  
-  <style scoped>
+
+<style scoped>
   /* Add your CSS styles if needed */
   </style>
-  

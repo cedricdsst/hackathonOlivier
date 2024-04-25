@@ -81,4 +81,3 @@ async function createAtelier() {
     }
 }
 </script>
-
