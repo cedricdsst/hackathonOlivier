@@ -22,8 +22,8 @@
       
     </div>
   </template>
-  
-  <script setup lang="ts">
+
+<script setup lang="ts">
   import { ref, computed } from 'vue';
   import { useAuthStore } from '../stores/authStore';
   import { useRouter } from 'vue-router';
@@ -33,17 +33,16 @@ const router = useRouter();
   const stayLoggedIn = ref(false);
   const authStore = useAuthStore();
   
-  // Propriété calculée pour déterminer si l'utilisateur est connecté
+  // Détermine si l'utilisateur est connecté
   const isUserLoggedIn = computed(() => {
-    return authStore.userId !== null; // Vérifiez en fonction de votre logique d'authentification
+    return authStore.userId !== null;
   });
   
   const login = async () => {
     try {
       await authStore.login({ email: email.value, password: password.value, stayLoggedIn: stayLoggedIn.value });
       // Redirection ou mise à jour de l'interface utilisateur en cas de succès
-      // Par exemple : router.push({ name: 'home' });
-      router.push('/');
+      router.push('/admin');
     } catch (error: any) {
       alert("Erreur de connexion : " + error.message);
     }
@@ -51,8 +50,8 @@ const router = useRouter();
   
 
   </script>
-  
-  <style>
+
+<style>
   .login-container {
     max-width: 400px;
     margin: auto;
@@ -75,4 +74,3 @@ const router = useRouter();
   
  
   </style>
-  

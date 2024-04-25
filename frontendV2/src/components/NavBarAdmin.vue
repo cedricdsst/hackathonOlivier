@@ -17,13 +17,36 @@
         </div>
 
         <!-- Btn deconnexion -->
-        <div class="disconnect-admin-btn"><img src="@/assets/icons/logout-svgrepo-com.svg" class="logo-admin" />Déconnexion</div>
+        <div class="disconnect-admin-btn" @click="logout"><img src="@/assets/icons/logout-svgrepo-com.svg" class="logo-admin" />Déconnexion</div>
     </div>
-
 </template>
 
 <script>
+import { defineComponent } from 'vue';
+import { useAuthStore } from '../stores/authStore';
+import { useRouter } from 'vue-router';
+
+export default defineComponent({
+    setup() {
+        const authStore = useAuthStore();
+        const router = useRouter();
+
+        const logout = async () => {
+            try {
+                await authStore.logout();
+                router.push({ name: 'login' });
+            } catch (error) {
+                alert("Erreur de connexion : " + error.message);
+            }
+        };
+
+        return {
+            logout
+        };
+    }
+});
 </script>
+
 
 <style>
 .admin-img

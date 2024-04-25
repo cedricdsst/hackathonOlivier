@@ -97,12 +97,15 @@ const router = createRouter({
   ]
 });
 
-router.beforeEach((to, from, next) => {
-  const authStore = useAuthStore(); // Obtenez l'instance du store à partir de Pinia
+router.beforeEach(async (to, from, next) => {
+  const authStore = useAuthStore();
+  await authStore.verifyToken()
+  console.log(to.meta.requiresAuth);
+  console.log(authStore.userId);
   if (to.meta.requiresAuth && !authStore.userId) {
     next({ name: 'login' });
   } else {
-    next(); // Continuez la navigation normalement
+    next();
   }
 });
 
