@@ -80,22 +80,28 @@
         <div class="modal">
             <div class="modal-content">
                 <span @click="closeModal" class="close">&times;</span>
-                <h2 class="futura-med">Inscription à la session "{{ currentAtelier.title }}"</h2>
-                <p class="disclaimer">Attention : vous devez avoir 18 ans pour vous inscrire à cette session</p>
-                <p class="inline-flex text-[12px] font-bold"><img src="@/assets/icons/date-svgrepo-com.svg" class="info-icon">{{ currentAtelier.startDate }}</p><br />
-                <p class="inline-flex text-[12px] font-bold"><img src="@/assets/icons/clock-with-white-face_icon-icons.com_72804.svg" class="info-icon">{{ currentAtelier.duration }}h</p><br />
-                <p class="inline-flex text-[12px] font-bold"><img src="@/assets/icons/3289574-clan-family-group-peer-people_107094.svg" class="info-icon">{{ currentAtelier.remainingSpots }} places restantes</p><br />
-            
-                <form @submit.prevent="addParticipant">
-                <div class="mb-6 mt-[15px]">
-                    <p>Votre email</p>
-                    <input class="text-[12px]" type="email" v-model="participantEmail" placeholder="exemple@mail.com" />
-                </div>
-                <button type="submit" class="red-btn">S'inscrire</button>
-                </form>
-            </div>
-      </div>
-    </div>
+                <template v-if="!submitted">
+                    <h2 class="futura-med">Inscription à la session "{{ currentAtelier.title }}"</h2>
+                    <p class="disclaimer">Attention : vous devez avoir 18 ans pour vous inscrire à cette session</p>
+                    <p class="inline-flex text-[12px] font-bold"><img src="@/assets/icons/date-svgrepo-com.svg" class="info-icon">{{ currentAtelier.startDate }}</p><br />
+                    <p class="inline-flex text-[12px] font-bold"><img src="@/assets/icons/clock-with-white-face_icon-icons.com_72804.svg" class="info-icon">{{ currentAtelier.duration }}h</p><br />
+                    <p class="inline-flex text-[12px] font-bold"><img src="@/assets/icons/3289574-clan-family-group-peer-people_107094.svg" class="info-icon">{{ currentAtelier.remainingSpots }} places restantes</p><br />
+                
+                    <form @submit.prevent="addParticipant">
+                    <div class="mb-6 mt-[15px]">
+                        <p>Votre email</p>
+                        <input class="text-[12px]" type="email" v-model="participantEmail" placeholder="exemple@mail.com" />
+                    </div>
+                    <button type="submit" class="red-btn">S'inscrire</button>
+                    </form>
+                </template>
+<template v-else>
+                    <h2 class="futura-med">Inscription confirmée</h2>
+                    <p class="text-[16px] futura-med">Votre inscription a bien été prise en compte. <br /> Vous allez bientôt recevoir un email pour régler vos places afin de valider votre inscription.</p>
+                </template>
+</div>
+</div>
+</div>
 </div>
 </template>
 
@@ -115,7 +121,7 @@ const route = useRoute();
 const router = useRouter();  // Create a router instance
 const currentAtelier = computed(() => atelierStore.currentAtelier);
 const participantEmail = ref('');
-
+const submitted = ref(false);
 
 
 
@@ -125,8 +131,7 @@ async function addParticipant() {
         await atelierStore.addParticipantToAtelier(route.params.id, participantData);
         await atelierStore.fetchAtelier(route.params.id);  // Refresh the atelier to show the new participant
         participantEmail.value = '';  // Reset the input after adding
-        alert('Participant added successfully');
-        closeModal();
+        submitted.value = true;
     }
 }
 
