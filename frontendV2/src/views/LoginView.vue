@@ -1,6 +1,12 @@
 <template>
     <div class="login-container">
-      <h2>Connexion</h2>
+      <!-- Logo -->
+      <div class="my-6">
+        <a href="/">
+            <img src="@/assets/img/Logo_Hackaton_M1-ESGI_blanc.png" alt="Logo" class="h-8 mr-2 logo admin-img">
+        </a>
+      </div>
+      <h2 class="mb-6">Connexion</h2>
       <form @submit.prevent="login">
         <div class="form-group">
           <label for="email">Email:</label>
