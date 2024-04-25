@@ -61,9 +61,9 @@
       <div>
         <h2 class="text-center">Liste des vins</h2>
         <hr class="divider-1 m-auto" />
-        <article v-for="vin in vins" :key="vin._id" class="flex flex-wrap justify-center gap-5">
+        <article class="flex flex-wrap justify-center gap-5">
            
-              <div class="flex flex-col justify-center items-center">
+              <div v-for="vin in vins" :key="vin._id" class="flex flex-col justify-center items-center">
                 <img :src="vin.fileUrl" class="w-52" />
                 <p>{{ vin.nom }}</p>
               </div>

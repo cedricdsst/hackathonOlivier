@@ -12,12 +12,12 @@ const transporter = nodemailer.createTransport({
 });
 
 // Exemple de fonction pour envoyer un email
-const sendEmail = async (to, subject, text) => {
+const sendEmail = async (to, subject, htmlContent) => {
     const mailOptions = {
         from: 'hackathon@chokbar.fr', // Doit correspondre à 'auth.user'
         to: to,
         subject: subject,
-        text: text
+        html: htmlContent,
     };
 
     try {
