@@ -10,20 +10,20 @@
     <section class="bg-white py-8">
     <div class="container mx-auto px-6">
       <h2 class="text-3xl font-semibold border-b-4 border-color-wine w-max pb-4">À propos de nous</h2>
-      <p class="mt-4 text-gray-600">
+      <p class="mt-4">
         Passionné par tous types de Savoirs : Spatial, Mathématiques, Physique, Informatique, Intelligence Artificielle, Œnologie…
       </p>
-      <p class="mt-2 text-gray-600">
+      <p class="mt-2">
         Après deux années de recherches scientifiques au tout début de ma carrière, je m'investis depuis plus de 25 ans dans l'enseignement des disciplines scientifiques auprès du public universitaire et de la formation pour adultes.
       </p>
-      <p class="mt-2 text-gray-600">
+      <p class="mt-2">
         Ma pratique : Faire (re)découvrir les Sciences sous de nouveaux angles (historiques, humains, ludiques, ...) et lier celles-ci à l'Actualité et au Monde d'aujourd'hui et de demain. L'évolution rapide des IA (Midjourney, Dall-e, Chat GPT, Avia, Stable Diffusion,...) en est un parfait exemple et se trouve au coeur de mes différents cours pour illustrer l'interaction entre Connaissances et Applications pratiques.
       </p>
 
       <!-- PROJETS EN COURS -->
       <div class="mt-6">
-        <h3 class="text-2xl font-semibold text-gray-800">Projets en Cours sur 2024 - ...</h3>
-        <ul class="list-disc ml-5 mt-2 text-gray-600">
+        <h3 class="text-2xl font-semibold">Projets en Cours sur 2024 - ...</h3>
+        <ul class="list-disc ml-5 mt-2 ">
           <li>Thèse de Doctorat sur le rôle et les besoins des professeurs des écoles dans l'enseignement de l'astronomie à l'école primaire.</li>
           <li>Ateliers autour de l'esprit critique et de la zététique (l'art du doute).</li>
           <li>Formateur en dégustation de vins (Ateliers).</li>
@@ -33,8 +33,8 @@
 
       <!-- PROJETS REALISES -->
       <div class="mt-6">
-        <h3 class="text-2xl font-semibold text-gray-800">Projets Réalisés sur la Période 2012 - 2023</h3>
-        <ul class="list-disc ml-5 mt-2 text-gray-600">
+        <h3 class="text-2xl font-semibold">Projets Réalisés sur la Période 2012 - 2023</h3>
+        <ul class="list-disc ml-5 mt-2 ">
           <li>Cuisine Moléculaire.</li>
           <li>Organisation de voyages culturels : ROME, FLORENCE, VENISE.</li>
           <li>Conférences grand public : L'univers a-t-il un sens ? La place de l'homme dans l'univers.</li>
@@ -48,8 +48,8 @@
 
       <!-- MOOCS & CERTIFICATIONS -->
       <div class="mt-6">
-        <h3 class="text-2xl font-semibold text-gray-800">MOOCS & Certifications</h3>
-        <ul class="list-disc ml-5 mt-2 text-gray-600">
+        <h3 class="text-2xl font-semibold ">MOOCS & Certifications</h3>
+        <ul class="list-disc ml-5 mt-2 ">
           <li>Défis et enjeux de la Cybersécurité (Université Bretagne Sud) - Score 84%</li>
           <li>Exercer son esprit critique : données et raisonnements fallacieux - Score 116 % ;-)</li>
           <!-- ... Autres certifications ... -->
@@ -67,12 +67,12 @@
           <!-- Image container -->
           <div class="w-full md:w-1/2 p-4">
             <!-- First image -->
-            <img class="rounded-lg shadow-lg" src="../assets/img/assiette_fromage.jpeg" alt="Dégustation de vin">
+            <img class=" shadow-lg" src="../assets/img/assiette_fromage.jpeg" alt="Dégustation de vin">
           </div>
 
           <div class="w-full md:w-1/2 p-4">
             <!-- Second image -->
-            <img class="rounded-lg shadow-lg" src="../assets/img/planche_degustation.jpg" alt="Assortiment de fromages">
+            <img class=" shadow-lg" src="../assets/img/planche_degustation.jpg" alt="Assortiment de fromages">
           </div>
         </div>
 
