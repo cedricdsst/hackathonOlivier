@@ -7,31 +7,32 @@
         <p>Finished: {{ currentAtelier.finished }}</p>
 
         <button @click="deleteAtelier(currentAtelier._id)">delete</button>
-        <button @click="showEditForm">Edit</button> 
+        <button @click="showEditForm">Edit</button>
         <button @click="markAsFinished(currentAtelier._id)">mark as finished</button>
 
-       <!-- Edit Form -->
-<div v-if="editFormVisible">
-    <h2>Edit Atelier</h2>
-    <form @submit.prevent="updateAtelier">
-        <input type="text" v-model="editableAtelier.title" placeholder="Title">
-        <textarea v-model="editableAtelier.description" placeholder="Description"></textarea>
-        <input type="date" v-model="editableAtelier.startDate" placeholder="Start Date">
-            <input type="number" v-model.number="editableAtelier.duration" placeholder="Duration (hours)">
-        <input type="number" v-model.number="editableAtelier.price" placeholder="Price">
-        <input type="number" v-model.number="editableAtelier.participantsMax" placeholder="Max Participants">
-        <!-- Dropdown to select Ecole -->
-        <select v-model="editableAtelier.idEcole">
-            <option disabled value="">Select an Ecole</option>
-            <option v-for="ecole in ecoles" :key="ecole._id" :value="ecole._id">
-                {{ ecole.nom }}
-            </option>
-        </select>
+        <!-- Edit Form -->
+        <div v-if="editFormVisible">
+            <h2>Edit Atelier</h2>
+            <form @submit.prevent="updateAtelier">
+                <input type="text" v-model="editableAtelier.title" placeholder="Title">
+                <input type="text" v-model="editableAtelier.adresse" placeholder="Adresse">
+                <textarea v-model="editableAtelier.description" placeholder="Description"></textarea>
+                <input type="date" v-model="editableAtelier.startDate" placeholder="Start Date">
+                <input type="number" v-model.number="editableAtelier.duration" placeholder="Duration (hours)">
+                <input type="number" v-model.number="editableAtelier.price" placeholder="Price">
+                <input type="number" v-model.number="editableAtelier.participantsMax" placeholder="Max Participants">
+                <!-- Dropdown to select Ecole -->
+                <select v-model="editableAtelier.idEcole">
+                    <option disabled value="">Select an Ecole</option>
+                    <option v-for="ecole in ecoles" :key="ecole._id" :value="ecole._id">
+                        {{ ecole.nom }}
+                    </option>
+                </select>
 
-        <button type="submit">Save Changes</button>
-        <button @click="editFormVisible = false">Cancel</button>
-    </form>
-</div>
+                <button type="submit">Save Changes</button>
+                <button @click="editFormVisible = false">Cancel</button>
+            </form>
+        </div>
 
 
         <!-- Displaying files -->
@@ -65,20 +66,20 @@
         <h2>Wines in Atelier</h2>
         <ul>
             <li v-for="vin in currentAtelier.vins" :key="vin._id">
-            {{ vin.id.nom }} - Quantity: {{ vin.quantity }}
-            <button @click="removeVinFromAtelier(currentAtelier._id, vin._id)">Remove</button>
+                {{ vin.id.nom }} - Quantity: {{ vin.quantity }}
+                <button @click="removeVinFromAtelier(currentAtelier._id, vin._id)">Remove</button>
             </li>
         </ul>
         <form @submit.prevent="addVinToAtelier">
             <select v-model="selectedVinId" @change="updateMaxQuantity">
-    <option disabled value="">Select a wine</option>
-    <option v-for="vin in vinStore.vins" :key="vin._id" :value="vin._id" :disabled="isVinAdded(vin._id)">
-        {{ vin.nom }}
-    </option>
-</select>
-<input type="number" v-model.number="selectedQuantity" :max="maxQuantity" placeholder="Quantity" min="1">
-    <button type="submit">Add Wine</button>
-</form>
+                <option disabled value="">Select a wine</option>
+                <option v-for="vin in vinStore.vins" :key="vin._id" :value="vin._id" :disabled="isVinAdded(vin._id)">
+                    {{ vin.nom }}
+                </option>
+            </select>
+            <input type="number" v-model.number="selectedQuantity" :max="maxQuantity" placeholder="Quantity" min="1">
+            <button type="submit">Add Wine</button>
+        </form>
     </div>
     <div v-else>
         Loading atelier details...
@@ -91,15 +92,15 @@ import { ref, onMounted, computed, watch, reactive } from 'vue';
 import { useAtelierStore } from '../stores/atelierStore';
 import { useEcoleStore } from '../stores/ecoleStore';
 import { useRoute, useRouter } from 'vue-router';
-import { useVinStore } from '../stores/vinStore'; 
+import { useVinStore } from '../stores/vinStore';
 
 const atelierStore = useAtelierStore();
-const ecoleStore = useEcoleStore(); 
+const ecoleStore = useEcoleStore();
 const vinStore = useVinStore(); // Use VinStore
 const route = useRoute();
 const router = useRouter();  // Create a router instance
 const currentAtelier = computed(() => atelierStore.currentAtelier);
-const ecoles = computed(() => ecoleStore.ecoles); 
+const ecoles = computed(() => ecoleStore.ecoles);
 const file = ref(null);
 const fileInputElement = ref(null);  // Use a different name to clarify its purpose
 const selectedVinId = ref('');
@@ -110,6 +111,7 @@ const editFormVisible = ref(false);
 const editableAtelier = reactive({
     title: '',
     description: '',
+    adresse: '',
     startDate: null,
     duration: null,
     finished: false,
@@ -191,14 +193,14 @@ async function markAsPayed(participantId) {
 
 async function markAsFinished(articleId) {
 
-try {
-    await atelierStore.finishAtelier(articleId);
-    await atelierStore.fetchAtelier(route.params.id);
-    alert('marked as payed');
-} catch (error) {
-    console.error('Failed to marked as payed:', error);
-    alert('Failed to marked as finished');
-}
+    try {
+        await atelierStore.finishAtelier(articleId);
+        await atelierStore.fetchAtelier(route.params.id);
+        alert('marked as payed');
+    } catch (error) {
+        console.error('Failed to marked as payed:', error);
+        alert('Failed to marked as finished');
+    }
 }
 
 async function addParticipant() {
@@ -236,7 +238,7 @@ async function removeVinFromAtelier(atelierId, vinId) {
     console.log(atelierId, vinId);
     try {
         await atelierStore.removeVinFromAtelier(atelierId, vinId);
-        await atelierStore.fetchAtelier(atelierId);  
+        await atelierStore.fetchAtelier(atelierId);
         alert('Wine removed successfully from the atelier');
     } catch (error) {
         console.error('Failed to remove wine:', error);

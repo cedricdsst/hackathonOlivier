@@ -13,12 +13,12 @@
             <textarea v-model="newAtelier.description" placeholder="Description"></textarea>
             <input type="date" v-model="newAtelier.startDate" placeholder="Start Date">
             <input type="number" v-model.number="newAtelier.duration" placeholder="Duration (hours)">
-            
+            <input v-model="newAtelier.adresse" placeholder="Adresse" required>
             <input type="number" v-model.number="newAtelier.price" placeholder="Price" required>
             <input type="number" v-model.number="newAtelier.participantsMax" placeholder="Max Participants">
 
-             <!-- Dropdown for selecting Ecole -->
-             <select v-model="newAtelier.idEcole">
+            <!-- Dropdown for selecting Ecole -->
+            <select v-model="newAtelier.idEcole">
                 <option disabled value="">Select an Ecole</option>
                 <option v-for="ecole in ecoles" :key="ecole._id" :value="ecole._id">
                     {{ ecole.nom }}
@@ -47,6 +47,7 @@ const ecoles = computed(() => ecoleStore.ecoles);  // Use computed for reactivit
 const newAtelier = ref({
     title: '',
     description: '',
+    adresse: '',
     startDate: null,
     duration: null,
     finished: false,
@@ -81,4 +82,3 @@ async function createAtelier() {
     }
 }
 </script>
-

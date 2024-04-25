@@ -107,20 +107,31 @@ exports.getOneAtelier = (req, res) => {
         .then(atelier => {
             if (!atelier) return res.status(404).json({ message: 'Atelier not found.' });
 
+            // Format startDate
+            const formattedStartDate = atelier.startDate ? new Date(atelier.startDate).toLocaleString("fr-FR", {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            }) : null;
+
             // Calculate remaining spots
             const remainingSpots = atelier.participantsMax - atelier.participants.length;
-            const atelierWithRemainingSpots = {
+            const atelierWithDetails = {
                 ...atelier._doc,
-                remainingSpots: remainingSpots
+                remainingSpots: remainingSpots,
+                formattedStartDate: formattedStartDate // Add formatted startDate
             };
 
-            res.status(200).json(atelierWithRemainingSpots);
+            res.status(200).json(atelierWithDetails);
         })
         .catch(error => {
             console.error('Error fetching Atelier:', error);
             res.status(400).json({ error: error.message });
         });
 };
+
 
 
 
@@ -133,18 +144,29 @@ exports.getAllAteliers = (req, res) => {
             model: 'Vin'
         })
         .then(ateliers => {
-            // Calculate remaining spots for each workshop
-            const ateliersWithRemainingSpots = ateliers.map(atelier => {
+            const ateliersWithDetails = ateliers.map(atelier => {
+                // Format startDate
+                const formattedStartDate = atelier.startDate ? new Date(atelier.startDate).toLocaleString("fr-FR", {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                }) : null;
+
+                // Calculate remaining spots
                 const remainingSpots = atelier.participantsMax - atelier.participants.length;
                 return {
                     ...atelier._doc,
-                    remainingSpots: remainingSpots
+                    remainingSpots: remainingSpots,
+                    formattedStartDate: formattedStartDate // Add formatted startDate
                 };
             });
-            res.status(200).json(ateliersWithRemainingSpots);
+            res.status(200).json(ateliersWithDetails);
         })
         .catch(error => res.status(400).json({ error }));
 };
+
 
 // Supprimer un vin d'un atelier
 exports.removeVinFromAtelier = (req, res) => {

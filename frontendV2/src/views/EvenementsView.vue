@@ -7,11 +7,11 @@
         <h1 class="text-white text-5xl font-bold mb-4">Evenement à venir</h1>
         <span class="border-2 w-full border-red-500 my-6"></span>
         <p class="text-white text-xl mb-4">Inscriptions réservées aux plus de 18 ans</p>
-    
+
       </div>
     </section>
 
-<!--     <div class="header-banner header-banner-img cust-full-width">
+    <!--     <div class="header-banner header-banner-img cust-full-width">
         <div class="header-gradiant cust-full-width">
         <small class="mb-5">Accueil > Evenement</small>
         <h1 class="text-white text-5xl font-bold mb-4">Evenement à venir</h1>
@@ -22,7 +22,8 @@
     </div> -->
 
 
-    <section v-for="atelier in ateliers" :key="atelier._id" @click="goToAtelier(atelier._id)" class="flex flex-col items-center pt-10 pb-5 m-auto bg-white ">
+    <section v-for="atelier in ateliers" :key="atelier._id" @click="goToAtelier(atelier._id)"
+      class="flex flex-col items-center pt-10 pb-5 m-auto bg-white ">
       <div class="max-w-md mx-auto bg-[#F2F2F2] overflow-hidden md:max-w-6xl p-2">
         <div class="md:flex">
           <div class="md:shrink-0">
@@ -35,7 +36,7 @@
               <div class="flex gap-4">
                 <div class="flex gap-1 items-center">
                   <img class="" src="../assets/icons/calendar.svg" />
-                  <p class="text-black text-[10px]">{{ atelier.startDate }}</p>
+                  <p class="text-black text-[10px]">{{ atelier.formattedStartDate }}</p>
                 </div>
                 <div class="flex gap-1">
                   <img class="" src="../assets/icons/clock.svg" />
@@ -63,7 +64,7 @@
     </section>
 
 
-    
+
   </div>
 </template>
 
@@ -82,12 +83,12 @@ const ecoles = computed(() => ecoleStore.ecoles);  // Use computed for reactivit
 
 
 onMounted(async () => {
-    await atelierStore.fetchAllAteliers();
-    await ecoleStore.fetchAllEcoles();  // Fetch Ecoles on mounted
+  await atelierStore.fetchAllAteliers();
+  await ecoleStore.fetchAllEcoles();  // Fetch Ecoles on mounted
 });
 
 function goToAtelier(id) {
-    router.push({ name: 'evenement', params: { id } });
+  router.push({ name: 'evenement', params: { id } });
 }
 
 
@@ -117,13 +118,11 @@ function goToAtelier(id) {
   margin-left: 50px;
 }
 
-.header-banner-img
-{
-    background-image: url('@/assets/img/verre_rouge.jpg');
+.header-banner-img {
+  background-image: url('@/assets/img/verre_rouge.jpg');
 }
 
-.cust-full-width
-{
+.cust-full-width {
   width: 100vw;
   margin-left: -50vw;
   left: 50%;
@@ -137,18 +136,23 @@ function goToAtelier(id) {
   align-items: center;
   justify-content: center;
 }
+
 .scoller div {
   margin-top: 100px;
 }
+
 .scoller div a img {
   width: 32px;
   height: 32px;
 }
+
 @keyframes bounce {
+
   0%,
   100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-15px);
   }
@@ -160,6 +164,7 @@ function goToAtelier(id) {
 .animate-bounce {
   animation: bounce 1s infinite;
 }
+
 .concepte,
 .NextEvent {
   color: black;
@@ -167,30 +172,35 @@ function goToAtelier(id) {
   display: flex;
   justify-content: center;
 }
+
 .concepte span,
 .NextEvent span {
   width: 20%;
 }
+
 .concepte article {
   width: 100%;
   padding: 5px;
   margin: 2px;
   margin-top: 30px;
 }
+
 .concepte article img {
   width: 64px;
   height: 64px;
 }
-.concepte article h3 {
-}
+
+.concepte article h3 {}
 
 .concepte article p {
   padding: 15px;
 }
+
 .NextEvent {
   display: flex;
   justify-content: center;
 }
+
 .event {
   background-color: #f1f1f1;
   margin-right: 10px;
@@ -203,5 +213,6 @@ function goToAtelier(id) {
     align-items: center;
   }
 }
+
 /* Ajouter d'autres styles si nécessaire */
 </style>

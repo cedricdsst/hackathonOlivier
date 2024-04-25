@@ -9,6 +9,7 @@ const participantSchema = mongoose.Schema({
 const AtelierSchema = mongoose.Schema({
     title: { type: String, required: true },
     description: { type: String, required: false },
+    adresse: { type: String, required: false },
     startDate: { type: Date, required: false },
     duration: { type: Number, required: false },
     finished: { type: Boolean, default: false },
