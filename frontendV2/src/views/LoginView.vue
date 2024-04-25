@@ -12,12 +12,14 @@
           <input id="password" v-model="password" type="password" required placeholder="Entrez votre mot de passe">
         </div>
         
-        <div class="form-group">
-          <input id="stayLoggedIn" type="checkbox" v-model="stayLoggedIn">
+        <div class="form-group inline-flex mb-6">
+          <input id="stayLoggedIn" class="mr-3" type="checkbox" v-model="stayLoggedIn">
           <label for="stayLoggedIn">Rester connecté</label>
         </div>
         
-        <button type="submit">Se connecter</button>
+        <div class="text-center">
+          <button class="login-btn" type="submit">Se connecter</button>
+        </div>
       </form>
       
     </div>
@@ -51,11 +53,13 @@ const router = useRouter();
 
   </script>
 
-<style>
+<style scoped>
   .login-container {
     max-width: 400px;
     margin: auto;
     padding: 20px;
+    background-color: #2C2F36;
+    color: #ffffff;
   }
   
   .form-group {
@@ -70,7 +74,21 @@ const router = useRouter();
     width: 100%;
     padding: 10px;
     margin-top: 5px;
+    color: black;
   }
   
- 
+ .login-btn
+ {
+  border: solid 2px #ffffff;
+  padding: 7px 20px;
+  transition: all 0.3s;
+ }
+
+ .login-btn:hover
+ {
+  border: solid 2px #ffffff;
+  background-color: #ffffff;
+  color: #2C2F36;
+ }
+
   </style>

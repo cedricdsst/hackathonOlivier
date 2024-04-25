@@ -17,7 +17,7 @@
         </div>
 
         <!-- Btn deconnexion -->
-        <div class="disconnect-admin-btn" @click="logout"><img src="@/assets/icons/logout-svgrepo-com.svg" class="logo-admin" />Déconnexion</div>
+        <div class="disconnect-admin-btn cursor-pointer" @click="logout"><img src="@/assets/icons/logout-svgrepo-com.svg" class="logo-admin" />Déconnexion</div>
     </div>
 </template>
 

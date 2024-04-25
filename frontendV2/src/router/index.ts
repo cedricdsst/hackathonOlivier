@@ -100,8 +100,6 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore();
   await authStore.verifyToken()
-  console.log(to.meta.requiresAuth);
-  console.log(authStore.userId);
   if (to.meta.requiresAuth && !authStore.userId) {
     next({ name: 'login' });
   } else {
