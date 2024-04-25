@@ -7,7 +7,7 @@ import Footer from '@/components/Footer.vue'
 
 <template>
   <div>
-    <template v-if="!isInAdminSection">
+    <template v-if="!isInAdminSection && !isInLoginSection">
       <header>
         <NavBar />
       </header>
@@ -19,7 +19,7 @@ import Footer from '@/components/Footer.vue'
       <Footer />
     </template>
 
-<template v-else>
+<template v-if="isInAdminSection && !isInLoginSection">
       <div id="admin-app">
         <NavBarAdmin />
 
@@ -27,6 +27,10 @@ import Footer from '@/components/Footer.vue'
           <RouterView />
         </div>
       </div>
+    </template>
+
+<template v-if="isInLoginSection">
+      <RouterView />
     </template>
 </div>
 </template>
@@ -36,6 +40,9 @@ export default {
   computed: {
     isInAdminSection() {
       return this.$route.path.startsWith('/admin');
+    },
+    isInLoginSection() {
+      return this.$route.path.startsWith('/login');
     }
   }
 };

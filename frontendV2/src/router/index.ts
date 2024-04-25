@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { useAuthStore } from '@/stores/authStore'
+// import { createPinia } from '@/stores'
 import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/LoginView.vue';
 import SignupView from '../views/SignupView.vue';
@@ -11,7 +13,7 @@ import CalendarView from '../views/CalendarView.vue';
 import DashboardView from '../views/DashboardView.vue';
 import PagesView from '../views/PagesView.vue';
 import VinsView from '../views/VinsView.vue';
-import AtelierView from '../views/AtelierView.vue'; // Pas utilisé pour le moment
+import AtelierView from '../views/AtelierView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -62,6 +64,7 @@ const router = createRouter({
       path: '/admin',
       component: DashboardView,
       name: 'admin',
+      meta: { requiresAuth: true },
       children: [
         {
           path: 'pages',
@@ -93,5 +96,15 @@ const router = createRouter({
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore(); // Obtenez l'instance du store à partir de Pinia
+  if (to.meta.requiresAuth && !authStore.userId) {
+    next({ name: 'login' });
+  } else {
+    next(); // Continuez la navigation normalement
+  }
+});
+
 
 export default router;
