@@ -51,28 +51,23 @@ const router = createRouter({
       name: 'admin',
       children: [
         {
-          path: '',
-          name: 'admin-dashboard',
-          component: DashboardView
-        },
-        {
           path: 'pages',
-          name: 'pages',
+          name: 'admin-pages',
           component: PagesView
         },
         {
           path: 'ateliers',
-          name: 'ateliers',
+          name: 'admin-ateliers',
           component: AteliersView
         },
         {
           path: 'cave',
-          name: 'cave',
+          name: 'admin-cave',
           component: CaveView
         },
         {
           path: 'ecoles',
-          name: 'ecoles',
+          name: 'admin-ecoles',
           component: EcolesView
         }
       ]

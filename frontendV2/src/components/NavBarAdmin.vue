@@ -9,11 +9,11 @@
 
         <!-- Liens -->
         <div class="admin-nav-link">
-            <router-link to="/admin">Tableau de bord</router-link>
-            <router-link to="/admin/pages">Pages</router-link>
-            <router-link to="/admin/ateliers">Ateliers</router-link>
-            <router-link to="/admin/cave">Cave</router-link>
-            <router-link to="/admin/ecoles">Écoles</router-link>
+            <router-link :to="{ name: 'admin' }">Tableau de bord</router-link>
+            <router-link :to="{ name: 'admin-pages' }">Pages</router-link>
+            <router-link :to="{ name: 'admin-ateliers' }">Ateliers</router-link>
+            <router-link :to="{ name: 'admin-cave' }">Cave</router-link>
+            <router-link :to="{ name: 'admin-ecoles' }">Écoles</router-link>
         </div>
 
         <!-- Btn deconnexion -->
