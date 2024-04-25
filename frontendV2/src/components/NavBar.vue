@@ -1,6 +1,30 @@
 <template>
-   <div v-if="isUserLoggedIn" id="botNavDis">
-        <nav>
+
+<nav :class="{ 'hidden': $route.name === 'admin' }">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <a href="#">
+                    <img src="@/assets/img/Logo_Hackaton_M1-ESGI_blanc.png" alt="Logo" class="h-8 mr-2 logo">
+                </a>
+            </div>
+            <!-- Bouton Burger (Hamburger) -->
+            <button class="burger-btn" @click="toggleNav">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            <!-- Liens -->
+            <div class="nav-links items-center">
+                <a href="/" class="text-white hover:text-gray-300">Accueil</a>
+                <a href="/about" class="text-white hover:text-gray-300">À propos</a>
+                <a href="/evenements" class="red-btn">Participer à un évenement</a>
+            </div>
+        </div>
+    </nav>
+        <!-- <nav>
             <div id="topNav">
                 <img class="navLogo" src="@/assets/logo.svg" alt="">
             </div>
@@ -33,124 +57,114 @@
                 <button class="loginbtnNav" @click="logout" >logout</button>
             </div>
         </nav>
-    </div>
-    <div v-else>Navbar site...</div>
 
-    
+     -->
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import { useAuthStore } from '../stores/authStore';
-import { useRouter } from 'vue-router';
-const router = useRouter();
-const authStore = useAuthStore();
+    import { ref, computed } from 'vue';
+    import { useAuthStore } from '../stores/authStore';
+    import { useRouter } from 'vue-router';
+    const router = useRouter();
+    const authStore = useAuthStore();
 
-// Propriété calculée pour déterminer si l'utilisateur est connecté
-const isUserLoggedIn = computed(() => {
-  return authStore.userId !== null; // Vérifiez en fonction de votre logique d'authentification
-});
+    // Propriété calculée pour déterminer si l'utilisateur est connecté
+    const isUserLoggedIn = computed(() => {
+    return authStore.userId !== null; // Vérifiez en fonction de votre logique d'authentification
+    });
 
-const username = computed(() => authStore.username);
-const email = computed(() => authStore.email);
+    const username = computed(() => authStore.username);
+    const email = computed(() => authStore.email);
 
-const logout = async () => {
-  try {
-    await authStore.logout();
-    router.push('/');
-    // Par exemple : router.push({ name: 'home' });
-  } catch (error: any) {
-    alert("Erreur de connexion : " + error.message);
-  }
-};
+    const logout = async () => {
+    try {
+        await authStore.logout();
+        router.push('/');
+        // Par exemple : router.push({ name: 'home' });
+    } catch (error: any) {
+        alert("Erreur de connexion : " + error.message);
+    }
+    };
 
 
 
-const redirectTo = (route: string) => {
-  router.push(route);
-};
+    const redirectTo = (route: string) => {
+    router.push(route);
+    };
+
+    function toggleNav()
+    {
+        const navLinks = document.querySelector('nav .nav-links');
+
+        const computedStyle = window.getComputedStyle(navLinks);
+        const displayValue = computedStyle.getPropertyValue('display');
+
+        if (displayValue === 'none') {
+            navLinks.style.display = 'flex';
+        } else {
+            navLinks.style.display = 'none';
+        }
+    }
 </script>
 
 <style>
-/* Style for NavBar component */
-nav {
-    flex: 0 0 250px;
-    /* Adjust as necessary, sets the base width of the navbar */
-    height: 100%;
-    /* Full height of its parent */
-   
-    display: flex;
-    flex-direction: column;
-    /* Align items vertically */
-    justify-content: space-between;
-    /* Align items to the start of the flex direction */
-    text-align: left;
-    /* Align text to the left */
+    nav 
+    {
+        position: fixed;
+        background-color: var(--default-black);
+        height: 112px;
+        display: flex;
+        vertical-align: middle;
+        padding: 0 85px;
+        width: 100%;
+        z-index: 10;
+    }
 
-    /* Just an example, adjust the color as needed */
-    border-right: solid 0.5px grey;
+    nav a, nav button
+    {
+        font-size: 15px;
+    }
 
-    margin-top:0 !important; 
+    nav img.logo
+    {
+        width: 180px;
+        height: 54px;
+    }
 
-}
-
-.navIcon {
-    width: 25px;
-    height: auto;
-}
-
-.navLogo {
-    width: 40px;
-    height: auto;
-    margin: 10px;
-}
-
-nav a {
-    display: flex;
-    align-items: center;
-    margin: 10px 10px 5px 10px;
-    text-decoration: none;
+    .nav-links
+    {
+        display: flex;
+        gap: 60px;
+    }
     
-}
 
-nav a p {
-    margin: 0px 5px;
-    font-size: 14px;
-}
+    .burger-btn
+    {
+        display: none;
+    }    
 
-.loginbtnNav {
-    height: 42px;
-    width: 190px;
-    background-color: #3b984a00;
-    color: rgb(0, 0, 0);
 
-    font-size: 13px;
-    border: solid 2px rgb(0, 0, 0);
-    border-radius: 5px;
-}
+    @media (max-width:768px)
+    {
+        .burger-btn
+        {
+            display: block;
+        }    
 
-.loginbtnNav:hover {
-    height: 42px;
-    width: 190px;
-    background-color: #00000000;
-    color: rgb(255, 255, 255);
+        nav .nav-links
+        {
+            display: none;
+        }
 
-    font-size: 13px;
-    border: solid 2px rgb(0, 0, 0);
-    border-radius: 5px;
-}
-
-#botNavDis {
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    margin: 15px;
-}
-
-#botNavDis button {
-
-    margin: auto;
-    margin: 10px;
-}
+        nav .nav-links
+        {
+            position: absolute;
+            background-color: var(--default-black);
+            left: 0;
+            top :  111px;
+            flex-direction: column;
+            width: 100%;
+            padding: 10px 0;
+        }
+    }
 </style>

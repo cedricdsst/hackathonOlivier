@@ -3,56 +3,12 @@
 @tailwind components;
 @tailwind utilities;
 
-#app {
-  background-color: white;
-  margin: 0 auto;
-  height: 100vh;
-  font-weight: normal;
-  /* display: flex; */
+#mainContent
+{
+  padding-top: 112px;
+  margin: 0 170px;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
-
-/* @media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
-} */
-.top-left-square {
-  position: absolute;
-  width: 85px;
-  height: 85px;
-  top: -42.5px;
-  left: -42.5px;
-  z-index: -1;
-}
-.bottom-right-square {
-  position: absolute;
-  width: 85px;
-  height: 85px;
-  bottom: -42.5px;
-  right: -42.5px;
-  z-index: -1;
-}
 h1 {
   font-family: 'Futura Std Medium';
   font-size: 48px;
@@ -83,10 +39,127 @@ span {
   font-size: 16px;
   line-height: 200%;
 }
+
+.red-btn {
+  font-size: 12px;
+  background-color: var(--default-red);
+  color: var(--vt-c-white);
+  padding: 7px 20px;
+  border: solid 2px var(--default-red);
+  transition: all 0.3s;
+}
+
+.red-btn:hover {
+  background-color: var(--vt-c-white);
+  color: var(--default-red);
+  border: solid 2px var(--default-red);
+}
+
+.white-btn
+{
+  font-size: 12px;
+  background-color: var(--vt-c-white);
+  color: var(--default-red);
+  border: solid 2px var(--default-red);
+  padding: 7px 20px;
+  transition: all 0.3s;
+}
+
+.white-btn:hover
+{
+  background-color: var(--default-red);
+  color: var(--vt-c-white);
+  border: solid 2px var(--default-red);
+}
+
 .header-gradiant
 {
   width: 100%;
   height: 100%;
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5));
   
+}
+
+
+.top-left-square {
+  position: absolute;
+  width: 85px;
+  height: 85px;
+  top: -42.5px;
+  left: -42.5px;
+  z-index: -1;
+}
+
+.bottom-right-square {
+  position: absolute;
+  width: 85px;
+  height: 85px;
+  bottom: -42.5px;
+  right: -42.5px;
+  z-index: -1;
+}
+
+.header-banner.header-banner-img
+{
+    height: 430px;
+    z-index: 1;
+}
+
+.header-banner-img
+{
+  background-size: cover;
+  background-position: center;
+}
+
+.cust-full-width
+{
+  width: 100vw;
+  margin-left: -50vw;
+  left: 50%;
+  position: relative;
+}
+
+.bg-default-red
+{
+  background-color: var(--default-red);
+}
+
+.bg-default-black
+{
+  background-color: var(--default-black);
+}
+
+body
+{
+  overflow-x: hidden;
+}
+
+.divider-1
+{
+  border-top: solid 4px var(--default-red);
+  width: 55px;
+  margin: 20px 0;
+}
+
+.divider-1.m-auto
+ {
+  margin: 20px auto;
+ }
+
+@media (max-width:768px)
+{
+  #mainContent
+  {
+    margin: 0 30px;
+  }
+
+  .top-left-square
+  {
+    display: none;
+  }
+
+  .bottom-right-square
+  {
+    display: none;
+  }
 }
