@@ -45,8 +45,8 @@
       <section class="NextEvent bg-white flex flex-col items-center justify-center text-center py-20 px-4">
           <h2 class="text-2xl font-bold mb-4">Prochain événement</h2>
           <span class="mx-4 border-2 w-full border-VinColor my-6"></span>
-          <div class="flex ">
-            <div class="event flex flex-col md:flex-row sm:flex-col items-center gap-4 w-full">
+          <div class="flex flex-col md-flex-row">
+            <div class="event flex flex-col md:flex-row items-center gap-4 w-full">
                 <img class="p-2 object-contain h-40 w-auto ml-4 sm:ml-0" src="../assets/img/thumbnail_evenement.jpg" alt="">
                 <article class="flex flex-col items-start w-auto gap-2">
                     <h4 class="text-lg font-semibold mb-4">Découverte des vins du monde</h4>
@@ -59,7 +59,7 @@
             </div>
 
             <div class="flex justify-center items-center mt-4 sm:mt-2">
-                <button type="button" class="text-sm bg-gray-200 border-2 px-4 py-2 hover:bg-VinColor whitespace-nowrap">
+                <button type="button" class="text-sm text-white bg-VinColor px-4 py-2 whitespace-nowrap">
                     Voir tous les événements
                 </button>
             </div>
@@ -70,15 +70,14 @@
       <section class="Apropos bg-white flex flex-col items-center justify-center text-center py-20 px-4 ">
           <h2 class="text-2xl font-bold mb-4">A propos</h2>
           <span class="mx-4 border-2 w-full border-VinColor my-6"></span>
-          <div class="flex flex-col md:flex-row items-center md:items-start text-center md:text-left mx-auto p-6">
-              <div class="sm:w-full ">
-                  <img src="../assets/img/Olivier_bonneton.webp" alt="Olivier Bonneton" class="object-contain h-40 md:w-48 lg:w-full self-start sm:self-center">
+          <div class="flex flex-col md:flex-row items-center md:items-start md:text-left p-6">
+              <div class="sm:w-full flex justify-center">
+                  <img src="../assets/img/Olivier_bonneton.webp" alt="Olivier Bonneton" class="object-contain h-40 md:w-48 lg:w-full md:self-start self-center">
               </div>
-              <div class="mt-6 flex flex-col justify-center items-start md:items-center">
-                <p class="mb-6 text-left md:text-center">Découvrez mon atelier de dégustation de vin à Lyon, spécialement conçu pour les débutants passionnés et curieux. Dans une ambiance chaleureuse et conviviale, je vous invite à un voyage œnologique pour découvrir les vins du monde. Ma table d'animation est le lieu idéal pour échanger, apprendre et partager des moments uniques autour du vin. Rejoignez-nous et laissez-vous guider par nos experts pour une expérience de dégustation inoubliable.</p>
-                <button type="button" class="text-black bg-gray-200 py-2 px-4 hover:bg-VinColor transition-colors self-start md:self-center">En savoir plus</button>
-            </div>
-
+              <div class=" flex flex-col items-start px-20">
+                  <p class="mb-6 text-left ">Découvrez mon atelier de dégustation de vin à Lyon, spécialement conçu pour les débutants passionnés et curieux. Dans une ambiance chaleureuse et conviviale, je vous invite à un voyage œnologique pour découvrir les vins du monde. Ma table d'animation est le lieu idéal pour échanger, apprendre et partager des moments uniques autour du vin. Rejoignez-nous et laissez-vous guider par nos experts pour une expérience de dégustation inoubliable.</p>
+                  <button type="button" class="text-white bg-VinColor py-2 px-4 transition-colors md:self-start self-center">En savoir plus</button>
+              </div>
           </div>
       </section>
 
@@ -106,7 +105,7 @@
   <style scoped>
   /* Assurez-vous d'ajuster les styles selon les besoins de votre design */
   .hero {
-    background-image: url('../assets/img/background_home_banner.jpg');
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/img/background_home_banner.jpg');
     background-size: cover;
     background-position: 0px 0px;
     text-align: left;
@@ -154,8 +153,6 @@
 .concepte, .NextEvent, .Apropos {
     color: black;
 
-    display: flex;
-    justify-content: center;
 }
 .concepte span, .NextEvent span, .Apropos span{
     width: 5%;
