@@ -4,7 +4,7 @@
     <section class="hero g-cover bg-no-repeat text-center py-32 px-4 cust-full-width">
       <div class="header flex flex-col items-center justify-center">
         <small class="mb-5">Accueil > Evenement</small>
-        <h1 class="text-white text-5xl font-bold mb-4">Evenement à venir</h1>
+        <h1 class="text-white text-5xl font-bold mb-4">Événements à venir</h1>
         <span class="border-2 w-full border-red-500 my-6"></span>
         <p class="text-white text-xl mb-4">Inscriptions réservées aux plus de 18 ans</p>
     
