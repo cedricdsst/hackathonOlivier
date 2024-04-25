@@ -13,8 +13,8 @@
     </section>
 
     <section class="scoller relative bg-cover bg-center flex justify-center items-end">
-      <div class="absolute animate-bounce">
-        <a href=""><img src="../assets/img/Icone_mouse_scroll.svg" alt="" ></a>
+      <div class="w-[45px] absolute animate-bounce">
+        <a><img src="../assets/img/Icone_mouse_scroll.svg" alt="" ></a>
       </div>
     </section>
 
@@ -131,8 +131,8 @@ export default {
   margin-top: 100px;
 }
 .scoller div a img {
-  width: 32px ;
-  height: 32px ;
+  width: 45px ;
+  height: 45px ;
 
 
 }
