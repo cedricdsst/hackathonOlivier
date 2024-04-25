@@ -2,7 +2,7 @@
     <footer class="mt-[100px]">
         <div class="container mx-auto flex justify-between items-center px-4 flex-col">
             <div class="adm-link">
-                <a href="#">
+                <a href="/admin">
                     <img src="@/assets/icons/lock-svgrepo-com.svg" alt="" class="adm-icon">
                 </a>
             </div>
