@@ -12,18 +12,20 @@
           <input id="password" v-model="password" type="password" required placeholder="Entrez votre mot de passe">
         </div>
         
-        <div class="form-group">
-          <input id="stayLoggedIn" type="checkbox" v-model="stayLoggedIn">
+        <div class="form-group inline-flex mb-6">
+          <input id="stayLoggedIn" class="mr-3" type="checkbox" v-model="stayLoggedIn">
           <label for="stayLoggedIn">Rester connecté</label>
         </div>
         
-        <button type="submit">Se connecter</button>
+        <div class="text-center">
+          <button class="login-btn" type="submit">Se connecter</button>
+        </div>
       </form>
       
     </div>
   </template>
-  
-  <script setup lang="ts">
+
+<script setup lang="ts">
   import { ref, computed } from 'vue';
   import { useAuthStore } from '../stores/authStore';
   import { useRouter } from 'vue-router';
@@ -33,17 +35,16 @@ const router = useRouter();
   const stayLoggedIn = ref(false);
   const authStore = useAuthStore();
   
-  // Propriété calculée pour déterminer si l'utilisateur est connecté
+  // Détermine si l'utilisateur est connecté
   const isUserLoggedIn = computed(() => {
-    return authStore.userId !== null; // Vérifiez en fonction de votre logique d'authentification
+    return authStore.userId !== null;
   });
   
   const login = async () => {
     try {
       await authStore.login({ email: email.value, password: password.value, stayLoggedIn: stayLoggedIn.value });
       // Redirection ou mise à jour de l'interface utilisateur en cas de succès
-      // Par exemple : router.push({ name: 'home' });
-      router.push('/');
+      router.push('/admin');
     } catch (error: any) {
       alert("Erreur de connexion : " + error.message);
     }
@@ -51,12 +52,14 @@ const router = useRouter();
   
 
   </script>
-  
-  <style>
+
+<style scoped>
   .login-container {
     max-width: 400px;
     margin: auto;
     padding: 20px;
+    background-color: #2C2F36;
+    color: #ffffff;
   }
   
   .form-group {
@@ -71,8 +74,21 @@ const router = useRouter();
     width: 100%;
     padding: 10px;
     margin-top: 5px;
+    color: black;
   }
   
- 
+ .login-btn
+ {
+  border: solid 2px #ffffff;
+  padding: 7px 20px;
+  transition: all 0.3s;
+ }
+
+ .login-btn:hover
+ {
+  border: solid 2px #ffffff;
+  background-color: #ffffff;
+  color: #2C2F36;
+ }
+
   </style>
-  

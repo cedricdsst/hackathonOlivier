@@ -88,10 +88,10 @@
                 <p class="inline-flex"><img src="@/assets/icons/3289574-clan-family-group-peer-people_107094.svg" class="info-icon">{{ currentAtelier.remainingSpots }} places restantes</p><br />
             
                 <form @submit.prevent="addParticipant">
-                
+                <div class="mb-6">
                     <p>Votre email</p>
                     <input type="email" v-model="participantEmail" placeholder="exemple@mail.com" />
-                
+                </div>
                 <button type="submit" class="red-btn">S'inscrire</button>
                 </form>
             </div>
