@@ -1,14 +1,10 @@
-
 <template>
-  <div id="app" class="">
-
-    <!-- Section Hero avec Tailwind CSS bg-white text-center py-20 px-4 -->
+  <div>
     <section class="hero g-cover bg-no-repeat bg-fixed text-center py-32 px-4 header-gradiant cust-full-width">
       <div class=" header flex flex-col items-center justify-center">
         <h1 class="leading-[130%] text-white text-5xl font-bold">Apprendre à <br> déguster autrement</h1>
         <span class="border-2 w-1/3 border-VinColor my-6"></span>
         <p class="text-white text-xl mb-4">Initiation à l’oenologie à Lyon</p>
-        <!-- Ajoutez plus de contenu ou des boutons si nécessaire -->
       </div>
     </section>
 
@@ -79,19 +75,13 @@
       </div>
     </section>
 
-    <section class="py-20 px-4 mt-10">
-      <div class="relative w-full h-full mb-10"> <!-- Assurez-vous que le conteneur a une hauteur suffisante -->
-        <!-- Première image (gauche) -->
-        <img src="../assets/img/gallerie_plateau.jpg" alt="Plateau 1" class="absolute ml-20 top-0 left-1/4 transform -translate-x-1/2 w-1/3 z-10">
-
-        <!-- Troisième image (droite) -->
-        <img src="../assets/img/gallerie_plateau.jpg" alt="Plateau 3" class="absolute top-0 left-3/4 transform -translate-x-1/2 w-1/3 z-30">
-
-        <!-- Deuxième image (centre, en bas et en partie en dessous de la troisième) -->
-        <img src="../assets/img/gallerie_plateau.jpg" alt="Plateau 2" class="absolute bottom-0 left-[45%] transform -translate-x-1/2 w-1/4 z-20" style="transform: translateY(50%);">
-      </div>
-    </section>
-    <div ><span class="my-10 bg-white"></span></div>
+    <div class="img-bottom-page mb-10">
+            <div class="top-left-square bg-default-red"></div>
+            <div class="bottom-right-square bg-default-black"></div>
+        <img src="@/assets/BD118-1024x684.jpg" class="image1">
+        <img src="@/assets/c600x400.jpeg" class="image2">
+    </div>
+    <div class="h-6"><span class="my-10 bg-white"></span></div>
   </div>
 </template>
 <script>
@@ -187,7 +177,3 @@ export default {
 }
 /* Ajouter d'autres styles si nécessaire */
 </style>
-
-  
-
-
