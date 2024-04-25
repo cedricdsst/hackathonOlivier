@@ -30,12 +30,12 @@
               <p>Découvrez les subtilités des vins avec un expert</p>
             </article>
             <article class="flex mx-10 flex-col items-center p-4">
-              <img src="../assets/img/wine_glass_icon_156828.svg" alt="" class="mb-2">
+              <img src="../assets/img/test-svgrepo-com.svg" alt="" class="mb-2">
               <h3 class="text-xl font-semibold mb-1">Apprentissage ludique</h3>
               <p>Apprenez à vous amuser grace à des jeux et des quizz</p>
             </article>
               <article class="flex mx-10 flex-col items-center p-4">
-              <img src="../assets/img/wine_glass_icon_156828.svg" alt="" class="mb-2">
+              <img src="../assets/img/world-1-svgrepo-com.svg" alt="" class="mb-2">
               <h3 class="text-xl font-semibold mb-1">Découverte des vins du monde</h3>
             <p>Voyagez à travers les régions viticoles en une séance</p>
             </article>
@@ -45,7 +45,7 @@
       <section class="NextEvent bg-white flex flex-col items-center justify-center text-center py-20 px-4">
           <h2 class="text-2xl font-bold mb-4">Prochain événement</h2>
           <span class="mx-4 border-2 w-full border-VinColor my-6"></span>
-          <div class="flex flex-col md-flex-row">
+          <div class="flex flex-col md:flex-row">
             <div class="event flex flex-col md:flex-row items-center gap-4 w-full">
                 <img class="p-2 object-contain h-40 w-auto ml-4 sm:ml-0" src="../assets/img/thumbnail_evenement.jpg" alt="">
                 <article class="flex flex-col items-start w-auto gap-2">
@@ -71,8 +71,8 @@
           <h2 class="text-2xl font-bold mb-4">A propos</h2>
           <span class="mx-4 border-2 w-full border-VinColor my-6"></span>
           <div class="flex flex-col md:flex-row items-center md:items-start md:text-left p-6">
-              <div class="sm:w-full flex justify-center">
-                  <img src="../assets/img/Olivier_bonneton.webp" alt="Olivier Bonneton" class="object-contain h-40 md:w-48 lg:w-full md:self-start self-center">
+              <div class="sm:w-full flex justify-center md:justify-end mb-10">
+                  <img src="../assets/img/Olivier_cropped.png" alt="Olivier Bonneton" class="object-contain h-40 md:w-48 lg:w-full md:self-end self-center">
               </div>
               <div class=" flex flex-col items-start px-20">
                   <p class="mb-6 text-left ">Découvrez mon atelier de dégustation de vin à Lyon, spécialement conçu pour les débutants passionnés et curieux. Dans une ambiance chaleureuse et conviviale, je vous invite à un voyage œnologique pour découvrir les vins du monde. Ma table d'animation est le lieu idéal pour échanger, apprendre et partager des moments uniques autour du vin. Rejoignez-nous et laissez-vous guider par nos experts pour une expérience de dégustation inoubliable.</p>
@@ -81,8 +81,8 @@
           </div>
       </section>
 
-      <section class="py-20 px-4 mt-20">
-    <div class="relative w-full h-full"> <!-- Assurez-vous que le conteneur a une hauteur suffisante -->
+      <section class="py-20 px-4 mt-10">
+    <div class="relative w-full h-full mb-10"> <!-- Assurez-vous que le conteneur a une hauteur suffisante -->
         <!-- Première image (gauche) -->
         <img src="../assets/img/gallerie_plateau.jpg" alt="Plateau 1" class="absolute ml-20 top-0 left-1/4 transform -translate-x-1/2 w-1/3 z-10">
         
@@ -93,6 +93,7 @@
         <img src="../assets/img/gallerie_plateau.jpg" alt="Plateau 2" class="absolute bottom-0 left-[45%] transform -translate-x-1/2 w-1/4 z-20" style="transform: translateY(50%);">
     </div>
 </section>
+<div ><span class="my-10 bg-white"></span></div>
     </div>
   </template>
   <script>
