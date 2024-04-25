@@ -102,10 +102,10 @@
                             class="info-icon">{{ currentAtelier.remainingSpots }} places restantes</p><br />
 
                     <form @submit.prevent="addParticipant">
-
-                        <p>Votre email</p>
-                        <input type="email" v-model="participantEmail" placeholder="exemple@mail.com" />
-
+                        <div class="mb-6">
+                            <p>Votre email</p>
+                            <input type="email" v-model="participantEmail" placeholder="exemple@mail.com" />
+                        </div>
                         <button type="submit" class="red-btn">S'inscrire</button>
                     </form>
                 </div>

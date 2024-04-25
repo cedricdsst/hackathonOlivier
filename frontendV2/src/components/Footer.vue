@@ -1,5 +1,5 @@
 <template>
-    <footer>
+    <footer  :class="{ 'hidden': $route.name === 'admin'}">
         <div class="container mx-auto flex justify-between items-center px-4 flex-col">
             <div class="adm-link">
                 <a href="#">

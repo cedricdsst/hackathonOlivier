@@ -6,26 +6,15 @@
         <small class="mb-5">Accueil > Evenement</small>
         <h1 class="text-white text-5xl font-bold mb-4">Evenement à venir</h1>
         <span class="border-2 w-full border-red-500 my-6"></span>
-        <p class="text-white text-xl mb-4">Inscriptions réservées aux plus de 18 ans</p>
+        <h2 class="text-white mb-4">Inscriptions réservées aux plus de 18 ans</h2>
 
       </div>
     </section>
 
-    <!--     <div class="header-banner header-banner-img cust-full-width">
-        <div class="header-gradiant cust-full-width">
-        <small class="mb-5">Accueil > Evenement</small>
-        <h1 class="text-white text-5xl font-bold mb-4">Evenement à venir</h1>
-        <span class="border-2 w-full border-red-500 my-6"></span>
-        <p class="text-white text-xl mb-4">Inscriptions réservées aux plus de 18 ans</p>
-
-        </div>
-    </div> -->
-
-
     <section v-for="atelier in ateliers" :key="atelier._id" @click="goToAtelier(atelier._id)"
       class="flex flex-col items-center pt-10 pb-5 m-auto bg-white ">
-      <div class="max-w-md mx-auto bg-[#F2F2F2] overflow-hidden md:max-w-6xl p-2">
-        <div class="md:flex">
+      <div class="w-full mx-auto bg-[#F2F2F2] overflow-hidden p-2 cursor-pointer">
+        <div class="flex">
           <div class="md:shrink-0">
             <img class="w-full object-cover" src="../assets/img/vins.png" alt="vin" />
           </div>
@@ -40,7 +29,7 @@
                 </div>
                 <div class="flex gap-1">
                   <img class="" src="../assets/icons/clock.svg" />
-                  <p class="text-black text-[10px]">{{ atelier.duration }}</p>
+                  <p class="text-black text-[10px]">{{ atelier.duration }}h</p>
                 </div>
                 <div class="flex gap-1">
                   <img class="" src="../assets/icons/places_restantes.svg" />
@@ -56,8 +45,8 @@
               <strong> Cet évenement est réservé au plus de 18 ans.</strong>
             </p>
           </div>
-          <div class="mr-2 md:mb-0 sm:mb-4 flex items-center">
-            <a href="" class="text-white bg-black px-2">+</a>
+          <div class="mr-2 md:mb-0 sm:mb-4 flex items-center ml-auto">
+            <p class="text-white bg-black px-2">+</p>
           </div>
         </div>
       </div>
