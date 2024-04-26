@@ -15,6 +15,7 @@ import PagesView from '../views/PagesView.vue';
 import VinsView from '../views/VinsView.vue';
 import AtelierView from '../views/AtelierView.vue';
 import AboutView from '@/views/AboutView.vue';
+import ContactView from '@/views/ContactView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -94,6 +95,11 @@ const router = createRouter({
           component: EcolesView
         }
       ]
+    },
+    {
+      path: '/contact',
+      name: 'contact',
+      component: ContactView
     }
   ]
 });
