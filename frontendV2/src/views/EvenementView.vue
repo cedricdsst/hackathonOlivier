@@ -36,7 +36,7 @@
         <hr class="divider-1 m-auto" />
         <article class="flex flex-wrap justify-center gap-5">
           <div v-for="vin in vins" :key="vin._id" class="flex flex-col justify-center items-center">
-            <img :src="vin.fileUrl" class="w-52" />
+            <img :src="vin.fileUrl" class="bottle-event" />
             <p>{{ vin.nom }}</p>
           </div>
         </article>
@@ -75,10 +75,8 @@
         <div>
           <h2 class="text-center">Liste des vins</h2>
           <hr class="divider-1 m-auto" />
-          <article v-for="vin in vins" :key="vin._id" class="flex flex-wrap justify-center gap-5">
+          <article class="flex flex-wrap justify-center gap-5">
             <div class="flex flex-col justify-center items-center">
-              <img :src="vin.fileUrl" class="w-52" />
-              <p>{{ vin.nom }}</p>
             </div>
           </article>
         </div>
@@ -386,4 +384,12 @@ padding: 40px;
   margin-right: 10px;
   width: 20px;
 }
-</style> 
+
+.bottle-event
+{
+    width: 230px;
+    height: 230px;
+    background-color: #ffffff;
+    padding: 20px;
+}
+</style>
