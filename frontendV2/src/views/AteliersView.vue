@@ -105,11 +105,11 @@ import { ref, onMounted, computed } from 'vue';
 import { useAtelierStore } from '../stores/atelierStore';
 import { useEcoleStore } from '../stores/ecoleStore';
 import { useRouter } from 'vue-router';
-
+const router = useRouter();
 
 const atelierStore = useAtelierStore();
 const ecoleStore = useEcoleStore();
-const router = useRouter();
+
 
 const ateliers = computed(() => atelierStore.ateliers);
 const ecoles = computed(() => ecoleStore.ecoles);
