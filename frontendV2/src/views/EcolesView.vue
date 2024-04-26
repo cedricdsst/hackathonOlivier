@@ -1,31 +1,36 @@
 <template>
-  <div>
-    <h1>Ecoles</h1>
-    <ul>
-      <li v-for="ecole in ecoles" :key="ecole._id">
-        {{ ecole.nom }} - {{ ecole.adresse }}
-        <button @click="editEcole(ecole)">Edit</button> <!-- Edit button -->
-        <button @click="deleteEcole(ecole._id)">Delete</button>
-      </li>
-    </ul>
+<div class="container mx-auto my-8 p-8 bg-white shadow-lg rounded-lg">
+  <h1 class="text-2xl font-semibold text-gray-800 mb-6">Écoles</h1>
+  <ul class="space-y-4">
+    <li v-for="ecole in ecoles" :key="ecole._id" class="flex justify-between items-center bg-gray-100 p-4">
+      <span class="font-medium text-gray-700">{{ ecole.nom }} - {{ ecole.adresse }}</span>
+      <div>
+        <button @click="editEcole(ecole)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 transition duration-300 ease-in-out mr-2">Edit</button>
+        <button @click="deleteEcole(ecole._id)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 transition duration-300 ease-in-out">Delete</button>
+      </div>
+    </li>
+  </ul>
 
-    <!-- Edit Form -->
-    <div v-if="editFormVisible">
-      <h2>Edit Ecole</h2>
-      <form @submit.prevent="updateEcole">
-        <input type="text" v-model="editableEcole.nom" placeholder="Name" required>
-        <input type="text" v-model="editableEcole.adresse" placeholder="Address">
-        <button type="submit">Update Ecole</button>
-        <button @click="editFormVisible = false">Cancel</button>
-      </form>
-    </div>
-
-    <h2>Add New Ecole</h2>
-    <form @submit.prevent="addEcole">
-      <input type="text" v-model="newEcole.nom" placeholder="Name" required>
-      <input type="text" v-model="newEcole.adresse" placeholder="Address">
-      <button type="submit">Add Ecole</button>
+  <!-- Edit Form -->
+  <div v-if="editFormVisible" class="mt-6 p-6 bg-gray-50">
+    <h2 class="text-xl font-semibold text-gray-800 mb-4">Editer École</h2>
+    <form @submit.prevent="updateEcole" class="space-y-4">
+      <input type="text" v-model="editableEcole.nom" placeholder="Name" required class="w-full p-2 border-2 border-gray-200 ">
+      <input type="text" v-model="editableEcole.adresse" placeholder="Address" class="w-full p-2 border-2 border-gray-200 ">
+      <div class="flex justify-between">
+        <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4  transition duration-300 ease-in-out">Update École</button>
+        <button @click="editFormVisible = false" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 transition duration-300 ease-in-out">Cancel</button>
+      </div>
     </form>
+  </div>
+
+
+  <h2 class="text-xl font-semibold text-gray-800 mb-4 mt-20">Ajouter école</h2>
+  <form @submit.prevent="addEcole" class="space-y-4">
+    <input type="text" v-model="newEcole.nom" placeholder="Name" required class="w-full p-2 border-2 border-gray-200">
+    <input type="text" v-model="newEcole.adresse" placeholder="Address" class="w-full p-2 border-2 border-gray-200">
+    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 transition duration-300 ease-in-out">Add École</button>
+  </form>
   </div>
 </template>
 
