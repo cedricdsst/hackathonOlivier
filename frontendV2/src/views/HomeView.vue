@@ -75,7 +75,9 @@
         </div>
         <div class=" flex flex-col items-start px-20">
           <p class="mb-6 text-left ">Découvrez mon atelier de dégustation de vin à Lyon, spécialement conçu pour les débutants passionnés et curieux. Dans une ambiance chaleureuse et conviviale, je vous invite à un voyage œnologique pour découvrir les vins du monde. Ma table d'animation est le lieu idéal pour échanger, apprendre et partager des moments uniques autour du vin. Rejoignez-nous et laissez-vous guider par nos experts pour une expérience de dégustation inoubliable.</p>
+          <a href="/about"> 
           <button type="button" class="text-white bg-VinColor py-2 px-4 transition-colors md:self-start self-center">En savoir plus</button>
+          </a>
         </div>
       </div>
     </section>
@@ -103,7 +105,7 @@ export default {
   background-size: cover;
   background-position: 0px 0px;
   text-align: left;
-  height: calc(100vh - 112px);
+  height: calc(100vh - 19 2px);
   display: flex;
 
   /* padding: 100px 0; */
