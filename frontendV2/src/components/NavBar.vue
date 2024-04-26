@@ -4,11 +4,11 @@
         <div class="container mx-auto flex justify-between items-center">
             <!-- Logo -->
             <div class="flex items-center">
-                <a href="#">
+                <a href="/">
                     <img src="@/assets/img/Logo_Hackaton_M1-ESGI_blanc.png" alt="Logo" class="h-8 mr-2 logo">
                 </a>
             </div>
-            <!-- Bouton Burger (Hamburger) -->
+            <!-- Bouton Burger -->
             <button class="burger-btn" @click="toggleNav">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                      xmlns="http://www.w3.org/2000/svg">
@@ -37,13 +37,12 @@
     {
         const navLinks = document.querySelector('nav .nav-links');
 
-        const computedStyle = window.getComputedStyle(navLinks);
-        const displayValue = computedStyle.getPropertyValue('display');
+        const isMobileDisplay = navLinks.classList.contains('mobile-display');
 
-        if (displayValue === 'none') {
-            navLinks.style.display = 'flex';
+        if (!isMobileDisplay) {
+            navLinks.classList.add('mobile-display');
         } else {
-            navLinks.style.display = 'none';
+            navLinks.classList.remove('mobile-display');
         }
     }
 </script>
@@ -106,6 +105,16 @@
             flex-direction: column;
             width: 100%;
             padding: 10px 0;
+        }
+        
+        nav 
+        {
+            padding: 0 30px;
+        }
+
+        .mobile-display
+        {
+            display: flex !important;
         }
     }
 </style>

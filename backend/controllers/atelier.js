@@ -2,6 +2,9 @@ const Atelier = require('../models/Atelier');
 const Ecole = require('../models/Ecole');  // Assuming Ecole model is needed for reference
 const Vin = require('../models/Vin');      // Assuming Vin model is needed for reference
 const { sendEmail } = require('../services/emailService');
+const {emailHTMLInscription} = require('../emails/templates/index');
+const {emailHTMLConfirmation} = require('../emails/templates/emailConfirmationPaiement');
+const {emailHTMLRemerciement} = require('../emails/templates/emailRemerciement');
 const fs = require('fs');
 
 function generateRandomPassword() {
@@ -244,10 +247,13 @@ exports.addParticipantToAtelier = (req, res) => {
     )
         .then(atelier => {
             res.status(200).json({ message: 'Participant added to Atelier.', atelier });
-            sendEmail(email, 'Confirmation de participation', `Vous êtes inscrit à l'atelier ${atelier.title} avec l'école ${school}.`).catch(console.error);
+            const emailParticipation = emailHTMLInscription(atelier.title, atelier.price, atelier.startDate, atelier.duration, atelier.adresse);
+            
+            sendEmail(email, 'Confirmation de participation', emailParticipation).catch(console.error);
         })
         .catch(error => res.status(400).json({ error }));
 };
+
 
 // Supprimer un participant d'un atelier
 exports.removeParticipantFromAtelier = (req, res) => {
@@ -287,16 +293,9 @@ exports.confirmPaymentForParticipant = (req, res) => {
             }
 
             // Prepare the email content
-            const emailContent = `Dear ${participant.email},\n\n` +
-                `Your payment for the atelier "${atelier.title}" has been confirmed.\n\n` +
-                `Best regards,\nYour Atelier Team`;
-
-            // Send a confirmation email to the participant
-            sendEmail(
-                participant.email,
-                'Confirmation of Payment',
-                emailContent
-            )
+            const emailConfirmation = emailHTMLConfirmation(atelier.title, atelier.price, atelier.startDate, atelier.duration, atelier.adresse);
+            
+            sendEmail(participant.email, 'Confirmation de Paiement pour votre Atelier de dégustation', emailConfirmation)
                 .then(() => {
                     res.status(200).json({
                         message: 'Payment confirmed and participant notified via email.',
@@ -423,11 +422,13 @@ exports.finishAtelier = (req, res) => {
         .then(atelier => {
             // Send a thank-you email to all participants
             const participantEmails = atelier.participants.map(participant => participant.email);
+            const emailRemerciement = emailHTMLRemerciement(atelier.title, atelier.password);
+
             const emailPromises = participantEmails.map(email => {
                 return sendEmail(
                     email,
-                    'Thank You for Participating',
-                    `Thank you for participating in our atelier "${atelier.title}". Here is your password for the records: ${atelier.password}`
+                    'Merci d\'avoir participé à l\'atelier de dégustation !',
+                    emailRemerciement
                 );
             });
 

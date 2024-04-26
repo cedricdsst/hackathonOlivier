@@ -3,7 +3,7 @@
       <h1>Vins List</h1>
       <ul>
         <li v-for="vin in vins" :key="vin._id">
-          {{ vin.nom }} - {{ vin.region }} - {{ vin.cepage }} - {{ vin.annee }} - {{ vin.quantite }} - {{ vin.descrption }}
+          {{ vin.nom }} - {{ vin.region }} - {{ vin.cepage }} - {{ vin.annee }} - {{ vin.quantite }} - {{ vin.description }}
           <button @click="editVin(vin)">Edit</button>
           <button @click="deleteVin(vin._id)">Delete</button>
         </li>
@@ -18,7 +18,7 @@
           <input v-model="editableVin.cepage" placeholder="Cepage">
           <input type="number" v-model.number="editableVin.annee" placeholder="Annee">
           <input type="number" v-model.number="editableVin.quantite" placeholder="Quantite" required>
-          <textarea v-model="editableVin.descrption" placeholder="Description"></textarea>
+          <textarea v-model="editableVin.description" placeholder="Description"></textarea>
           <button type="submit">Update Vin</button>
           <button @click="editFormVisible = false">Cancel</button>
         </form>
@@ -31,7 +31,7 @@
         <input v-model="newVin.cepage" placeholder="Cepage">
         <input type="number" v-model.number="newVin.annee" placeholder="Annee">
         <input type="number" v-model.number="newVin.quantite" placeholder="Quantite" required>
-        <textarea v-model="newVin.descrption" placeholder="Description"></textarea>
+        <textarea v-model="newVin.description" placeholder="Description"></textarea>
         <input type="file" @change="handleFileChange">
         <button type="submit">Create Vin</button>
       </form>
@@ -51,7 +51,7 @@
       cepage: '',
       annee: '',
       quantite: '',
-      descrption: ''
+      description: ''
   });
   const editableVin = ref({
       _id: '',
@@ -60,7 +60,7 @@
       cepage: '',
       annee: '',
       quantite: '',
-      descrption: ''
+      description: ''
   });
   const editFormVisible = ref(false);
   const file = ref(null);
@@ -75,7 +75,7 @@
   
   async function submitVin() {
       await vinStore.createVin(newVin.value, file.value);
-      newVin.value = { nom: '', region: '', cepage: '', annee: '', quantite: '', descrption: '' };
+      newVin.value = { nom: '', region: '', cepage: '', annee: '', quantite: '', description: '' };
       file.value = null;  // Clear the file input
      
       await vinStore.fetchAllVins();
@@ -95,7 +95,7 @@
   async function updateVin() {
       await vinStore.updateVin(editableVin.value._id, editableVin.value, file.value);
       editFormVisible.value = false;
-      editableVin.value = { nom: '', region: '', cepage: '', annee: '', quantite: '', descrption: '' };  // Reset the form
+      editableVin.value = { nom: '', region: '', cepage: '', annee: '', quantite: '', description: '' };  // Reset the form
       await vinStore.fetchAllVins();
   }
   </script>

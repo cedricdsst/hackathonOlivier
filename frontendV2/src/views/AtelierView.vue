@@ -288,7 +288,17 @@ async function markAsPayed(participantId) {
     }
 }
 
+async function markAsFinished(articleId) {
 
+    try {
+        await atelierStore.finishAtelier(articleId);
+        await atelierStore.fetchAtelier(route.params.id);
+        alert('marked as finished');
+    } catch (error) {
+        console.error('Failed to marked as finished:', error);
+        alert('Failed to marked as finished');
+    }
+}
 
 async function addParticipant() {
     if (participantEmail.value) {

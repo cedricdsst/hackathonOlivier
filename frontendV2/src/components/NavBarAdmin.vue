@@ -2,7 +2,7 @@
     <div id="sidebar-admin">
         <!-- Logo -->
         <div>
-            <a href="#">
+            <a href="/">
                 <img src="@/assets/img/Logo_Hackaton_M1-ESGI_blanc.png" alt="Logo" class="h-8 mr-2 logo admin-img">
             </a>
         </div>
