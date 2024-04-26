@@ -64,7 +64,9 @@
                 </thead>
                 <tbody>
                     <tr v-for="file in currentAtelier.files" :key="file._id">
-                        <td style="border: 1px solid grey; padding: 10px; text-align: left;">{{ file.fileUrl }}</td>
+                        <td style="border: 1px solid grey; padding: 10px; text-align: left;"><a :href="file.fileUrl"
+                                target="_blank">{{ file.fileUrl }}</a>
+                        </td>
                         <td style="border: 1px solid grey; padding: 10px; text-align: center;">
                             <button @click="deleteFile(file._id)"
                                 style="background-color: #f44336; color: white; padding: 5px 10px; border: none; cursor: pointer;">Supprimer</button>
@@ -288,17 +290,7 @@ async function markAsPayed(participantId) {
     }
 }
 
-async function markAsFinished(articleId) {
 
-    try {
-        await atelierStore.finishAtelier(articleId);
-        await atelierStore.fetchAtelier(route.params.id);
-        alert('marked as finished');
-    } catch (error) {
-        console.error('Failed to marked as finished:', error);
-        alert('Failed to marked as finished');
-    }
-}
 
 async function addParticipant() {
     if (participantEmail.value) {
@@ -379,13 +371,25 @@ async function deleteAtelier(atelierId) {
     }
 }
 
-async function markAsFinished(atelierId) {
+// async function markAsFinished(atelierId) {
+//     try {
+//         await atelierStore.finishAtelier(atelierId);
+//         router.go(0);
+//     } catch (error) {
+//         console.error('Failed to mark as finished:', error);
+//         alert('Failed to mark as finished');
+//     }
+// }
+
+async function markAsFinished(articleId) {
+
     try {
-        await atelierStore.finishAtelier(atelierId);
-        router.go(0);
+        await atelierStore.finishAtelier(articleId);
+        await atelierStore.fetchAtelier(route.params.id);
+        alert('marqué comme fini');
     } catch (error) {
-        console.error('Failed to mark as finished:', error);
-        alert('Failed to mark as finished');
+        console.error('Erreur:', error);
+        alert('Erreur');
     }
 }
 
