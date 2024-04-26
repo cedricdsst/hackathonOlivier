@@ -28,8 +28,8 @@
                 <td>{{ atelier.price }}€</td>
                 <td>{{ atelier.idEcole.nom }}</td>
                 <td style="display:flex; justify-content:space-evenly">
-                    <img @click="goToAtelier(atelier._id)" src="@/assets/icons/edit.svg" class="info-icon">
-                    <img @click="goToEvent(atelier._id)" src="@/assets/icons/eye.svg" class="info-icon">
+                    <img @click="goToAtelier(atelier._id)" src="@/assets/icons/edit.svg" class="info-icon cursor-pointer" title="éditer">
+                    <img @click="goToEvent(atelier._id)" src="@/assets/icons/eye.svg" class="info-icon cursor-pointer" title="visualiser la page">
                 </td>
             </tr>
         </table>
