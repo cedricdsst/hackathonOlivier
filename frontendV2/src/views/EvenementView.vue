@@ -69,8 +69,9 @@
             </div> 
         </div>
           <div v-if="isPasswordCorrect" class="">
-            <!-- Contenu protégé par mot de passe -->
-            <h2>PDF</h2>
+            <div v-for="file in currentAtelier.files" :key="file._id">
+              <a :href="file.fileUrl" target="_blank">{{ extractFilename(file.fileUrl) }}</a>
+            </div>
           </div>
         </div>
       </div>
@@ -165,6 +166,7 @@ const ecoleStore = useEcoleStore()
 const route = useRoute()
 const router = useRouter() // Create a router instance
 const currentAtelier = computed(() => atelierStore.currentAtelier)
+console.log(currentAtelier);
 const participantEmail = ref('')
 const password = ref('') // Variable pour stocker le mot de passe saisi par l'utilisateur
 
@@ -232,6 +234,18 @@ const submitPassword = () => {
         }
   }
 }
+
+function extractFilename(fileUrl) {
+      // Divise l'URL en utilisant '/topicFiles/' comme délimiteur et récupère la partie suivante
+      const parts = fileUrl.split('/topicFiles/');
+      if (parts.length > 1) {
+        // Retourne la partie suivante comme le nom du fichier
+        return parts[1];
+      } else {
+        // Si l'extraction échoue, retourne une chaîne vide ou un message par défaut
+        return 'Nom de fichier inconnu';
+      }
+    }
 </script>
 
 
