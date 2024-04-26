@@ -22,8 +22,6 @@ const AtelierSchema = mongoose.Schema({
         fileType: { type: String, required: true }
     }],
 
-
-
     // Utilisation du sous-schéma participantSchema pour les participants
     participants: [participantSchema],
 

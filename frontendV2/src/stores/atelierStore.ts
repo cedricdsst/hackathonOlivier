@@ -16,6 +16,7 @@ export const useAtelierStore = defineStore('atelier', {
             price: atelier.price,
             participantsMax: atelier.participantsMax,
             finished: atelier.finished,
+            password: atelier.password,
             school: atelier.idEcole.nom
         }))
     },

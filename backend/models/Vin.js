@@ -7,7 +7,7 @@ const VinSchema = mongoose.Schema({
     cepage: { type: String, required: false },
     annee: { type: Number, required: false },
     quantite: { type: Number, required: true },
-    descrption: { type: String, required: false },
+    description: { type: String, required: false },
     fileUrl: { type: String, required: false }
 });
 
