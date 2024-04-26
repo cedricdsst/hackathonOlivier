@@ -1,4 +1,4 @@
-function emailRappelAtelier(title, date, duration, adresse, username){
+function emailRappelAtelier(title, date, duration, adresse){
     return `
     <div style="background-color:#f4f4f4;" lang="und" dir="auto">
     <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" bgcolor="#110E0E" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
@@ -52,7 +52,7 @@ function emailRappelAtelier(title, date, duration, adresse, username){
                     <!-- Left image -->
                     <tr>
                       <td align="center" style="font-size:0px;padding:20px;word-break:break-word;">
-                        <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;line-height:1;text-align:center;color:#000000;">Bonjour ${username}, nous vous rappelons que vous vous êtes inscrit à notre atelier de degustation de vins : <strong>${title}</strong></div>
+                        <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;line-height:1;text-align:center;color:#000000;">Bonjour, Demain est le grand jour !! <br> <br> Nous vous rappelons que vous vous êtes inscrit à notre atelier de degustation de vins : <strong>${title}</strong></div>
                       </td>
                     </tr>
                     <tr>

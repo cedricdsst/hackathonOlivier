@@ -1,4 +1,4 @@
-function emailHTMLRemerciement(title, password){
+function emailHTMLRemerciement(title, password, id_atelier){
     return `
     <div style="background-color:#f4f4f4;" lang="und" dir="auto">
     <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" bgcolor="#110E0E" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
@@ -86,7 +86,7 @@ function emailHTMLRemerciement(title, password){
                     </tr>
                     <tr>
                       <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:center;color:#000000;"><strong><a href="">lien de la page</a></strong></div>
+                        <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:center;color:#000000;"><strong><a href="http://localhost:5173/evenement/${id_atelier}" target="_blank">Page de l'atelier</a></strong></div>
                       </td>
                     </tr>
                     <tr>

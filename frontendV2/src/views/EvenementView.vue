@@ -1,7 +1,11 @@
 <template>
   <div v-if="currentAtelier">
     <div class="header-banner header-banner-img cust-full-width">
-      <div class="header-gradiant cust-full-width"></div>
+      <div class="header-gradiant cust-full-width">
+        <div class="header-square-1 bg-default-red"></div>
+      <div class="header-square-2 bg-default-black"></div>
+      <div class="header-square-3 bg-default-black"></div>
+      </div>
     </div>
     <div class="content-wrapper">
       <div class="info-event-card">
@@ -57,14 +61,17 @@
               continuer :
             </p>
             <div class="text-center">
-              <input class="m-auto" type="password" v-model="password" placeholder="Mot de passe" />
-              <button class="red-btn" @click="submitPassword">Soumettre</button>
+                <input class="m-auto" type="password" v-model="password" placeholder="Mot de passe" />
+                <p id="incorrect-pass">Mot de passe incorrect</p>
             </div>
-          </div>
-          <!-- Contenu à afficher si le mot de passe est correct -->
-          <div v-if="isPasswordCorrect">
-            <!-- Votre contenu protégé par mot de passe -->
-            <h2>PDF</h2>
+            <div class="text-center">
+                <button class="red-btn" @click="submitPassword">Soumettre</button>
+            </div> 
+        </div>
+          <div v-if="isPasswordCorrect" class="">
+            <div v-for="file in currentAtelier.files" :key="file._id">
+              <a :href="file.fileUrl" target="_blank">{{ extractFilename(file.fileUrl) }}</a>
+            </div>
           </div>
         </div>
       </div>
@@ -85,14 +92,16 @@
             </div>
           </article>
         </div>
-
-        <div class="ressource-block">
-          <h2 class="text-center">Ressources liées</h2>
-          <hr class="divider-1 m-auto" />
-          <p class="text-center">Les ressources sont protégées par mot de passe. Veuillez entrer le mot de passe pour
-            continuer :</p>
-          <input class="m-auto" type="password" placeholder="Mot de passe" />
-          <button class="red-btn">Soumettre</button>
+            <div class="ressource-block">
+                <h2 class="text-center">Ressources liées</h2>
+                <hr class="divider-1 m-auto" />
+                <p class="text-center">Les ressources sont protégées par mot de passe. Veuillez entrer le mot de passe pour continuer :</p>
+                <div class="text-center">
+                    <input class="m-auto" type="password" placeholder="Mot de passe" />
+                </div>
+                <div class="text-center">
+                    <button class="red-btn">Soumettre</button>
+                </div>
         </div>
       </div>
     </div>
@@ -130,15 +139,15 @@
               <button type="submit" class="red-btn">S'inscrire</button>
             </form>
           </template>
-          <template v-else>
+<template v-else>
             <h2 class="futura-med">Inscription confirmée</h2>
             <p class="text-[16px] futura-med">Votre inscription a bien été prise en compte. <br /> Vous allez bientôt
               recevoir un email pour régler vos places afin de valider votre inscription.</p>
           </template>
-        </div>
-      </div>
-    </div>
-  </div>
+</div>
+</div>
+</div>
+</div>
 </template>
 
 <script setup lang="ts">
@@ -157,6 +166,7 @@ const ecoleStore = useEcoleStore()
 const route = useRoute()
 const router = useRouter() // Create a router instance
 const currentAtelier = computed(() => atelierStore.currentAtelier)
+console.log(currentAtelier);
 const participantEmail = ref('')
 const password = ref('') // Variable pour stocker le mot de passe saisi par l'utilisateur
 
@@ -188,13 +198,6 @@ const closeModal = () => {
   isModalVisible.value = false
 }
 
-const submitRegistration = () => {
-  console.log('Inscription confirmée pour :', currentAtelier.title)
-  // ajouter ici la logique pour effectuer une action d'inscription
-  // Une fois l'inscription réussie, fermer la modale
-  closeModal()
-}
-
 let correctPassword = ''
 
 // Fonction asynchrone pour charger les données de l'atelier et mettre à jour le mot de passe correct
@@ -203,23 +206,46 @@ const loadAtelierData = async () => {
   correctPassword = currentAtelier.value.password
 }
 
-// Appeler la fonction de chargement des données de l'atelier lors du montage du composant
+// Fonction de chargement des données de l'atelier lors du montage du composant
 onMounted(loadAtelierData)
 
-// Utiliser watch pour détecter les changements dans currentAtelier et mettre à jour correctPassword
+// Watch pour détecter les changements dans currentAtelier et mettre à jour correctPassword
 watch(currentAtelier, () => {
   correctPassword = currentAtelier.value.password
 })
 
-// Méthode pour vérifier si le mot de passe saisi est correct
+// Vérifie si le mot de passe saisi est correct
 const isPasswordCorrect = ref(false)
 const submitPassword = () => {
   if (password.value === correctPassword) {
-    isPasswordCorrect.value = true // Afficher le contenu si le mot de passe est correct
+    isPasswordCorrect.value = true
   } else {
-    alert('Mot de passe incorrect')
+    const incorrectPass = document.getElementById('incorrect-pass');
+    const computedStyle = window.getComputedStyle(incorrectPass);
+    const displayValue = computedStyle.getPropertyValue('display');
+
+    if (displayValue === 'block') {
+            incorrectPass.style.display = "none";
+            setTimeout(() => {
+                incorrectPass.style.display = "block";
+            }, 300);
+        } else {
+            incorrectPass.style.display = "block";
+        }
   }
 }
+
+function extractFilename(fileUrl) {
+      // Divise l'URL en utilisant '/topicFiles/' comme délimiteur et récupère la partie suivante
+      const parts = fileUrl.split('/topicFiles/');
+      if (parts.length > 1) {
+        // Retourne la partie suivante comme le nom du fichier
+        return parts[1];
+      } else {
+        // Si l'extraction échoue, retourne une chaîne vide ou un message par défaut
+        return 'Nom de fichier inconnu';
+      }
+    }
 </script>
 
 
@@ -285,6 +311,8 @@ const submitPassword = () => {
 .ressource-block {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .ressource-block input,
@@ -386,5 +414,12 @@ const submitPassword = () => {
   height: 230px;
   background-color: #ffffff;
   padding: 20px;
+}
+
+#incorrect-pass
+{
+    display: none;
+    font-size: 16px;
+    color: var(--default-red);
 }
 </style>

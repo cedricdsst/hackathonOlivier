@@ -28,8 +28,8 @@
                 <td>{{ atelier.price }}€</td>
                 <td>{{ atelier.idEcole.nom }}</td>
                 <td style="display:flex; justify-content:space-evenly">
-                    <img @click="goToAtelier(atelier._id)" src="@/assets/icons/edit.svg" class="info-icon">
-                    <img @click="goToEvent(atelier._id)" src="@/assets/icons/eye.svg" class="info-icon">
+                    <img @click="goToAtelier(atelier._id)" src="@/assets/icons/edit.svg" class="info-icon cursor-pointer" title="éditer">
+                    <img @click="goToEvent(atelier._id)" src="@/assets/icons/eye.svg" class="info-icon cursor-pointer" title="visualiser la page">
                 </td>
             </tr>
         </table>
@@ -45,7 +45,7 @@
                 <label for="description" style="margin-bottom: 5px;">Description:</label>
                 <textarea id="description" v-model="newAtelier.description"
                     style="width: 100%; height: 100px; resize: none; padding: 8px; border:solid 1px grey;"
-                    readonly></textarea>
+                    ></textarea>
 
                 <div style="display: flex; justify-content: space-between;">
                     <div style="flex: 1; margin-right: 5px;">
@@ -78,8 +78,8 @@
                 </div>
 
                 <label for="idEcole" style="margin-bottom: 5px;">Ecole:</label>
-                <select id="idEcole" v-model="newAtelier.idEcole" style="width: 100%; padding: 8px;">
-                    <option disabled value="">Ecoles</option>
+                <select id="idEcole" v-model="newAtelier.idEcole" style="width: 100%; padding: 8px; border: 1px solid">
+                    <option disabled value="">- - -</option>
                     <option v-for="ecole in ecoles" :key="ecole._id" :value="ecole._id">
                         {{ ecole.nom }}
                     </option>
