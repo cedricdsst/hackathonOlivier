@@ -2,6 +2,9 @@
   <div id="app">
     <!-- Section Hero avec Tailwind CSS -->
     <section class="hero g-cover bg-no-repeat text-center py-32 px-4 cust-full-width mb-[100px]">
+      <div class="header-square-1 bg-default-red"></div>
+      <div class="header-square-2 bg-default-black"></div>
+      <div class="header-square-3 bg-default-black"></div>
       <div class="header flex flex-col items-center justify-center">
         <small class="mb-5 text-white">Accueil > Évènements</small>
         <h1 class="text-white text-5xl font-bold mb-4">Évènements à venir</h1>

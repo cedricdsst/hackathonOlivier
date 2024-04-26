@@ -1,7 +1,11 @@
 <template>
   <div v-if="currentAtelier">
     <div class="header-banner header-banner-img cust-full-width">
-      <div class="header-gradiant cust-full-width"></div>
+      <div class="header-gradiant cust-full-width">
+        <div class="header-square-1 bg-default-red"></div>
+      <div class="header-square-2 bg-default-black"></div>
+      <div class="header-square-3 bg-default-black"></div>
+      </div>
     </div>
     <div class="content-wrapper">
         <div class="info-event-card">
