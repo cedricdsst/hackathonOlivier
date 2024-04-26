@@ -1,6 +1,6 @@
 # Instructions pour lancer le projet Node.js
 
-Ce dépôt contient le code source d'un projet Node.js avec un backend et un frontend.
+Ce dépôt contient le code de notre projet Hackathon 2024
 
 ## Backend
 
