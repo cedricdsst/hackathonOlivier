@@ -364,19 +364,22 @@ padding: 40px;
 
 .disclaimer-btn-event
 {
-  max-width: 300px;
-  background-color: var(--default-red);
-  color: var(--vt-c-white);
-  padding: 10px 20px;
-  text-align: center;
+    cursor: none;
+    max-width: 300px;
+    background-color: var(--default-red);
+    color: var(--vt-c-white);
+    padding: 10px 20px;
+    text-align: center;
 }
 
 .container-disclaimer-btn-event
 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+    position: relative;
+    top: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .info-icon

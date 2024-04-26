@@ -37,13 +37,12 @@
     {
         const navLinks = document.querySelector('nav .nav-links');
 
-        const computedStyle = window.getComputedStyle(navLinks);
-        const displayValue = computedStyle.getPropertyValue('display');
+        const isMobileDisplay = navLinks.classList.contains('mobile-display');
 
-        if (displayValue === 'none') {
-            navLinks.style.display = 'flex';
+        if (!isMobileDisplay) {
+            navLinks.classList.add('mobile-display');
         } else {
-            navLinks.style.display = 'none';
+            navLinks.classList.remove('mobile-display');
         }
     }
 </script>
@@ -106,6 +105,16 @@
             flex-direction: column;
             width: 100%;
             padding: 10px 0;
+        }
+        
+        nav 
+        {
+            padding: 0 30px;
+        }
+
+        .mobile-display
+        {
+            display: flex !important;
         }
     }
 </style>
