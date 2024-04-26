@@ -42,7 +42,7 @@
     <section class="NextEvent bg-white flex flex-col items-center justify-center text-center py-20 px-4">
       <h2 class="text-2xl font-bold mb-4">Prochain événement</h2>
       <span class="mx-4 border-2 w-full border-VinColor my-6"></span>
-      <div class="flex flex-col md:flex-row">
+      <div class="flex flex-col md:flex-row w-full">
         <div class="event flex flex-col md:flex-row items-center gap-4 w-full">
           <img class="p-2 object-contain h-40 w-auto ml-4 sm:ml-0" src="../assets/img/thumbnail_evenement.jpg" alt="">
           <article class="flex flex-col items-start w-auto gap-2">
@@ -73,7 +73,7 @@
         <div class="sm:w-full flex justify-center md:justify-end mb-10">
           <img src="../assets/img/Olivier_cropped.png" alt="Olivier Bonneton" class="object-contain h-40 md:w-48 lg:w-full md:self-end self-center">
         </div>
-        <div class=" flex flex-col items-start px-20">
+        <div class=" flex flex-col items-start">
           <p class="mb-6 text-left ">Découvrez mon atelier de dégustation de vin à Lyon, spécialement conçu pour les débutants passionnés et curieux. Dans une ambiance chaleureuse et conviviale, je vous invite à un voyage œnologique pour découvrir les vins du monde. Ma table d'animation est le lieu idéal pour échanger, apprendre et partager des moments uniques autour du vin. Rejoignez-nous et laissez-vous guider par nos experts pour une expérience de dégustation inoubliable.</p>
           <a href="/about"> 
           <button type="button" class="text-white bg-VinColor py-2 px-4 transition-colors md:self-start self-center">En savoir plus</button>
@@ -105,7 +105,7 @@ export default {
   background-size: cover;
   background-position: 0px 0px;
   text-align: left;
-  height: calc(100vh - 19 2px);
+  height: calc(100vh - 192px);
   display: flex;
 
   /* padding: 100px 0; */
