@@ -1,6 +1,7 @@
 const cron = require('node-cron');
 const Atelier = require('../models/Atelier');
 const { sendEmail } = require('../services/emailService'); // Import the sendEmail function
+const {emailRappelAtelier} = require('../emails/templates/emailRappelAtelier');
 
 // Cron job to check for ateliers starting the next day
 cron.schedule('0 0 * * *', () => { // This runs at midnight every day
@@ -22,11 +23,12 @@ cron.schedule('0 0 * * *', () => { // This runs at midnight every day
         .then(ateliers => {
             ateliers.forEach(atelier => {
                 const participantEmails = atelier.participants.map(p => p.email);
-                const subject = 'Reminder: Upcoming Atelier Tomorrow';
-                const text = `Dear Participant,\n\nThis is a reminder that the atelier "${atelier.title}" is scheduled to start tomorrow. We look forward to your participation.\n\nBest Regards,\nAtelier Team`;
+
+                const subject = 'Rappel: N\'oubliez pas votre reservation à notre Atelier de dégustation !';
+                const emailRappel = emailRappelAtelier(atelier.title, atelier.startDate, atelier.duration, atelier.adresse);
 
                 participantEmails.forEach(email => {
-                    sendEmail(email, subject, text);
+                    sendEmail(email, subject, emailRappel);
                 });
             });
         })
