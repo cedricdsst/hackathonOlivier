@@ -4,7 +4,11 @@ module.exports = {
     './public/index.html' // Analyser le fichier index.html pour les classes utilisées dans le contenu statique
   ],
   theme: {
-    extend: {} // Étendre ou personnaliser le thème Tailwind CSS si nécessaire
+    extend: {
+      colors: {
+        'VinColor': '#8c2c2c',
+      },
+    } // Étendre ou personnaliser le thème Tailwind CSS si nécessaire
   },
   plugins: [] // Activer les plugins Tailwind CSS si nécessaire
 }
