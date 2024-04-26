@@ -40,3 +40,11 @@ Ce dépôt contient le code de notre projet Hackathon 2024
     ```
     npm run dev
     ```
+## Identifiants Admin
+
+email: t@t.fr
+
+password: t
+
+
+    
