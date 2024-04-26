@@ -212,4 +212,11 @@
   }
 }
 
+@media (max-width:768px)
+{
+  .hero div {
+    margin-left: 20px ;
+  }
+}
+
 </style>

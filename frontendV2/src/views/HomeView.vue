@@ -182,4 +182,11 @@ export default {
   margin-right: 10px;
 }
 /* Ajouter d'autres styles si nécessaire */
+
+@media (max-width:768px)
+{
+  .hero div {
+    margin-left: 20px ;
+  }
+}
 </style>
