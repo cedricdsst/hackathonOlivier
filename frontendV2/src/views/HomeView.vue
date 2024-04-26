@@ -101,8 +101,7 @@ export default {
   background-size: cover;
   background-position: 0px 0px;
   text-align: left;
-  width: auto;
-  height: 90vh;
+  height: calc(100vh - 112px);
   display: flex;
 
   /* padding: 100px 0; */
