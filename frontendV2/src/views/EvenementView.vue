@@ -320,6 +320,7 @@ const submitRegistration = () => {
 
 .disclaimer-btn-event
 {
+    cursor: none;
     max-width: 300px;
     background-color: var(--default-red);
     color: var(--vt-c-white);
@@ -329,6 +330,8 @@ const submitRegistration = () => {
 
 .container-disclaimer-btn-event
 {
+    position: relative;
+    top: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
