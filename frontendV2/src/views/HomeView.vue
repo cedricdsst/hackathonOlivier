@@ -56,9 +56,11 @@
         </div>
 
         <div class="flex justify-center items-center mt-4 sm:mt-2 pl-6">
+          <a href="/evenements">
           <button type="button" class="red-btn px-6 py-2 whitespace-nowrap">
             Voir tous les événements
           </button>
+        </a>
         </div>
       </div>
 
