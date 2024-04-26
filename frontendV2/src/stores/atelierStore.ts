@@ -7,6 +7,19 @@ export const useAtelierStore = defineStore('atelier', {
         currentAtelier: null,
     }),
     getters: {
+        unpaidParticipants: (state) => {
+            let unpaidParticipants = [];
+            state.ateliers.forEach(atelier => {
+                unpaidParticipants = unpaidParticipants.concat(
+                    atelier.participants.filter(p => !p.payed).map(participant => ({
+                        ...participant,
+                        atelierTitle: atelier.title,
+                        atelierId: atelier._id
+                    }))
+                );
+            });
+            return unpaidParticipants;
+        },
         calendarEvents: (state) => state.ateliers.map(atelier => ({
             id: atelier._id,
             startDate: new Date(atelier.startDate),

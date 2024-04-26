@@ -6,6 +6,11 @@ export const useVinStore = defineStore('vin', {
         vins: [],
         currentVin: null,
     }),
+    getters: {
+        totalQuantity: (state) => {
+            return state.vins.reduce((total, vin) => total + vin.quantite, 0);
+        }
+    },
     actions: {
         async fetchAllVins() {
             this.vins = await vinService.getAllVins();
