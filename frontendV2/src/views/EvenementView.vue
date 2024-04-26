@@ -14,7 +14,7 @@
         <h2 class="event-title mb-3 futura-med">{{ currentAtelier.title }}</h2>
         <div class="event-summary mb-3">
           <p class="inline-flex text-[12px] font-bold"><img src="@/assets/icons/date-svgrepo-com.svg"
-              class="info-icon">{{ currentAtelier.startDate }}</p><br />
+              class="info-icon">{{ currentAtelier.formattedStartDate }}</p><br />
           <p class="inline-flex text-[12px] font-bold"><img
               src="@/assets/icons/clock-with-white-face_icon-icons.com_72804.svg" class="info-icon">{{
     currentAtelier.duration }}h</p><br />

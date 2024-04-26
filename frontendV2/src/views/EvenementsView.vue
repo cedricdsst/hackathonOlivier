@@ -17,7 +17,7 @@
     <section v-for="atelier in ateliers" :key="atelier._id" @click="goToAtelier(atelier._id)"
       class="flex flex-col items-center my-[30px] mx-auto bg-white ">
       <div class="w-full mx-auto bg-[#F2F2F2] overflow-hidden p-2 cursor-pointer">
-        <div class="flex">
+        <div class="flex flex-col md:flex-row">
           <div class="md:shrink-0">
             <img class="w-full object-cover" src="../assets/img/vins.png" alt="vin" />
           </div>
@@ -207,6 +207,13 @@ function goToAtelier(id) {
     min-height: 100vh;
     display: flex;
     align-items: center;
+  }
+}
+
+@media (max-width:768px)
+{
+  .hero div {
+    margin-left: 20px ;
   }
 }
 

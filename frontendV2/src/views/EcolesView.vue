@@ -5,8 +5,8 @@
     <li v-for="ecole in ecoles" :key="ecole._id" class="flex justify-between items-center bg-gray-100 p-4">
       <span class="font-medium text-gray-700">{{ ecole.nom }} - {{ ecole.adresse }}</span>
       <div>
-        <button @click="editEcole(ecole)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 transition duration-300 ease-in-out mr-2">Edit</button>
-        <button @click="deleteEcole(ecole._id)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 transition duration-300 ease-in-out">Delete</button>
+        <button @click="editEcole(ecole)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 transition duration-300 ease-in-out mr-2">Modifier</button>
+        <button @click="deleteEcole(ecole._id)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 transition duration-300 ease-in-out">Supprimer</button>
       </div>
     </li>
   </ul>
@@ -18,8 +18,8 @@
       <input type="text" v-model="editableEcole.nom" placeholder="Name" required class="w-full p-2 border-2 border-gray-200 ">
       <input type="text" v-model="editableEcole.adresse" placeholder="Address" class="w-full p-2 border-2 border-gray-200 ">
       <div class="flex justify-between">
-        <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4  transition duration-300 ease-in-out">Update École</button>
-        <button @click="editFormVisible = false" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 transition duration-300 ease-in-out">Cancel</button>
+        <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4  transition duration-300 ease-in-out">Modifier École</button>
+        <button @click="editFormVisible = false" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 transition duration-300 ease-in-out">Annuler</button>
       </div>
     </form>
   </div>
@@ -27,9 +27,9 @@
 
   <h2 class="text-xl font-semibold text-gray-800 mb-4 mt-20">Ajouter école</h2>
   <form @submit.prevent="addEcole" class="space-y-4">
-    <input type="text" v-model="newEcole.nom" placeholder="Name" required class="w-full p-2 border-2 border-gray-200">
-    <input type="text" v-model="newEcole.adresse" placeholder="Address" class="w-full p-2 border-2 border-gray-200">
-    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 transition duration-300 ease-in-out">Add École</button>
+    <input type="text" v-model="newEcole.nom" placeholder="Nom" required class="w-full p-2 border-2 border-gray-200">
+    <input type="text" v-model="newEcole.adresse" placeholder="Adresse" class="w-full p-2 border-2 border-gray-200">
+    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 transition duration-300 ease-in-out">Ajouter École</button>
   </form>
   </div>
 </template>
