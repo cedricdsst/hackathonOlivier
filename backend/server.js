@@ -3,7 +3,7 @@ const { Server } = require("socket.io");
 const app = require('./app');
 
 
-//require('./cron_tasks/topicDeleter.js');
+require('./cron_tasks/mailSender.js');
 
 const normalizePort = val => {
     const port = parseInt(val, 10);
