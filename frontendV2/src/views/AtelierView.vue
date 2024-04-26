@@ -1,85 +1,191 @@
 <template>
     <div v-if="currentAtelier">
-        <h1>{{ currentAtelier.title }}</h1>
-        <p>{{ currentAtelier.description }}</p>
-        <p>ecole : {{ currentAtelier.idEcole.nom }}</p>
-        <p>Price: {{ currentAtelier.price }}€</p>
-        <p>Finished: {{ currentAtelier.finished }}</p>
-
-        <button @click="deleteAtelier(currentAtelier._id)">delete</button>
-        <button @click="showEditForm">Edit</button>
-        <button @click="markAsFinished(currentAtelier._id)">mark as finished</button>
-
-        <!-- Edit Form -->
-        <div v-if="editFormVisible">
-            <h2>Edit Atelier</h2>
-            <form @submit.prevent="updateAtelier">
-                <input type="text" v-model="editableAtelier.title" placeholder="Title">
-                <input type="text" v-model="editableAtelier.adresse" placeholder="Adresse">
-                <textarea v-model="editableAtelier.description" placeholder="Description"></textarea>
-                <input type="date" v-model="editableAtelier.startDate" placeholder="Start Date">
-                <input type="number" v-model.number="editableAtelier.duration" placeholder="Duration (hours)">
-                <input type="number" v-model.number="editableAtelier.price" placeholder="Price">
-                <input type="number" v-model.number="editableAtelier.participantsMax" placeholder="Max Participants">
-                <!-- Dropdown to select Ecole -->
-                <select v-model="editableAtelier.idEcole">
-                    <option disabled value="">Select an Ecole</option>
-                    <option v-for="ecole in ecoles" :key="ecole._id" :value="ecole._id">
-                        {{ ecole.nom }}
-                    </option>
+        <h1>Editer Atelier<span v-if="currentAtelier.finished" style="color:red;"> Atelier terminé</span></h1>
+        <form @submit.prevent="updateAtelier" style="display: flex; flex-direction: column; gap: 10px;">
+            <label style="display: flex; flex-direction: column;">
+                Titre:
+                <input type="text" v-model="editableAtelier.title" style="border: 1px solid grey;">
+            </label>
+            <label style="display: flex; flex-direction: column;">
+                Adresse:
+                <input type="text" v-model="editableAtelier.adresse" style="border: 1px solid grey;">
+            </label>
+            <label style="display: flex; flex-direction: column;">
+                Description:
+                <textarea v-model="editableAtelier.description"
+                    style="border: 1px solid grey; resize: none; width: 100%;"></textarea>
+            </label>
+            <label style="display: flex; flex-direction: column;">
+                Date/heur de debut:
+                <input type="dateTime-local" v-model="editableAtelier.startDate" style="border: 1px solid grey;">
+            </label>
+            <label style="display: flex; flex-direction: column;">
+                Durée (heures):
+                <input type="number" v-model.number="editableAtelier.duration" style="border: 1px solid grey;">
+            </label>
+            <label style="display: flex; flex-direction: column;">
+                Prix:
+                <input type="number" v-model.number="editableAtelier.price" style="border: 1px solid grey;">
+            </label>
+            <label style="display: flex; flex-direction: column;">
+                Participants Max:
+                <input type="number" v-model.number="editableAtelier.participantsMax" style="border: 1px solid grey;">
+            </label>
+            <label style="display: flex; flex-direction: column;">
+                Ecole:
+                <select v-model="editableAtelier.idEcole" style="border: 1px solid grey;">
+                    <option disabled value="">Selectionner une Ecole</option>
+                    <option v-for="ecole in ecoles" :key="ecole._id" :value="ecole._id">{{ ecole.nom }}</option>
                 </select>
+            </label>
+            <div style="display: flex; gap: 10px;">
+                <button type="submit"
+                    style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer;">Sauvegarder</button>
+                <button @click="deleteAtelier(currentAtelier._id)"
+                    style="background-color: #f44336; color: white; padding: 10px 20px; border: none; cursor: pointer;">Supprimer
+                    Atelier</button>
+                <button v-if="!currentAtelier.finished" @click="markAsFinished(currentAtelier._id)"
+                    style="background-color: #008CBA; color: white; padding: 10px 20px; border: none; cursor: pointer;">Terminer
+                    l'atelier</button>
+            </div>
+        </form>
 
-                <button type="submit">Save Changes</button>
-                <button @click="editFormVisible = false">Cancel</button>
-            </form>
-        </div>
 
 
         <!-- Displaying files -->
-        <h2>Files</h2>
-        <ul>
-            <li v-for="file in currentAtelier.files" :key="file._id">
-                {{ file.fileUrl }}
-                <button @click="deleteFile(file._id)">delete</button>
-            </li>
-        </ul>
+        <div style="margin-top: 20px; border-top: 1px solid grey; padding-top: 10px;">
+            <h2>Fichiers</h2>
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th style="border: 1px solid grey; padding: 10px; text-align: left;">Url Fichier</th>
+                        <th style="border: 1px solid grey; padding: 10px; text-align: center;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="file in currentAtelier.files" :key="file._id">
+                        <td style="border: 1px solid grey; padding: 10px; text-align: left;">{{ file.fileUrl }}</td>
+                        <td style="border: 1px solid grey; padding: 10px; text-align: center;">
+                            <button @click="deleteFile(file._id)"
+                                style="background-color: #f44336; color: white; padding: 5px 10px; border: none; cursor: pointer;">Supprimer</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="display:flex;">
+                <div style="display:flex; width:50%; flex-direction: column">
+                    <h2>Ajouter Fichiers</h2>
+                    <form @submit.prevent="addFile"
+                        style="display: flex; width:400px; flex-direction: column; gap: 10px;">
+                        <label style="display: flex; flex-direction: column;">
+                            Selectionner un fichier:
+                            <input type="file" @change="handleFileChange" ref="fileInputElement" required
+                                style="border: 1px solid grey;">
+                        </label>
+                        <button type="submit"
+                            style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer;">Upload
+                            Fichier</button>
+                    </form>
+                </div>
+                <div
+                    style="display:flex; width:50%; flex-direction: column; justify-content: center;text-align: center;">
+                    <p>Mot de Passe de l'Atelier : <span style="font-weight: bolder;">{{ currentAtelier.password
+                            }}</span></p>
+                </div>
+            </div>
 
-        <h2>Add File</h2>
-        <form @submit.prevent="addFile">
-            <input type="file" @change="handleFileChange" ref="fileInputElement" required>
-            <button type="submit">Upload File</button>
-        </form>
+        </div>
 
-        <h2>Participants</h2>
-        <ul>
-            <li v-for="participant in currentAtelier.participants" :key="participant._id">
-                {{ participant.email }} | payed : {{ participant.payed }}
-                <button @click="markAsPayed(participant._id)">payed</button>
-                <button @click="deleteParticipant(participant._id)">delete</button>
-            </li>
-        </ul>
-        <form @submit.prevent="addParticipant">
-            <input type="email" v-model="participantEmail" placeholder="Enter participant's email" required>
-            <button type="submit">Add Participant</button>
-        </form>
+        <div style="margin-top: 20px; border-top: 1px solid grey; padding-top: 10px;">
+            <h2>Participants</h2>
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th style="border: 1px solid grey; padding: 10px; text-align: left;">Email</th>
+                        <th style="border: 1px solid grey; padding: 10px; text-align: left; max-width:10%;">A payé</th>
+                        <th style="border: 1px solid grey; padding: 10px; text-align: center;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="participant in currentAtelier.participants" :key="participant._id">
+                        <td style="border: 1px solid grey; padding: 10px; text-align: left;">{{ participant.email }}
+                        </td>
+                        <td v-if="participant.payed"
+                            style="border: 1px solid grey; padding: 10px; text-align: left; background-color: #4CAF50; max-width:10%;">
 
-        <h2>Wines in Atelier</h2>
-        <ul>
-            <li v-for="vin in currentAtelier.vins" :key="vin._id">
-                {{ vin.id.nom }} - Quantity: {{ vin.quantity }}
-                <button @click="removeVinFromAtelier(currentAtelier._id, vin._id)">Remove</button>
-            </li>
-        </ul>
-        <form @submit.prevent="addVinToAtelier">
-            <select v-model="selectedVinId" @change="updateMaxQuantity">
-                <option disabled value="">Select a wine</option>
-                <option v-for="vin in vinStore.vins" :key="vin._id" :value="vin._id" :disabled="isVinAdded(vin._id)">
-                    {{ vin.nom }}
-                </option>
-            </select>
-            <input type="number" v-model.number="selectedQuantity" :max="maxQuantity" placeholder="Quantity" min="1">
-            <button type="submit">Add Wine</button>
-        </form>
+                        </td>
+                        <td v-if="!participant.payed"
+                            style="border: 1px solid grey; padding: 10px; text-align: left; background-color:#f44336; max-width:10%;">
+
+                        </td>
+                        <td
+                            style="border: 1px solid grey; padding: 10px; text-align: center; display:flex; justify-content: space-evenly;">
+                            <button v-if="!participant.payed" @click="markAsPayed(participant._id)"
+                                style="background-color: #008CBA; color: white; padding: 5px 10px; border: none; cursor: pointer;">Confirmer
+                                paiement</button>
+                            <button @click="deleteParticipant(participant._id)"
+                                style="background-color: #f44336; color: white; padding: 5px 10px; border: none; cursor: pointer;">Suprimer</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <form @submit.prevent="addParticipant"
+                style="display: flex; width:400px; flex-direction: column; gap: 10px;">
+                <label style="display: flex; flex-direction: column;">
+                    E-mail participant:
+                    <input type="email" v-model="participantEmail" required style="border: 1px solid grey;">
+                </label>
+                <button type="submit"
+                    style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer;">Ajouter
+                    Participant</button>
+            </form>
+        </div>
+
+        <div style="margin-top: 20px; border-top: 1px solid grey; padding-top: 10px;">
+            <h2>Vins de l'Atelier</h2>
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th style="border: 1px solid grey; padding: 10px; text-align: left;">Nom</th>
+                        <th style="border: 1px solid grey; padding: 10px; text-align: left;">Quantité</th>
+                        <th style="border: 1px solid grey; padding: 10px; text-align: center;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="vin in currentAtelier.vins" :key="vin._id">
+                        <td style="border: 1px solid grey; padding: 10px; text-align: left;">{{ vin.id.nom }}</td>
+                        <td style="border: 1px solid grey; padding: 10px; text-align: left;">{{ vin.quantity }}</td>
+                        <td style="border: 1px solid grey; padding: 10px; text-align: center;">
+                            <button @click="removeVinFromAtelier(currentAtelier._id, vin._id)"
+                                style="background-color: #f44336; color: white; padding: 5px 10px; border: none; cursor: pointer;">Suprimer</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <form @submit.prevent="addVinToAtelier"
+                style="display: flex; width:400px; flex-direction: column; gap: 10px;">
+                <label style="display: flex; flex-direction: column;">
+                    Selectionner vin:
+                    <select v-model="selectedVinId" @change="updateMaxQuantity" style="border: 1px solid grey;">
+                        <option disabled value="">Vins</option>
+                        <option v-for="vin in vinStore.vins" :key="vin._id" :value="vin._id"
+                            :disabled="isVinAdded(vin._id)">
+                            {{ vin.nom }}
+                        </option>
+                    </select>
+                </label>
+                <label style="display: flex; flex-direction: column;">
+                    Quantité:
+                    <input type="number" v-model.number="selectedQuantity" :max="maxQuantity" placeholder="Quantity"
+                        min="1" style="border: 1px solid grey;">
+                </label>
+                <button type="submit"
+                    style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer;">Ajouter
+                    vin</button>
+            </form>
+        </div>
     </div>
     <div v-else>
         Loading atelier details...
@@ -168,16 +274,7 @@ async function deleteFile(fileId) {
     }
 }
 
-async function deleteAtelier(atelierId) {
-    try {
-        await atelierStore.deleteAtelier(atelierId);
-        router.push({ name: 'ateliers' });  // Redirect to the 'ateliers' route after deletion
-        alert('Atelier deleted successfully');
-    } catch (error) {
-        console.error('Failed to delete atelier:', error);
-        alert('Failed to delete atelier');
-    }
-}
+
 
 async function markAsPayed(participantId) {
 
@@ -191,17 +288,7 @@ async function markAsPayed(participantId) {
     }
 }
 
-async function markAsFinished(articleId) {
 
-    try {
-        await atelierStore.finishAtelier(articleId);
-        await atelierStore.fetchAtelier(route.params.id);
-        alert('marked as payed');
-    } catch (error) {
-        console.error('Failed to marked as payed:', error);
-        alert('Failed to marked as finished');
-    }
-}
 
 async function addParticipant() {
     if (participantEmail.value) {
@@ -246,20 +333,6 @@ async function removeVinFromAtelier(atelierId, vinId) {
     }
 }
 
-function showEditForm() {
-    Object.assign(editableAtelier, currentAtelier.value);
-    // Convert startDate to YYYY-MM-DD format if it exists
-    if (currentAtelier.value.startDate) {
-        const date = new Date(currentAtelier.value.startDate);
-        editableAtelier.startDate = date.toISOString().split('T')[0]; // Splits the ISO string and takes the date part
-    }
-    editFormVisible.value = true;
-}
-async function updateAtelier() {
-    await atelierStore.updateAtelier(editableAtelier._id, editableAtelier);
-    await atelierStore.fetchAtelier(editableAtelier._id); // Refresh the displayed details
-    editFormVisible.value = false;
-}
 
 
 onMounted(async () => {
@@ -269,13 +342,42 @@ onMounted(async () => {
         atelierStore.fetchAtelier(route.params.id)
     ]);
     if (route.params.id) {
-        Object.assign(editableAtelier, currentAtelier.value);
-        if (currentAtelier.value.startDate) {
-            const date = new Date(currentAtelier.value.startDate);
-            editableAtelier.startDate = date.toISOString().split('T')[0];
-        }
+        setupEditableAtelier(currentAtelier.value);
     }
 });
+
+function setupEditableAtelier(atelier) {
+    Object.assign(editableAtelier, atelier);
+    if (atelier.startDate) {
+        editableAtelier.startDate = new Date(atelier.startDate).toISOString().split('T')[0];
+    }
+}
+
+async function updateAtelier() {
+    await atelierStore.updateAtelier(editableAtelier._id, editableAtelier);
+    await atelierStore.fetchAtelier(editableAtelier._id); // Re-fetch atelier to refresh the displayed details
+    router.go(0); // Reloads the current route
+}
+
+async function deleteAtelier(atelierId) {
+    try {
+        await atelierStore.deleteAtelier(atelierId);
+        router.push({ name: 'ateliers' });
+    } catch (error) {
+        console.error('Failed to delete atelier:', error);
+        alert('Failed to delete atelier');
+    }
+}
+
+async function markAsFinished(atelierId) {
+    try {
+        await atelierStore.finishAtelier(atelierId);
+        router.go(0);
+    } catch (error) {
+        console.error('Failed to mark as finished:', error);
+        alert('Failed to mark as finished');
+    }
+}
 
 
 </script>
