@@ -1,5 +1,8 @@
 <template>
     <section class="hero mb-[100px] g-cover bg-no-repeat text-center py-32 px-4 cust-full-width">
+      <div class="header-square-1 bg-default-red"></div>
+      <div class="header-square-2 bg-default-black"></div>
+      <div class="header-square-3 bg-default-black"></div>
       <div class="header  flex flex-col items-center justify-center">
         <small class="mb-5 text-white">Accueil > À propos</small>
         <h1 class="text-white text-5xl font-bold mb-4">À propos</h1>

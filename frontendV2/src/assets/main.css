@@ -140,6 +140,30 @@ body
   overflow-x: hidden;
 }
 
+.header-square-1 {
+  position: absolute;
+  width: 85px;
+  height: 85px;
+  bottom: 0;
+  right: 0;
+}
+
+.header-square-2 {
+  position: absolute;
+  width: 85px;
+  height: 85px;
+  bottom: 0;
+  right: 85px;
+}
+
+.header-square-3 {
+  position: absolute;
+  width: 85px;
+  height: 85px;
+  bottom: 85px;
+  right: 0;
+}
+
 .divider-1
 {
   border-top: solid 4px var(--default-red);

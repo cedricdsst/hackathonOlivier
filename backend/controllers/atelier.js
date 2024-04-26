@@ -422,7 +422,7 @@ exports.finishAtelier = (req, res) => {
         .then(atelier => {
             // Send a thank-you email to all participants
             const participantEmails = atelier.participants.map(participant => participant.email);
-            const emailRemerciement = emailHTMLRemerciement(atelier.title, atelier.password);
+            const emailRemerciement = emailHTMLRemerciement(atelier.title, atelier.password, atelier._id);
 
             const emailPromises = participantEmails.map(email => {
                 return sendEmail(

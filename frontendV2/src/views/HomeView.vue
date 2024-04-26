@@ -1,6 +1,9 @@
 <template>
   <div>
     <section class="hero g-cover bg-no-repeat bg-fixed text-center py-32 px-4 header-gradiant cust-full-width">
+      <div class="header-square-1 bg-default-red"></div>
+      <div class="header-square-2 bg-default-black"></div>
+      <div class="header-square-3 bg-default-black"></div>
       <div class=" header flex flex-col items-center justify-center">
         <h1 class="leading-[130%] text-white text-5xl font-bold">Apprendre à <br> déguster autrement</h1>
         <span class="border-2 w-1/3 border-VinColor my-6"></span>
@@ -98,8 +101,7 @@ export default {
   background-size: cover;
   background-position: 0px 0px;
   text-align: left;
-  width: auto;
-  height: 90vh;
+  height: calc(100vh - 112px);
   display: flex;
 
   /* padding: 100px 0; */
