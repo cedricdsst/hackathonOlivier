@@ -37,12 +37,7 @@ const router = createRouter({
       component: EvenementView,
       props: true
     },
-    {
-      path: '/topic/:topicId',
-      name: 'topic',
-      component: TopicView,
-      props: true
-    },
+
     {
       path: '/login',
       name: 'login',
@@ -77,11 +72,12 @@ const router = createRouter({
         {
           path: 'ateliers',
           name: 'admin-ateliers',
-          component: AteliersView
+          component: AteliersView,
+
         },
         {
-          path: '/atelier/:id',
-          name: 'atelier',
+          path: 'atelier/:id',
+          name: 'admin-atelier',
           component: AtelierView,
           props: true
         },
