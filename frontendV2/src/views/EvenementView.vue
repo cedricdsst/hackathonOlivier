@@ -19,14 +19,6 @@
 
             <div class="price mb-3">{{ currentAtelier.price }} € par pers.</div>
             <button class="red-btn" @click="openModal">Je souhaite m'inscrire</button>
-        </div>
-        <p class="mb-3">
-          {{ currentAtelier.description }} <br />
-          <b>Cet évènement est réservé au plus de 18 ans</b>
-        </p>
-
-        <div class="price mb-3">{{ currentAtelier.price }} € par pers.</div>
-        <button class="red-btn" @click="openModal">Je souhaite m'inscrire</button>
       </div>
     </div>
 
@@ -67,7 +59,7 @@
           <!-- Contenu à afficher si le mot de passe est correct -->
           <div v-if="isPasswordCorrect">
             <!-- Votre contenu protégé par mot de passe -->
-            <h2>Ressources orotefgé par mdp oeeeeeeee</h2>
+            <h2>PDF</h2>
           </div>
         </div>
       </div>
@@ -220,65 +212,74 @@ const submitPassword = () => {
 }
 </script>
 
+
 <style>
-.header-banner-img {
+.header-banner-img
+{
   background-image: url('@/assets/thumbnail_atelier.jpg');
 }
 
-.info-event-card {
+.info-event-card
+{
   position: relative;
   background-color: var(--default-light-grey);
   padding: 40px;
 }
 
-.info-event-card .price {
+.info-event-card .price
+{
   font-size: 20px;
   color: var(--default-red);
 }
 
 .content-wrapper
 {
-    max-height: 340px;
-    position: relative;
-    max-width : 550px;
-    top : -200px;
-    z-index: 2;
+  max-height: 340px;
+  position: relative;
+  max-width : 550px;
+  top : -200px;
+  z-index: 2;
 }
 
-.event-title {
-  color: var(--default-red);
+.event-title
+{
+  color : var(--default-red);
   font-family: 'Futura Std Medium';
 }
 
-.img-bottom-page {
+.img-bottom-page
+{
   width: 100%;
   position: relative;
-  height: 600px;
+  height: 600px
 }
 
-.img-bottom-page img {
+.img-bottom-page img
+{
   position: relative;
   width: 60%;
   height: 400px;
   object-fit: cover;
 }
 
-.img-bottom-page .image1 {
+.img-bottom-page .image1
+{
   border: solid 5px var(--default-black);
 }
 
-.img-bottom-page .image2 {
+.img-bottom-page .image2
+{
   left: 40%;
-  top: -200px;
+  top:-200px;
   border: solid 5px var(--default-red);
 }
 
 .info-post-event
 {
-    width: 100%;
-    background-color: var(--default-light-grey);
-    margin-bottom: 5rem;
-    padding: 50px 20px;
+  width: 100%;
+  background-color: var(--default-light-grey);
+  margin-bottom: 5rem;
+  padding: 50px 20px;
 }
 
 .ressource-block {
@@ -286,78 +287,85 @@ const submitPassword = () => {
   flex-direction: column;
 }
 
-.ressource-block input,
-.modal input {
+.ressource-block input, .modal input
+{
   width: 245px;
 }
 
-.ressource-block input,
-.ressource-block p {
+.ressource-block input, .ressource-block p
+{
   margin: 0 auto 20px auto;
 }
 
-.ressource-block button {
+.ressource-block button
+{
   margin: 0 auto;
 }
 
-.ressource-block p {
+.ressource-block p
+{
   max-width: 245px;
   font-size: 12px;
 }
 
 .modal-container {
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
-  justify-content: center;
-  align-items: center;
+
+position: fixed;
+z-index: 1000;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+justify-content: center;
+align-items: center;
 }
 
-.modal {
+.modal
+{
   position: relative;
   max-width: 1000px;
   margin: 50px auto;
   background-color: var(--default-light-grey);
 }
 
-.modal h2 {
+.modal h2 
+{
   color: var(--default-red);
 }
 
 .futura-med
 {
-    font-family: 'Futura Std Medium';
-    font-weight: bold;
+  font-family: 'Futura Std Medium';
+  font-weight: bold;
 }
 
 .modal .disclaimer
 {
-    font-weight: bold;
+  font-weight: bold;
 }
 
+
 .modal-content {
-  padding: 40px;
+padding: 40px;
 }
 
 .modal-content > *
 {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .close {
-    color: #8B8A8A;
-    position: absolute;
-    top: 0;
-    right: 30px;
-    font-size: 40px;
-    cursor: pointer;
+  color: #8B8A8A;
+  position: absolute;
+  top: 0;
+  right: 30px;
+  font-size: 40px;
+  cursor: pointer;
 }
 
-.disclaimer-btn-event {
+.disclaimer-btn-event
+{
   max-width: 300px;
   background-color: var(--default-red);
   color: var(--vt-c-white);
@@ -365,7 +373,8 @@ const submitPassword = () => {
   text-align: center;
 }
 
-.container-disclaimer-btn-event {
+.container-disclaimer-btn-event
+{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -374,7 +383,7 @@ const submitPassword = () => {
 
 .info-icon
 {
-    margin-right: 10px;
-    width: 20px;
+  margin-right: 10px;
+  width: 20px;
 }
-</style>
+</style> 
